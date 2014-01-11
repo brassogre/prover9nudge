@@ -1,0 +1,24 @@
+assign(max_weight,120).
+assign(max_proofs,4).
+%set(print_gen).
+assign(max_given,10000).
+
+list(weights).
+end_of_list.
+
+formulas(sos).
+-P(j(x,y)) | -P(x) | P(y).
+P(j(x,j(y,x))). P(i(x,y)).
+P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).
+P(j(j(n(y),n(x)),j(j(n(y),x),y))).
+end_of_list.
+
+formulas(usable).
+end_of_list.
+
+formulas(goals).
+P(j(x,x)).
+P(j(j(x,y),j(j(y,z),j(x,z)))).
+P(j(n(n(x)),x)).
+P(j(j(x,n(x)),n(x))).
+end_of_list.

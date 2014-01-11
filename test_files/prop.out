@@ -1,0 +1,2591 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-02A, February 2009.
+Process 14819 was started by zac on mini,
+Fri Jan 10 23:22:33 2014
+The command was "prover9".
+============================== end of head ===========================
+
+============================== INPUT =================================
+assign(max_weight,120).
+assign(max_proofs,4).
+assign(max_given,10000).
+
+list(weights).
+end_of_list.
+
+formulas(sos).
+-P(j(x,y)) | -P(x) | P(y).
+P(j(x,j(y,x))).
+P(i(x,y)).
+P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).
+P(j(j(n(y),n(x)),j(j(n(y),x),y))).
+end_of_list.
+
+formulas(usable).
+end_of_list.
+
+formulas(goals).
+P(j(x,x)).
+P(j(j(x,y),j(j(y,z),j(x,z)))).
+P(j(n(n(x)),x)).
+P(j(j(x,n(x)),n(x))).
+end_of_list.
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 P(j(x,x)) # label(non_clause) # label(goal).  [goal].
+2 P(j(j(x,y),j(j(y,z),j(x,z)))) # label(non_clause) # label(goal).  [goal].
+3 P(j(n(n(x)),x)) # label(non_clause) # label(goal).  [goal].
+4 P(j(j(x,n(x)),n(x))) # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+-P(j(x,y)) | -P(x) | P(y).  [assumption].
+P(j(x,j(y,x))).  [assumption].
+P(i(x,y)).  [assumption].
+P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+-P(j(c1,c1)).  [deny(1)].
+-P(j(j(c2,c3),j(j(c3,c4),j(c2,c4)))).  [deny(2)].
+-P(j(n(n(c5)),c5)).  [deny(3)].
+-P(j(j(c6,n(c6)),n(c6))).  [deny(4)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+No predicates eliminated.
+
+============================== end predicate elimination =============
+
+Auto_denials:  (no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ P ]).
+Function symbol precedence:  function_order([ c1, c2, c3, c4, c5, c6, j, i, n ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(hyper_resolution).  % (HNE depth_diff=1)
+    % set(hyper_resolution) -> set(pos_hyper_resolution).
+
+Auto_process settings:  (no changes).
+
+kept:      5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+kept:      6 P(j(x,j(y,x))).  [assumption].
+kept:      7 P(i(x,y)).  [assumption].
+kept:      8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+kept:      9 P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+kept:      10 -P(j(c1,c1)).  [deny(1)].
+kept:      11 -P(j(j(c2,c3),j(j(c3,c4),j(c2,c4)))).  [deny(2)].
+kept:      12 -P(j(n(n(c5)),c5)).  [deny(3)].
+kept:      13 -P(j(j(c6,n(c6)),n(c6))).  [deny(4)].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+6 P(j(x,j(y,x))).  [assumption].
+7 P(i(x,y)).  [assumption].
+8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+9 P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+10 -P(j(c1,c1)).  [deny(1)].
+11 -P(j(j(c2,c3),j(j(c3,c4),j(c2,c4)))).  [deny(2)].
+12 -P(j(n(n(c5)),c5)).  [deny(3)].
+13 -P(j(j(c6,n(c6)),n(c6))).  [deny(4)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.01 seconds.
+
+given #1 (I,wt=8): 5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+
+given #2 (I,wt=6): 6 P(j(x,j(y,x))).  [assumption].
+
+given #3 (I,wt=4): 7 P(i(x,y)).  [assumption].
+
+given #4 (I,wt=14): 8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+
+given #5 (I,wt=13): 9 P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+
+given #6 (I,wt=4): 10 -P(j(c1,c1)).  [deny(1)].
+
+given #7 (I,wt=12): 11 -P(j(j(c2,c3),j(j(c3,c4),j(c2,c4)))).  [deny(2)].
+
+given #8 (I,wt=6): 12 -P(j(n(n(c5)),c5)).  [deny(3)].
+
+given #9 (I,wt=8): 13 -P(j(j(c6,n(c6)),n(c6))).  [deny(4)].
+
+given #10 (A,wt=8): 14 P(j(x,j(y,j(z,y)))).  [hyper(5,a,6,a,b,6,a)].
+
+given #11 (T,wt=6): 15 P(j(x,i(y,z))).  [hyper(5,a,6,a,b,7,a)].
+
+given #12 (T,wt=8): 18 P(j(j(x,y),j(x,x))).  [hyper(5,a,8,a,b,6,a)].
+
+============================== PROOF =================================
+
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 10.
+% Level of proof is 3.
+% Maximum clause weight is 14.
+% Given clauses 12.
+
+1 P(j(x,x)) # label(non_clause) # label(goal).  [goal].
+5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+6 P(j(x,j(y,x))).  [assumption].
+7 P(i(x,y)).  [assumption].
+8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+10 -P(j(c1,c1)).  [deny(1)].
+15 P(j(x,i(y,z))).  [hyper(5,a,6,a,b,7,a)].
+18 P(j(j(x,y),j(x,x))).  [hyper(5,a,8,a,b,6,a)].
+26 P(j(x,x)).  [hyper(5,a,18,a,b,15,a)].
+27 $F.  [resolve(26,a,10,a)].
+
+============================== end of proof ==========================
+
+% Disable descendants (x means already disabled):
+ 10
+
+given #13 (T,wt=4): 26 P(j(x,x)).  [hyper(5,a,18,a,b,15,a)].
+
+given #14 (T,wt=6): 30 P(j(x,j(y,y))).  [hyper(5,a,6,a,b,26,a)].
+
+given #15 (A,wt=20): 16 P(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,8,a,b,8,a)].
+
+given #16 (T,wt=7): 28 P(j(j(n(x),x),x)).  [hyper(5,a,9,a,b,26,a)].
+
+given #17 (T,wt=8): 23 P(j(x,j(y,i(z,u)))).  [hyper(5,a,6,a,b,15,a)].
+
+given #18 (T,wt=8): 31 P(j(x,j(y,j(z,z)))).  [hyper(5,a,6,a,b,30,a)].
+
+given #19 (T,wt=9): 37 P(j(x,j(j(n(y),y),y))).  [hyper(5,a,6,a,b,28,a)].
+
+given #20 (A,wt=16): 17 P(j(x,j(j(y,j(z,u)),j(j(y,z),j(y,u))))).  [hyper(5,a,6,a,b,8,a)].
+
+given #21 (T,wt=10): 21 P(j(j(x,y),j(x,j(z,y)))).  [hyper(5,a,8,a,b,14,a)].
+
+given #22 (T,wt=8): 55 P(j(x,j(y,j(z,x)))).  [hyper(5,a,21,a,b,6,a)].
+
+given #23 (T,wt=9): 51 P(j(j(n(x),x),j(y,x))).  [hyper(5,a,21,a,b,28,a)].
+
+given #24 (T,wt=10): 22 P(j(x,j(y,j(z,j(u,z))))).  [hyper(5,a,6,a,b,14,a)].
+
+given #25 (A,wt=19): 19 P(j(j(j(n(x),n(y)),j(n(x),y)),j(j(n(x),n(y)),x))).  [hyper(5,a,8,a,b,9,a)].
+
+given #26 (T,wt=9): 77 P(j(j(n(x),n(n(x))),x)).  [hyper(5,a,19,a,b,30,a)].
+
+given #27 (T,wt=10): 34 P(j(j(x,j(x,y)),j(x,y))).  [hyper(5,a,16,a,b,30,a)].
+
+given #28 (T,wt=10): 39 P(j(x,j(y,j(z,i(u,w))))).  [hyper(5,a,6,a,b,23,a)].
+
+given #29 (T,wt=10): 41 P(j(x,j(y,j(z,j(u,u))))).  [hyper(5,a,6,a,b,31,a)].
+
+given #30 (A,wt=15): 20 P(j(x,j(j(n(y),n(z)),j(j(n(y),z),y)))).  [hyper(5,a,6,a,b,9,a)].
+
+given #31 (T,wt=10): 57 P(j(x,j(y,j(z,j(u,x))))).  [hyper(5,a,21,a,b,55,a)].
+
+given #32 (T,wt=10): 58 P(j(x,j(y,j(z,j(u,y))))).  [hyper(5,a,6,a,b,55,a)].
+
+given #33 (T,wt=10): 76 P(j(j(n(x),n(j(y,y))),x)).  [hyper(5,a,19,a,b,31,a)].
+
+given #34 (T,wt=10): 78 P(j(j(n(x),n(i(y,z))),x)).  [hyper(5,a,19,a,b,23,a)].
+
+given #35 (A,wt=12): 29 P(j(j(j(x,y),x),j(j(x,y),y))).  [hyper(5,a,8,a,b,26,a)].
+
+given #36 (T,wt=8): 139 P(j(j(j(x,x),y),y)).  [hyper(5,a,29,a,b,30,a)].
+
+given #37 (T,wt=8): 144 P(j(j(i(x,y),z),z)).  [hyper(5,a,29,a,b,15,a)].
+
+given #38 (T,wt=10): 138 P(j(j(j(x,j(y,y)),z),z)).  [hyper(5,a,29,a,b,31,a)].
+
+given #39 (T,wt=10): 140 P(j(j(j(x,i(y,z)),u),u)).  [hyper(5,a,29,a,b,23,a)].
+
+given #40 (A,wt=30): 32 P(j(j(j(j(x,j(y,z)),j(x,y)),j(x,j(y,z))),j(j(j(x,j(y,z)),j(x,y)),j(x,z)))).  [hyper(5,a,8,a,b,16,a)].
+
+given #41 (T,wt=10): 145 P(j(j(j(x,j(y,x)),z),z)).  [hyper(5,a,29,a,b,14,a)].
+
+given #42 (T,wt=10): 148 P(j(j(j(x,x),y),j(z,y))).  [hyper(5,a,21,a,b,139,a)].
+
+given #43 (T,wt=10): 150 P(j(x,j(j(j(y,y),z),z))).  [hyper(5,a,6,a,b,139,a)].
+
+given #44 (T,wt=10): 153 P(j(j(i(x,y),z),j(u,z))).  [hyper(5,a,21,a,b,144,a)].
+
+given #45 (A,wt=22): 33 P(j(x,j(j(j(y,j(z,u)),j(y,z)),j(j(y,j(z,u)),j(y,u))))).  [hyper(5,a,6,a,b,16,a)].
+
+given #46 (T,wt=10): 155 P(j(x,j(j(i(y,z),u),u))).  [hyper(5,a,6,a,b,144,a)].
+
+given #47 (T,wt=11): 43 P(j(j(x,j(n(y),y)),j(x,y))).  [hyper(5,a,8,a,b,37,a)].
+
+given #48 (T,wt=10): 204 P(j(j(n(x),j(n(x),x)),x)).  [hyper(5,a,43,a,b,43,a)].
+
+given #49 (T,wt=11): 44 P(j(x,j(y,j(j(n(z),z),z)))).  [hyper(5,a,6,a,b,37,a)].
+
+given #50 (A,wt=12): 35 P(j(j(x,j(j(y,x),z)),j(x,z))).  [hyper(5,a,16,a,b,14,a)].
+
+given #51 (T,wt=10): 236 P(j(n(x),j(j(n(y),x),y))).  [hyper(5,a,35,a,b,20,a)].
+
+given #52 (T,wt=11): 68 P(j(j(n(x),x),j(y,j(z,x)))).  [hyper(5,a,21,a,b,51,a)].
+
+given #53 (T,wt=11): 69 P(j(x,j(j(n(y),y),j(z,y)))).  [hyper(5,a,6,a,b,51,a)].
+
+given #54 (T,wt=11): 80 P(j(j(n(x),n(j(y,n(x)))),x)).  [hyper(5,a,19,a,b,14,a)].
+
+given #55 (A,wt=22): 36 P(j(j(j(n(j(x,y)),j(x,y)),x),j(j(n(j(x,y)),j(x,y)),y))).  [hyper(5,a,8,a,b,28,a)].
+
+given #56 (T,wt=11): 82 P(j(j(n(x),n(n(x))),j(y,x))).  [hyper(5,a,21,a,b,77,a)].
+
+given #57 (T,wt=11): 84 P(j(x,j(j(n(y),n(n(y))),y))).  [hyper(5,a,6,a,b,77,a)].
+
+============================== PROOF =================================
+
+% Proof 2 at 0.02 (+ 0.01) seconds.
+% Length of proof is 19.
+% Level of proof is 7.
+% Maximum clause weight is 20.
+% Given clauses 57.
+
+3 P(j(n(n(x)),x)) # label(non_clause) # label(goal).  [goal].
+5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+6 P(j(x,j(y,x))).  [assumption].
+7 P(i(x,y)).  [assumption].
+8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+9 P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+12 -P(j(n(n(c5)),c5)).  [deny(3)].
+14 P(j(x,j(y,j(z,y)))).  [hyper(5,a,6,a,b,6,a)].
+15 P(j(x,i(y,z))).  [hyper(5,a,6,a,b,7,a)].
+16 P(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,8,a,b,8,a)].
+18 P(j(j(x,y),j(x,x))).  [hyper(5,a,8,a,b,6,a)].
+19 P(j(j(j(n(x),n(y)),j(n(x),y)),j(j(n(x),n(y)),x))).  [hyper(5,a,8,a,b,9,a)].
+26 P(j(x,x)).  [hyper(5,a,18,a,b,15,a)].
+30 P(j(x,j(y,y))).  [hyper(5,a,6,a,b,26,a)].
+35 P(j(j(x,j(j(y,x),z)),j(x,z))).  [hyper(5,a,16,a,b,14,a)].
+77 P(j(j(n(x),n(n(x))),x)).  [hyper(5,a,19,a,b,30,a)].
+84 P(j(x,j(j(n(y),n(n(y))),y))).  [hyper(5,a,6,a,b,77,a)].
+286 P(j(n(n(x)),x)).  [hyper(5,a,35,a,b,84,a)].
+287 $F.  [resolve(286,a,12,a)].
+
+============================== end of proof ==========================
+
+% Disable descendants (x means already disabled):
+ 12
+
+given #58 (T,wt=6): 286 P(j(n(n(x)),x)).  [hyper(5,a,35,a,b,84,a)].
+
+given #59 (T,wt=6): 292 P(n(n(i(x,y)))).  [hyper(5,a,78,a,b,286,a)].
+
+given #60 (A,wt=12): 38 P(j(j(x,j(i(y,z),u)),j(x,u))).  [hyper(5,a,16,a,b,23,a)].
+
+given #61 (T,wt=6): 293 P(n(n(j(x,x)))).  [hyper(5,a,76,a,b,286,a)].
+
+given #62 (T,wt=8): 297 P(j(n(n(x)),j(y,x))).  [hyper(5,a,21,a,b,286,a)].
+
+given #63 (T,wt=8): 300 P(j(x,j(n(n(y)),y))).  [hyper(5,a,6,a,b,286,a)].
+
+given #64 (T,wt=8): 303 P(j(x,n(n(i(y,z))))).  [hyper(5,a,6,a,b,292,a)].
+
+given #65 (A,wt=12): 40 P(j(j(x,j(j(y,y),z)),j(x,z))).  [hyper(5,a,16,a,b,31,a)].
+
+given #66 (T,wt=8): 324 P(j(x,n(n(j(y,y))))).  [hyper(5,a,6,a,b,293,a)].
+
+given #67 (T,wt=9): 296 P(j(n(n(j(n(x),x))),x)).  [hyper(5,a,43,a,b,286,a)].
+
+given #68 (T,wt=10): 295 P(j(x,j(y,j(n(n(z)),z)))).  [hyper(5,a,55,a,b,286,a)].
+
+given #69 (T,wt=10): 302 P(j(x,j(y,n(n(i(z,u)))))).  [hyper(5,a,55,a,b,292,a)].
+
+given #70 (A,wt=16): 42 P(j(j(j(n(x),x),j(x,y)),j(j(n(x),x),y))).  [hyper(5,a,16,a,b,37,a)].
+
+given #71 (T,wt=10): 311 P(j(n(n(j(i(x,y),z))),z)).  [hyper(5,a,38,a,b,286,a)].
+
+given #72 (T,wt=10): 323 P(j(x,j(y,n(n(j(z,z)))))).  [hyper(5,a,55,a,b,293,a)].
+
+given #73 (T,wt=10): 327 P(j(n(n(x)),j(y,j(z,x)))).  [hyper(5,a,21,a,b,297,a)].
+
+given #74 (T,wt=10): 328 P(j(x,j(n(n(y)),j(z,y)))).  [hyper(5,a,6,a,b,297,a)].
+
+given #75 (A,wt=24): 45 P(j(j(j(x,j(y,z)),j(j(j(x,y),j(x,z)),u)),j(j(x,j(y,z)),u))).  [hyper(5,a,16,a,b,17,a)].
+
+given #76 (T,wt=10): 332 P(j(j(j(n(n(x)),x),y),y)).  [hyper(5,a,29,a,b,300,a)].
+
+given #77 (T,wt=10): 334 P(j(j(x,n(n(y))),j(x,y))).  [hyper(5,a,8,a,b,300,a)].
+
+given #78 (T,wt=8): 436 P(j(n(n(n(n(x)))),x)).  [hyper(5,a,332,a,b,334,a)].
+
+given #79 (T,wt=8): 456 P(n(n(n(n(i(x,y)))))).  [hyper(5,a,78,a,b,436,a)].
+
+given #80 (A,wt=18): 46 P(j(j(x,j(y,j(z,u))),j(x,j(j(y,z),j(y,u))))).  [hyper(5,a,8,a,b,17,a)].
+
+given #81 (T,wt=8): 457 P(n(n(n(n(j(x,x)))))).  [hyper(5,a,76,a,b,436,a)].
+
+given #82 (T,wt=10): 337 P(j(j(n(n(i(x,y))),z),z)).  [hyper(5,a,29,a,b,303,a)].
+
+given #83 (T,wt=10): 346 P(j(n(n(j(j(x,x),y))),y)).  [hyper(5,a,40,a,b,286,a)].
+
+given #84 (T,wt=10): 358 P(j(j(n(n(j(x,x))),y),y)).  [hyper(5,a,29,a,b,324,a)].
+
+given #85 (A,wt=18): 47 P(j(x,j(y,j(j(z,j(u,w)),j(j(z,u),j(z,w)))))).  [hyper(5,a,6,a,b,17,a)].
+
+given #86 (T,wt=10): 392 P(n(j(i(x,y),n(i(z,u))))).  [hyper(5,a,78,a,b,311,a)].
+
+given #87 (T,wt=10): 393 P(n(j(i(x,y),n(j(z,z))))).  [hyper(5,a,76,a,b,311,a)].
+
+given #88 (T,wt=10): 439 P(j(j(j(x,x),n(n(y))),y)).  [hyper(5,a,40,a,b,334,a)].
+
+given #89 (T,wt=10): 440 P(j(j(i(x,y),n(n(z))),z)).  [hyper(5,a,38,a,b,334,a)].
+
+given #90 (A,wt=12): 48 P(j(j(x,y),j(z,j(x,j(u,y))))).  [hyper(5,a,21,a,b,21,a)].
+
+given #91 (T,wt=10): 455 P(j(n(n(n(n(n(n(x)))))),x)).  [hyper(5,a,334,a,b,436,a)].
+
+given #92 (T,wt=10): 463 P(j(n(n(n(n(x)))),j(y,x))).  [hyper(5,a,21,a,b,436,a)].
+
+given #93 (T,wt=10): 466 P(j(x,j(n(n(n(n(y)))),y))).  [hyper(5,a,6,a,b,436,a)].
+
+given #94 (T,wt=10): 469 P(j(x,n(n(n(n(i(y,z))))))).  [hyper(5,a,6,a,b,456,a)].
+
+given #95 (A,wt=14): 49 P(j(j(j(x,y),x),j(j(x,y),j(z,y)))).  [hyper(5,a,8,a,b,21,a)].
+
+given #96 (T,wt=10): 518 P(j(x,n(n(n(n(j(y,y))))))).  [hyper(5,a,6,a,b,457,a)].
+
+given #97 (T,wt=10): 530 P(n(j(j(x,x),n(i(y,z))))).  [hyper(5,a,78,a,b,346,a)].
+
+given #98 (T,wt=10): 531 P(n(j(j(x,x),n(j(y,y))))).  [hyper(5,a,76,a,b,346,a)].
+
+given #99 (T,wt=10): 632 P(n(n(n(n(n(n(i(x,y)))))))).  [hyper(5,a,78,a,b,455,a)].
+
+given #100 (A,wt=12): 50 P(j(x,j(j(y,z),j(y,j(u,z))))).  [hyper(5,a,6,a,b,21,a)].
+
+given #101 (T,wt=10): 633 P(n(n(n(n(n(n(j(x,x)))))))).  [hyper(5,a,76,a,b,455,a)].
+
+given #102 (T,wt=11): 137 P(j(j(j(j(n(x),x),x),y),y)).  [hyper(5,a,29,a,b,37,a)].
+
+given #103 (T,wt=11): 209 P(j(j(i(x,y),j(n(z),z)),z)).  [hyper(5,a,43,a,b,144,a)].
+
+given #104 (T,wt=11): 211 P(j(j(j(x,x),j(n(y),y)),y)).  [hyper(5,a,43,a,b,139,a)].
+
+given #105 (A,wt=22): 52 P(j(j(j(x,j(y,z)),j(x,y)),j(u,j(j(x,j(y,z)),j(x,z))))).  [hyper(5,a,21,a,b,16,a)].
+
+given #106 (T,wt=11): 217 P(j(j(n(j(x,y)),y),j(x,y))).  [hyper(5,a,43,a,b,21,a)].
+
+given #107 (T,wt=10): 780 P(j(j(n(j(n(x),x)),x),x)).  [hyper(5,a,43,a,b,217,a)].
+
+given #108 (T,wt=11): 298 P(j(j(n(n(n(x))),x),n(n(x)))).  [hyper(5,a,9,a,b,286,a)].
+
+given #109 (T,wt=8): 807 P(n(n(j(n(n(x)),x)))).  [hyper(5,a,298,a,b,300,a)].
+
+given #110 (A,wt=15): 53 P(j(j(n(x),n(y)),j(z,j(j(n(x),y),x)))).  [hyper(5,a,21,a,b,9,a)].
+
+given #111 (T,wt=8): 821 P(n(n(j(x,j(y,y))))).  [hyper(5,a,298,a,b,31,a)].
+
+given #112 (T,wt=8): 822 P(n(n(j(x,i(y,z))))).  [hyper(5,a,298,a,b,23,a)].
+
+given #113 (T,wt=8): 826 P(n(n(j(x,j(y,x))))).  [hyper(5,a,298,a,b,14,a)].
+
+given #114 (T,wt=9): 797 P(j(j(n(n(n(x))),x),x)).  [hyper(5,a,334,a,b,298,a)].
+
+given #115 (A,wt=16): 54 P(j(j(x,j(y,z)),j(u,j(j(x,y),j(x,z))))).  [hyper(5,a,21,a,b,8,a)].
+
+given #116 (T,wt=9): 819 P(n(n(j(j(n(x),x),x)))).  [hyper(5,a,298,a,b,37,a)].
+
+given #117 (T,wt=10): 803 P(n(n(j(n(n(n(n(x)))),x)))).  [hyper(5,a,298,a,b,466,a)].
+
+given #118 (T,wt=10): 804 P(n(n(j(n(n(x)),j(y,x))))).  [hyper(5,a,298,a,b,328,a)].
+
+given #119 (T,wt=10): 805 P(n(n(j(x,n(n(j(y,y))))))).  [hyper(5,a,298,a,b,323,a)].
+
+given #120 (A,wt=12): 56 P(j(x,j(y,j(z,j(u,j(w,z)))))).  [hyper(5,a,55,a,b,55,a)].
+
+given #121 (T,wt=10): 806 P(n(n(j(x,n(n(i(y,z))))))).  [hyper(5,a,298,a,b,302,a)].
+
+given #122 (T,wt=10): 808 P(n(n(j(x,j(n(n(y)),y))))).  [hyper(5,a,298,a,b,295,a)].
+
+given #123 (T,wt=10): 809 P(n(n(j(j(i(x,y),z),z)))).  [hyper(5,a,298,a,b,155,a)].
+
+given #124 (T,wt=10): 810 P(n(n(j(j(j(x,x),y),y)))).  [hyper(5,a,298,a,b,150,a)].
+
+given #125 (A,wt=13): 59 P(j(x,j(y,j(z,j(j(n(u),u),u))))).  [hyper(5,a,55,a,b,37,a)].
+
+given #126 (T,wt=10): 813 P(n(n(j(x,j(y,j(z,x)))))).  [hyper(5,a,298,a,b,58,a)].
+
+given #127 (T,wt=10): 817 P(n(n(j(x,j(y,j(z,z)))))).  [hyper(5,a,298,a,b,41,a)].
+
+given #128 (T,wt=10): 818 P(n(n(j(x,j(y,i(z,u)))))).  [hyper(5,a,298,a,b,39,a)].
+
+given #129 (T,wt=10): 823 P(n(n(j(x,j(y,j(z,y)))))).  [hyper(5,a,298,a,b,22,a)].
+
+given #130 (A,wt=12): 60 P(j(x,j(y,j(z,j(u,j(w,w)))))).  [hyper(5,a,55,a,b,31,a)].
+
+given #131 (T,wt=10): 829 P(j(x,n(n(j(n(n(y)),y))))).  [hyper(5,a,6,a,b,807,a)].
+
+given #132 (T,wt=10): 844 P(j(x,n(n(j(y,j(z,z)))))).  [hyper(5,a,6,a,b,821,a)].
+
+given #133 (T,wt=10): 847 P(j(x,n(n(j(y,i(z,u)))))).  [hyper(5,a,6,a,b,822,a)].
+
+given #134 (T,wt=10): 850 P(j(x,n(n(j(y,j(z,y)))))).  [hyper(5,a,6,a,b,826,a)].
+
+given #135 (A,wt=12): 61 P(j(x,j(y,j(z,j(u,i(w,v5)))))).  [hyper(5,a,55,a,b,23,a)].
+
+given #136 (T,wt=10): 980 P(n(n(n(n(j(n(n(x)),x)))))).  [hyper(5,a,298,a,b,829,a)].
+
+given #137 (T,wt=10): 986 P(n(n(n(n(j(x,j(y,y))))))).  [hyper(5,a,298,a,b,844,a)].
+
+given #138 (T,wt=10): 992 P(n(n(n(n(j(x,i(y,z))))))).  [hyper(5,a,298,a,b,847,a)].
+
+given #139 (T,wt=10): 998 P(n(n(n(n(j(x,j(y,x))))))).  [hyper(5,a,298,a,b,850,a)].
+
+given #140 (A,wt=14): 62 P(j(x,j(y,j(j(z,u),j(z,j(w,u)))))).  [hyper(5,a,55,a,b,21,a)].
+
+given #141 (T,wt=11): 306 P(j(j(n(x),j(i(y,z),x)),x)).  [hyper(5,a,43,a,b,38,a)].
+
+given #142 (T,wt=11): 340 P(j(j(n(x),j(j(y,y),x)),x)).  [hyper(5,a,43,a,b,40,a)].
+
+given #143 (T,wt=11): 366 P(j(n(n(j(n(x),x))),j(y,x))).  [hyper(5,a,21,a,b,296,a)].
+
+given #144 (T,wt=11): 369 P(j(x,j(n(n(j(n(y),y))),y))).  [hyper(5,a,6,a,b,296,a)].
+
+given #145 (A,wt=20): 63 P(j(x,j(y,j(z,j(j(u,j(w,v5)),j(j(u,w),j(u,v5))))))).  [hyper(5,a,55,a,b,17,a)].
+
+given #146 (T,wt=11): 386 P(j(j(n(n(n(x))),n(n(x))),x)).  [hyper(5,a,42,a,b,300,a)].
+
+given #147 (T,wt=11): 460 P(j(n(n(n(n(j(n(x),x))))),x)).  [hyper(5,a,43,a,b,436,a)].
+
+given #148 (T,wt=11): 781 P(j(j(n(j(j(x,x),y)),y),y)).  [hyper(5,a,40,a,b,217,a)].
+
+given #149 (T,wt=11): 782 P(j(j(n(j(i(x,y),z)),z),z)).  [hyper(5,a,38,a,b,217,a)].
+
+given #150 (A,wt=24): 64 P(j(x,j(y,j(j(j(z,j(u,w)),j(z,u)),j(j(z,j(u,w)),j(z,w)))))).  [hyper(5,a,55,a,b,16,a)].
+
+given #151 (T,wt=11): 811 P(n(n(j(j(n(x),n(n(x))),x)))).  [hyper(5,a,298,a,b,84,a)].
+
+given #152 (T,wt=11): 812 P(n(n(j(j(n(x),x),j(y,x))))).  [hyper(5,a,298,a,b,69,a)].
+
+given #153 (T,wt=11): 816 P(n(n(j(x,j(j(n(y),y),y))))).  [hyper(5,a,298,a,b,44,a)].
+
+given #154 (T,wt=11): 859 P(j(j(n(n(n(x))),x),j(y,x))).  [hyper(5,a,21,a,b,797,a)].
+
+given #155 (A,wt=12): 65 P(j(x,j(y,j(z,j(u,j(w,u)))))).  [hyper(5,a,55,a,b,14,a)].
+
+given #156 (T,wt=11): 861 P(j(x,j(j(n(n(n(y))),y),y))).  [hyper(5,a,6,a,b,797,a)].
+
+given #157 (T,wt=11): 912 P(j(x,n(n(j(j(n(y),y),y))))).  [hyper(5,a,6,a,b,819,a)].
+
+given #158 (T,wt=11): 1065 P(n(n(j(n(n(j(n(x),x))),x)))).  [hyper(5,a,298,a,b,369,a)].
+
+given #159 (T,wt=11): 1166 P(n(n(j(j(n(n(n(x))),x),x)))).  [hyper(5,a,298,a,b,861,a)].
+
+given #160 (A,wt=17): 66 P(j(x,j(y,j(j(n(z),n(u)),j(j(n(z),u),z))))).  [hyper(5,a,55,a,b,9,a)].
+
+given #161 (T,wt=11): 1177 P(n(n(n(n(j(j(n(x),x),x)))))).  [hyper(5,a,298,a,b,912,a)].
+
+given #162 (T,wt=12): 79 P(j(j(n(x),n(j(y,j(z,y)))),x)).  [hyper(5,a,19,a,b,22,a)].
+
+given #163 (T,wt=12): 86 P(j(j(x,j(x,y)),j(z,j(x,y)))).  [hyper(5,a,21,a,b,34,a)].
+
+given #164 (T,wt=12): 88 P(j(x,j(j(y,j(y,z)),j(y,z)))).  [hyper(5,a,6,a,b,34,a)].
+
+given #165 (A,wt=13): 67 P(j(x,j(y,j(j(n(z),z),j(u,z))))).  [hyper(5,a,55,a,b,51,a)].
+
+given #166 (T,wt=12): 90 P(j(j(n(x),n(j(y,i(z,u)))),x)).  [hyper(5,a,19,a,b,39,a)].
+
+given #167 (T,wt=12): 93 P(j(j(n(x),n(j(y,j(z,z)))),x)).  [hyper(5,a,19,a,b,41,a)].
+
+given #168 (T,wt=12): 100 P(j(x,j(y,j(z,j(u,j(w,x)))))).  [hyper(5,a,21,a,b,57,a)].
+
+given #169 (T,wt=12): 101 P(j(x,j(y,j(z,j(u,j(w,y)))))).  [hyper(5,a,6,a,b,57,a)].
+
+given #170 (A,wt=14): 70 P(j(x,j(y,j(z,j(u,j(w,j(v5,w))))))).  [hyper(5,a,55,a,b,22,a)].
+
+given #171 (T,wt=12): 118 P(j(j(x,y),j(x,j(z,j(u,y))))).  [hyper(5,a,8,a,b,58,a)].
+
+given #172 (T,wt=12): 121 P(j(j(n(x),n(j(y,y))),j(z,x))).  [hyper(5,a,21,a,b,76,a)].
+
+given #173 (T,wt=12): 123 P(j(x,j(j(n(y),n(j(z,z))),y))).  [hyper(5,a,6,a,b,76,a)].
+
+given #174 (T,wt=7): 1494 P(j(n(j(x,x)),y)).  [hyper(5,a,35,a,b,123,a)].
+
+given #175 (A,wt=14): 71 P(j(j(x,j(j(y,j(z,y)),u)),j(x,u))).  [hyper(5,a,16,a,b,22,a)].
+
+given #176 (T,wt=8): 1535 P(j(n(j(x,n(y))),y)).  [hyper(5,a,71,a,b,236,a)].
+
+given #177 (T,wt=9): 1500 P(j(x,j(n(j(y,y)),z))).  [hyper(5,a,86,a,b,1494,a)].
+
+given #178 (T,wt=9): 1569 P(n(n(j(n(j(x,x)),y)))).  [hyper(5,a,298,a,b,1500,a)].
+
+given #179 (T,wt=10): 1552 P(j(n(j(x,n(n(n(y))))),y)).  [hyper(5,a,334,a,b,1535,a)].
+
+given #180 (A,wt=23): 72 P(j(x,j(y,j(j(j(n(z),n(u)),j(n(z),u)),j(j(n(z),n(u)),z))))).  [hyper(5,a,55,a,b,19,a)].
+
+given #181 (T,wt=10): 1565 P(j(n(j(x,n(y))),j(z,y))).  [hyper(5,a,21,a,b,1535,a)].
+
+given #182 (T,wt=10): 1568 P(j(x,j(n(j(y,n(z))),z))).  [hyper(5,a,6,a,b,1535,a)].
+
+given #183 (T,wt=10): 1616 P(n(n(j(n(j(x,n(y))),y)))).  [hyper(5,a,298,a,b,1568,a)].
+
+given #184 (T,wt=11): 1502 P(j(x,j(y,j(n(j(z,z)),u)))).  [hyper(5,a,55,a,b,1494,a)].
+
+given #185 (A,wt=21): 73 P(j(j(j(n(x),n(y)),j(n(x),y)),j(z,j(j(n(x),n(y)),x)))).  [hyper(5,a,21,a,b,19,a)].
+
+given #186 (T,wt=11): 1562 P(j(n(j(x,n(j(n(y),y)))),y)).  [hyper(5,a,43,a,b,1535,a)].
+
+given #187 (T,wt=11): 1575 P(j(j(j(n(j(x,x)),y),z),z)).  [hyper(5,a,29,a,b,1500,a)].
+
+given #188 (T,wt=11): 1576 P(j(j(x,n(j(y,y))),j(x,z))).  [hyper(5,a,8,a,b,1500,a)].
+
+given #189 (T,wt=9): 1700 P(j(n(n(n(j(x,x)))),y)).  [hyper(5,a,332,a,b,1576,a)].
+
+given #190 (A,wt=30): 74 P(j(j(j(j(n(x),n(y)),j(n(x),y)),j(n(x),n(y))),j(j(j(n(x),n(y)),j(n(x),y)),x))).  [hyper(5,a,8,a,b,19,a)].
+
+given #191 (T,wt=11): 1581 P(j(x,n(n(j(n(j(y,y)),z))))).  [hyper(5,a,6,a,b,1569,a)].
+
+given #192 (T,wt=11): 1632 P(n(n(j(x,j(n(j(y,y)),z))))).  [hyper(5,a,298,a,b,1502,a)].
+
+given #193 (T,wt=11): 1709 P(j(j(j(x,x),n(j(y,y))),z)).  [hyper(5,a,40,a,b,1576,a)].
+
+given #194 (T,wt=11): 1710 P(j(j(i(x,y),n(j(z,z))),u)).  [hyper(5,a,38,a,b,1576,a)].
+
+given #195 (A,wt=21): 75 P(j(x,j(j(j(n(y),n(z)),j(n(y),z)),j(j(n(y),n(z)),y)))).  [hyper(5,a,6,a,b,19,a)].
+
+given #196 (T,wt=11): 1716 P(j(n(j(x,n(n(j(y,y))))),z)).  [hyper(5,a,1576,a,b,1535,a)].
+
+given #197 (T,wt=11): 1725 P(j(n(n(n(n(n(j(x,x)))))),y)).  [hyper(5,a,1576,a,b,436,a)].
+
+given #198 (T,wt=11): 1748 P(j(x,j(n(n(n(j(y,y)))),z))).  [hyper(5,a,86,a,b,1700,a)].
+
+given #199 (T,wt=11): 1766 P(n(n(n(n(j(n(j(x,x)),y)))))).  [hyper(5,a,298,a,b,1581,a)].
+
+given #200 (A,wt=13): 81 P(j(x,j(y,j(j(n(z),n(n(z))),z)))).  [hyper(5,a,55,a,b,77,a)].
+
+given #201 (T,wt=11): 1803 P(n(n(j(n(n(n(j(x,x)))),y)))).  [hyper(5,a,298,a,b,1748,a)].
+
+given #202 (T,wt=12): 126 P(j(j(n(x),n(i(y,z))),j(u,x))).  [hyper(5,a,21,a,b,78,a)].
+
+given #203 (T,wt=12): 128 P(j(x,j(j(n(y),n(i(z,u))),y))).  [hyper(5,a,6,a,b,78,a)].
+
+given #204 (T,wt=7): 1844 P(j(n(i(x,y)),z)).  [hyper(5,a,35,a,b,128,a)].
+
+given #205 (A,wt=26): 83 P(j(j(j(n(j(x,y)),n(n(j(x,y)))),x),j(j(n(j(x,y)),n(n(j(x,y)))),y))).  [hyper(5,a,8,a,b,77,a)].
+
+given #206 (T,wt=9): 1850 P(j(x,j(n(i(y,z)),u))).  [hyper(5,a,86,a,b,1844,a)].
+
+given #207 (T,wt=9): 1921 P(n(n(j(n(i(x,y)),z)))).  [hyper(5,a,298,a,b,1850,a)].
+
+given #208 (T,wt=11): 1852 P(j(x,j(y,j(n(i(z,u)),w)))).  [hyper(5,a,55,a,b,1844,a)].
+
+given #209 (T,wt=11): 1928 P(j(j(j(n(i(x,y)),z),u),u)).  [hyper(5,a,29,a,b,1850,a)].
+
+given #210 (A,wt=14): 85 P(j(x,j(y,j(j(z,j(z,u)),j(z,u))))).  [hyper(5,a,55,a,b,34,a)].
+
+given #211 (T,wt=11): 1929 P(j(j(x,n(i(y,z))),j(x,u))).  [hyper(5,a,8,a,b,1850,a)].
+
+given #212 (T,wt=9): 1971 P(j(n(n(n(i(x,y)))),z)).  [hyper(5,a,332,a,b,1929,a)].
+
+given #213 (T,wt=11): 1934 P(j(x,n(n(j(n(i(y,z)),u))))).  [hyper(5,a,6,a,b,1921,a)].
+
+given #214 (T,wt=11): 1935 P(n(n(j(x,j(n(i(y,z)),u))))).  [hyper(5,a,298,a,b,1852,a)].
+
+given #215 (A,wt=16): 87 P(j(j(j(x,j(x,y)),x),j(j(x,j(x,y)),y))).  [hyper(5,a,8,a,b,34,a)].
+
+given #216 (T,wt=11): 1980 P(j(j(j(x,x),n(i(y,z))),u)).  [hyper(5,a,40,a,b,1929,a)].
+
+given #217 (T,wt=11): 1981 P(j(j(i(x,y),n(i(z,u))),w)).  [hyper(5,a,38,a,b,1929,a)].
+
+given #218 (T,wt=11): 1988 P(j(n(j(x,n(n(i(y,z))))),u)).  [hyper(5,a,1929,a,b,1535,a)].
+
+given #219 (T,wt=11): 1997 P(j(n(n(n(n(n(i(x,y)))))),z)).  [hyper(5,a,1929,a,b,436,a)].
+
+given #220 (A,wt=14): 89 P(j(x,j(y,j(z,j(u,j(w,i(v5,v6))))))).  [hyper(5,a,55,a,b,39,a)].
+
+given #221 (T,wt=11): 2018 P(j(x,j(n(n(n(i(y,z)))),u))).  [hyper(5,a,86,a,b,1971,a)].
+
+given #222 (T,wt=11): 2021 P(n(n(n(n(j(n(i(x,y)),z)))))).  [hyper(5,a,298,a,b,1934,a)].
+
+given #223 (T,wt=11): 2131 P(n(n(j(n(n(n(i(x,y)))),z)))).  [hyper(5,a,298,a,b,2018,a)].
+
+given #224 (T,wt=12): 134 P(j(j(j(x,j(y,j(z,x))),u),u)).  [hyper(5,a,29,a,b,58,a)].
+
+given #225 (A,wt=14): 91 P(j(j(x,j(j(y,i(z,u)),w)),j(x,w))).  [hyper(5,a,16,a,b,39,a)].
+
+given #226 (T,wt=12): 135 P(j(j(j(x,j(y,j(z,z))),u),u)).  [hyper(5,a,29,a,b,41,a)].
+
+given #227 (T,wt=12): 136 P(j(j(j(x,j(y,i(z,u))),w),w)).  [hyper(5,a,29,a,b,39,a)].
+
+given #228 (T,wt=12): 141 P(j(j(j(x,j(y,j(z,y))),u),u)).  [hyper(5,a,29,a,b,22,a)].
+
+given #229 (T,wt=12): 147 P(j(x,j(y,j(j(j(z,z),u),u)))).  [hyper(5,a,55,a,b,139,a)].
+
+given #230 (A,wt=14): 92 P(j(x,j(y,j(z,j(u,j(w,j(v5,v5))))))).  [hyper(5,a,55,a,b,41,a)].
+
+given #231 (T,wt=12): 152 P(j(x,j(y,j(j(i(z,u),w),w)))).  [hyper(5,a,55,a,b,144,a)].
+
+given #232 (T,wt=12): 158 P(j(j(j(x,j(y,y)),z),j(u,z))).  [hyper(5,a,21,a,b,138,a)].
+
+given #233 (T,wt=12): 160 P(j(x,j(j(j(y,j(z,z)),u),u))).  [hyper(5,a,6,a,b,138,a)].
+
+given #234 (T,wt=12): 163 P(j(j(j(x,i(y,z)),u),j(w,u))).  [hyper(5,a,21,a,b,140,a)].
+
+given #235 (A,wt=14): 94 P(j(j(x,j(j(y,j(z,z)),u)),j(x,u))).  [hyper(5,a,16,a,b,41,a)].
+
+given #236 (T,wt=12): 165 P(j(x,j(j(j(y,i(z,u)),w),w))).  [hyper(5,a,6,a,b,140,a)].
+
+given #237 (T,wt=12): 178 P(j(j(j(x,j(y,x)),z),j(u,z))).  [hyper(5,a,21,a,b,145,a)].
+
+given #238 (T,wt=12): 180 P(j(x,j(j(j(y,j(z,y)),u),u))).  [hyper(5,a,6,a,b,145,a)].
+
+given #239 (T,wt=12): 183 P(j(j(j(x,x),y),j(z,j(u,y)))).  [hyper(5,a,21,a,b,148,a)].
+
+given #240 (A,wt=19): 95 P(j(x,j(y,j(z,j(j(n(u),n(w)),j(j(n(u),w),u)))))).  [hyper(5,a,55,a,b,20,a)].
+
+given #241 (T,wt=12): 184 P(j(x,j(j(j(y,y),z),j(u,z)))).  [hyper(5,a,6,a,b,148,a)].
+
+given #242 (T,wt=12): 187 P(j(j(j(j(j(x,x),y),y),z),z)).  [hyper(5,a,29,a,b,150,a)].
+
+given #243 (T,wt=12): 191 P(j(j(i(x,y),z),j(u,j(w,z)))).  [hyper(5,a,21,a,b,153,a)].
+
+given #244 (T,wt=12): 192 P(j(x,j(j(i(y,z),u),j(w,u)))).  [hyper(5,a,6,a,b,153,a)].
+
+given #245 (A,wt=23): 96 P(j(j(j(n(x),n(y)),j(j(j(n(x),y),x),z)),j(j(n(x),n(y)),z))).  [hyper(5,a,16,a,b,20,a)].
+
+given #246 (T,wt=12): 200 P(j(j(j(j(i(x,y),z),z),u),u)).  [hyper(5,a,29,a,b,155,a)].
+
+given #247 (T,wt=12): 221 P(j(j(n(x),j(n(x),x)),j(y,x))).  [hyper(5,a,21,a,b,204,a)].
+
+given #248 (T,wt=12): 223 P(j(x,j(j(n(y),j(n(y),y)),y))).  [hyper(5,a,6,a,b,204,a)].
+
+given #249 (T,wt=12): 231 P(j(j(n(x),j(j(y,n(x)),x)),x)).  [hyper(5,a,43,a,b,35,a)].
+
+given #250 (A,wt=17): 97 P(j(j(x,j(n(y),n(z))),j(x,j(j(n(y),z),y)))).  [hyper(5,a,8,a,b,20,a)].
+
+given #251 (T,wt=12): 237 P(j(j(x,y),j(j(z,x),j(z,y)))).  [hyper(5,a,35,a,b,17,a)].
+
+given #252 (T,wt=10): 2630 P(j(j(j(x,y),z),j(y,z))).  [hyper(5,a,71,a,b,237,a)].
+
+given #253 (T,wt=6): 2728 P(j(x,n(n(x)))).  [hyper(5,a,2630,a,b,298,a)].
+
+given #254 (T,wt=8): 2743 P(j(x,j(j(x,y),y))).  [hyper(5,a,2630,a,b,29,a)].
+
+given #255 (A,wt=16): 98 P(j(x,j(y,j(z,j(u,j(w,j(v5,j(v6,u)))))))).  [hyper(5,a,57,a,b,57,a)].
+
+given #256 (T,wt=8): 2744 P(n(n(j(x,n(n(x)))))).  [hyper(5,a,2728,a,b,2728,a)].
+
+given #257 (T,wt=8): 2745 P(j(x,n(n(j(y,x))))).  [hyper(5,a,2630,a,b,2728,a)].
+
+given #258 (T,wt=8): 2752 P(j(x,j(y,n(n(x))))).  [hyper(5,a,21,a,b,2728,a)].
+
+given #259 (T,wt=8): 2753 P(j(x,j(y,n(n(y))))).  [hyper(5,a,6,a,b,2728,a)].
+
+given #260 (A,wt=14): 99 P(j(x,j(y,j(z,j(u,j(w,j(v5,z))))))).  [hyper(5,a,55,a,b,57,a)].
+
+given #261 (T,wt=9): 2724 P(j(j(j(x,n(y)),y),y)).  [hyper(5,a,43,a,b,2630,a)].
+
+given #262 (T,wt=9): 2730 P(j(n(j(x,j(y,y))),z)).  [hyper(5,a,2630,a,b,93,a)].
+
+given #263 (T,wt=9): 2731 P(j(n(j(x,i(y,z))),u)).  [hyper(5,a,2630,a,b,90,a)].
+
+given #264 (T,wt=9): 2734 P(j(n(j(x,j(y,x))),z)).  [hyper(5,a,2630,a,b,79,a)].
+
+given #265 (A,wt=15): 102 P(j(x,j(y,j(z,j(j(n(u),n(n(u))),u))))).  [hyper(5,a,57,a,b,77,a)].
+
+given #266 (T,wt=9): 3543 P(j(j(n(x),x),n(n(x)))).  [hyper(5,a,42,a,b,2753,a)].
+
+given #267 (T,wt=10): 2732 P(j(x,j(j(x,j(x,y)),y))).  [hyper(5,a,2630,a,b,87,a)].
+
+given #268 (T,wt=10): 2738 P(j(x,j(j(x,y),j(z,y)))).  [hyper(5,a,2630,a,b,49,a)].
+
+given #269 (T,wt=10): 2746 P(j(j(x,y),j(x,n(n(y))))).  [hyper(5,a,237,a,b,2728,a)].
+
+given #270 (A,wt=14): 103 P(j(x,j(y,j(z,j(u,j(w,j(v5,u))))))).  [hyper(5,a,57,a,b,55,a)].
+
+given #271 (T,wt=8): 4060 P(j(x,n(n(n(n(x)))))).  [hyper(5,a,2746,a,b,2728,a)].
+
+given #272 (T,wt=10): 2747 P(j(x,j(y,j(z,n(n(x)))))).  [hyper(5,a,118,a,b,2728,a)].
+
+given #273 (T,wt=10): 2750 P(j(x,j(y,j(z,n(n(z)))))).  [hyper(5,a,55,a,b,2728,a)].
+
+given #274 (T,wt=10): 2751 P(j(x,j(y,j(z,n(n(y)))))).  [hyper(5,a,48,a,b,2728,a)].
+
+given #275 (A,wt=15): 104 P(j(x,j(y,j(z,j(j(n(u),u),j(w,u)))))).  [hyper(5,a,57,a,b,51,a)].
+
+given #276 (T,wt=10): 2922 P(n(n(j(x,j(j(x,y),y))))).  [hyper(5,a,2728,a,b,2743,a)].
+
+given #277 (T,wt=10): 2923 P(j(x,j(j(j(y,x),z),z))).  [hyper(5,a,2630,a,b,2743,a)].
+
+given #278 (T,wt=10): 2931 P(j(x,j(y,j(j(x,z),z)))).  [hyper(5,a,21,a,b,2743,a)].
+
+given #279 (T,wt=10): 2932 P(j(x,j(y,j(j(y,z),z)))).  [hyper(5,a,6,a,b,2743,a)].
+
+given #280 (A,wt=16): 105 P(j(x,j(y,j(z,j(u,j(w,j(v5,j(v6,v6)))))))).  [hyper(5,a,57,a,b,41,a)].
+
+given #281 (T,wt=10): 2933 P(j(j(j(x,n(n(x))),y),y)).  [hyper(5,a,2743,a,b,2728,a)].
+
+given #282 (T,wt=10): 3119 P(n(n(n(n(j(x,n(n(x)))))))).  [hyper(5,a,2728,a,b,2744,a)].
+
+given #283 (T,wt=10): 3124 P(j(x,n(n(j(y,n(n(y))))))).  [hyper(5,a,6,a,b,2744,a)].
+
+given #284 (T,wt=10): 3127 P(n(n(j(x,n(n(j(y,x))))))).  [hyper(5,a,2728,a,b,2745,a)].
+
+given #285 (A,wt=16): 106 P(j(x,j(y,j(z,j(u,j(w,j(v5,i(v6,v7)))))))).  [hyper(5,a,57,a,b,39,a)].
+
+given #286 (T,wt=10): 3128 P(j(x,n(n(j(y,j(z,x)))))).  [hyper(5,a,2630,a,b,2745,a)].
+
+given #287 (T,wt=10): 3135 P(j(x,j(y,n(n(j(z,x)))))).  [hyper(5,a,21,a,b,2745,a)].
+
+given #288 (T,wt=10): 3136 P(j(x,j(y,n(n(j(z,y)))))).  [hyper(5,a,6,a,b,2745,a)].
+
+given #289 (T,wt=10): 3139 P(n(n(j(x,j(y,n(n(y))))))).  [hyper(5,a,2745,a,b,2728,a)].
+
+given #290 (A,wt=15): 107 P(j(x,j(y,j(z,j(u,j(j(n(w),w),w)))))).  [hyper(5,a,57,a,b,37,a)].
+
+given #291 (T,wt=10): 3313 P(n(n(j(x,j(y,n(n(x))))))).  [hyper(5,a,2728,a,b,2752,a)].
+
+given #292 (T,wt=10): 3317 P(j(x,j(j(n(y),n(x)),y))).  [hyper(5,a,97,a,b,2752,a)].
+
+given #293 (T,wt=10): 4041 P(j(j(i(x,y),z),n(n(z)))).  [hyper(5,a,200,a,b,2746,a)].
+
+given #294 (T,wt=10): 4042 P(j(j(j(x,x),y),n(n(y)))).  [hyper(5,a,187,a,b,2746,a)].
+
+given #295 (A,wt=16): 108 P(j(x,j(y,j(z,j(j(u,j(u,w)),j(u,w)))))).  [hyper(5,a,57,a,b,34,a)].
+
+given #296 (T,wt=10): 4055 P(j(x,n(n(j(y,n(n(x))))))).  [hyper(5,a,2746,a,b,2752,a)].
+
+given #297 (T,wt=10): 4056 P(j(x,n(n(n(n(j(y,x))))))).  [hyper(5,a,2746,a,b,2745,a)].
+
+given #298 (T,wt=10): 4057 P(j(x,n(n(j(j(x,y),y))))).  [hyper(5,a,2746,a,b,2743,a)].
+
+given #299 (T,wt=10): 4069 P(j(n(j(x,n(y))),n(n(y)))).  [hyper(5,a,2746,a,b,1535,a)].
+
+given #300 (A,wt=16): 109 P(j(x,j(y,j(z,j(u,j(w,j(v5,j(v6,v5)))))))).  [hyper(5,a,57,a,b,22,a)].
+
+given #301 (T,wt=10): 4087 P(j(n(n(x)),n(n(j(y,x))))).  [hyper(5,a,2746,a,b,297,a)].
+
+given #302 (T,wt=10): 4169 P(j(x,n(n(n(n(n(n(x)))))))).  [hyper(5,a,2746,a,b,4060,a)].
+
+given #303 (T,wt=10): 4174 P(n(n(j(x,n(n(n(n(x)))))))).  [hyper(5,a,2728,a,b,4060,a)].
+
+given #304 (T,wt=10): 4181 P(j(x,j(y,n(n(n(n(x))))))).  [hyper(5,a,21,a,b,4060,a)].
+
+given #305 (A,wt=16): 110 P(j(x,j(y,j(z,j(j(u,w),j(u,j(v5,w))))))).  [hyper(5,a,57,a,b,21,a)].
+
+given #306 (T,wt=10): 4182 P(j(x,j(y,n(n(n(n(y))))))).  [hyper(5,a,6,a,b,4060,a)].
+
+given #307 (T,wt=11): 2740 P(j(j(x,y),j(j(n(x),x),y))).  [hyper(5,a,2630,a,b,42,a)].
+
+given #308 (T,wt=11): 3545 P(j(j(n(x),n(n(n(n(x))))),x)).  [hyper(5,a,19,a,b,2753,a)].
+
+given #309 (T,wt=11): 3560 P(n(n(j(j(j(x,n(y)),y),y)))).  [hyper(5,a,2728,a,b,2724,a)].
+
+given #310 (A,wt=21): 111 P(j(x,j(y,j(z,j(u,j(j(n(w),n(v5)),j(j(n(w),v5),w))))))).  [hyper(5,a,57,a,b,20,a)].
+
+given #311 (T,wt=11): 3579 P(j(j(j(x,n(y)),y),j(z,y))).  [hyper(5,a,21,a,b,2724,a)].
+
+given #312 (T,wt=11): 3581 P(j(x,j(j(j(y,n(z)),z),z))).  [hyper(5,a,6,a,b,2724,a)].
+
+given #313 (T,wt=11): 3585 P(n(n(j(n(j(x,j(y,y))),z)))).  [hyper(5,a,2728,a,b,2730,a)].
+
+given #314 (T,wt=11): 3588 P(j(x,j(n(j(y,j(z,z))),u))).  [hyper(5,a,86,a,b,2730,a)].
+
+given #315 (A,wt=25): 112 P(j(x,j(y,j(z,j(j(j(n(u),n(w)),j(n(u),w)),j(j(n(u),n(w)),u)))))).  [hyper(5,a,57,a,b,19,a)].
+
+given #316 (T,wt=11): 3594 P(n(n(j(n(j(x,i(y,z))),u)))).  [hyper(5,a,2728,a,b,2731,a)].
+
+given #317 (T,wt=11): 3597 P(j(x,j(n(j(y,i(z,u))),w))).  [hyper(5,a,86,a,b,2731,a)].
+
+given #318 (T,wt=11): 3603 P(n(n(j(n(j(x,j(y,x))),z)))).  [hyper(5,a,2728,a,b,2734,a)].
+
+given #319 (T,wt=11): 3606 P(j(x,j(n(j(y,j(z,y))),u))).  [hyper(5,a,86,a,b,2734,a)].
+
+given #320 (A,wt=22): 113 P(j(x,j(y,j(z,j(u,j(j(w,j(v5,v6)),j(j(w,v5),j(w,v6)))))))).  [hyper(5,a,57,a,b,17,a)].
+
+given #321 (T,wt=11): 3624 P(n(n(j(j(n(x),x),n(n(x)))))).  [hyper(5,a,2728,a,b,3543,a)].
+
+given #322 (T,wt=11): 3631 P(j(j(n(x),x),j(y,n(n(x))))).  [hyper(5,a,21,a,b,3543,a)].
+
+given #323 (T,wt=11): 3632 P(j(x,j(j(n(y),y),n(n(y))))).  [hyper(5,a,6,a,b,3543,a)].
+
+given #324 (T,wt=11): 4054 P(j(j(n(x),x),n(n(n(n(x)))))).  [hyper(5,a,2746,a,b,3543,a)].
+
+given #325 (A,wt=26): 114 P(j(x,j(y,j(z,j(j(j(u,j(w,v5)),j(u,w)),j(j(u,j(w,v5)),j(u,v5))))))).  [hyper(5,a,57,a,b,16,a)].
+
+given #326 (T,wt=11): 4061 P(j(j(j(x,n(y)),y),n(n(y)))).  [hyper(5,a,2746,a,b,2724,a)].
+
+given #327 (T,wt=11): 4088 P(j(n(n(j(n(x),x))),n(n(x)))).  [hyper(5,a,2746,a,b,296,a)].
+
+given #328 (T,wt=11): 4128 P(j(j(n(x),n(n(x))),n(n(x)))).  [hyper(5,a,2746,a,b,77,a)].
+
+given #329 (T,wt=11): 4138 P(j(j(n(x),x),n(n(j(y,x))))).  [hyper(5,a,2746,a,b,51,a)].
+
+given #330 (A,wt=16): 115 P(j(x,j(y,j(z,j(u,j(w,j(v5,j(v6,w)))))))).  [hyper(5,a,57,a,b,58,a)].
+
+given #331 (T,wt=11): 5191 P(j(j(n(x),x),j(j(x,y),y))).  [hyper(5,a,42,a,b,2932,a)].
+
+given #332 (T,wt=12): 240 P(j(n(x),j(y,j(j(n(z),x),z)))).  [hyper(5,a,21,a,b,236,a)].
+
+given #333 (T,wt=12): 242 P(j(x,j(n(y),j(j(n(z),y),z)))).  [hyper(5,a,6,a,b,236,a)].
+
+given #334 (T,wt=12): 294 P(j(x,j(y,j(z,j(n(n(u)),u))))).  [hyper(5,a,57,a,b,286,a)].
+
+given #335 (A,wt=13): 116 P(j(j(n(x),n(j(y,j(z,n(x))))),x)).  [hyper(5,a,19,a,b,58,a)].
+
+given #336 (T,wt=10): 8309 P(j(n(j(x,j(y,n(z)))),z)).  [hyper(5,a,2630,a,b,116,a)].
+
+given #337 (T,wt=12): 301 P(j(x,j(y,j(z,n(n(i(u,w))))))).  [hyper(5,a,57,a,b,292,a)].
+
+given #338 (T,wt=12): 307 P(j(j(i(x,y),j(i(z,u),w)),w)).  [hyper(5,a,38,a,b,38,a)].
+
+given #339 (T,wt=12): 315 P(j(j(j(x,x),j(i(y,z),u)),u)).  [hyper(5,a,38,a,b,139,a)].
+
+given #340 (A,wt=14): 117 P(j(j(x,j(j(y,j(z,x)),u)),j(x,u))).  [hyper(5,a,16,a,b,58,a)].
+
+given #341 (T,wt=12): 322 P(j(x,j(y,j(z,n(n(j(u,u))))))).  [hyper(5,a,57,a,b,293,a)].
+
+given #342 (T,wt=12): 326 P(j(x,j(y,j(n(n(z)),j(u,z))))).  [hyper(5,a,55,a,b,297,a)].
+
+given #343 (T,wt=12): 341 P(j(j(j(x,x),j(j(y,y),z)),z)).  [hyper(5,a,40,a,b,40,a)].
+
+given #344 (T,wt=12): 342 P(j(j(i(x,y),j(j(z,z),u)),u)).  [hyper(5,a,38,a,b,40,a)].
+
+given #345 (A,wt=16): 119 P(j(x,j(y,j(z,j(j(n(u),n(j(w,w))),u))))).  [hyper(5,a,57,a,b,76,a)].
+
+given #346 (T,wt=12): 359 P(n(j(n(n(i(x,y))),n(i(x,y))))).  [hyper(5,a,78,a,b,296,a)].
+
+given #347 (T,wt=12): 360 P(n(j(n(n(j(x,x))),n(j(x,x))))).  [hyper(5,a,76,a,b,296,a)].
+
+given #348 (T,wt=12): 373 P(j(j(j(x,j(n(n(y)),y)),z),z)).  [hyper(5,a,29,a,b,295,a)].
+
+given #349 (T,wt=12): 374 P(j(j(n(x),n(j(n(n(y)),y))),x)).  [hyper(5,a,19,a,b,295,a)].
+
+given #350 (A,wt=14): 120 P(j(x,j(y,j(j(n(z),n(j(u,u))),z)))).  [hyper(5,a,55,a,b,76,a)].
+
+given #351 (T,wt=9): 8752 P(j(n(j(n(n(x)),x)),y)).  [hyper(5,a,2630,a,b,374,a)].
+
+given #352 (T,wt=11): 8809 P(n(n(j(n(j(n(n(x)),x)),y)))).  [hyper(5,a,2728,a,b,8752,a)].
+
+given #353 (T,wt=11): 8812 P(j(x,j(n(j(n(n(y)),y)),z))).  [hyper(5,a,86,a,b,8752,a)].
+
+given #354 (T,wt=12): 378 P(j(j(j(x,n(n(i(y,z)))),u),u)).  [hyper(5,a,29,a,b,302,a)].
+
+given #355 (A,wt=24): 122 P(j(j(j(n(j(x,y)),n(j(z,z))),x),j(j(n(j(x,y)),n(j(z,z))),y))).  [hyper(5,a,8,a,b,76,a)].
+
+given #356 (T,wt=12): 379 P(j(j(n(x),n(n(n(i(y,z))))),x)).  [hyper(5,a,19,a,b,302,a)].
+
+given #357 (T,wt=12): 399 P(j(n(n(j(i(x,y),z))),j(u,z))).  [hyper(5,a,21,a,b,311,a)].
+
+given #358 (T,wt=12): 402 P(j(x,j(n(n(j(i(y,z),u))),u))).  [hyper(5,a,6,a,b,311,a)].
+
+given #359 (T,wt=12): 405 P(j(j(j(x,n(n(j(y,y)))),z),z)).  [hyper(5,a,29,a,b,323,a)].
+
+given #360 (A,wt=16): 124 P(j(x,j(y,j(z,j(j(n(u),n(i(w,v5))),u))))).  [hyper(5,a,57,a,b,78,a)].
+
+given #361 (T,wt=12): 406 P(j(j(n(x),n(n(n(j(y,y))))),x)).  [hyper(5,a,19,a,b,323,a)].
+
+given #362 (T,wt=12): 410 P(j(n(n(x)),j(y,j(z,j(u,x))))).  [hyper(5,a,21,a,b,327,a)].
+
+given #363 (T,wt=12): 411 P(j(x,j(n(n(y)),j(z,j(u,y))))).  [hyper(5,a,6,a,b,327,a)].
+
+given #364 (T,wt=12): 415 P(j(j(j(n(n(x)),j(y,x)),z),z)).  [hyper(5,a,29,a,b,328,a)].
+
+given #365 (A,wt=14): 125 P(j(x,j(y,j(j(n(z),n(i(u,w))),z)))).  [hyper(5,a,55,a,b,78,a)].
+
+given #366 (T,wt=12): 416 P(j(j(n(n(x)),n(j(y,x))),n(x))).  [hyper(5,a,19,a,b,328,a)].
+
+given #367 (T,wt=8): 9350 P(j(n(j(x,y)),n(y))).  [hyper(5,a,2630,a,b,416,a)].
+
+given #368 (T,wt=10): 9372 P(j(n(j(x,y)),n(n(n(y))))).  [hyper(5,a,2746,a,b,9350,a)].
+
+given #369 (T,wt=10): 9378 P(n(n(j(n(j(x,y)),n(y))))).  [hyper(5,a,2728,a,b,9350,a)].
+
+given #370 (A,wt=24): 127 P(j(j(j(n(j(x,y)),n(i(z,u))),x),j(j(n(j(x,y)),n(i(z,u))),y))).  [hyper(5,a,8,a,b,78,a)].
+
+given #371 (T,wt=10): 9385 P(j(n(j(x,y)),j(z,n(y)))).  [hyper(5,a,21,a,b,9350,a)].
+
+given #372 (T,wt=10): 9386 P(j(x,j(n(j(y,z)),n(z)))).  [hyper(5,a,6,a,b,9350,a)].
+
+given #373 (T,wt=12): 418 P(j(j(x,n(n(y))),j(x,j(z,y)))).  [hyper(5,a,8,a,b,328,a)].
+
+given #374 (T,wt=12): 433 P(j(j(j(n(n(x)),x),y),j(z,y))).  [hyper(5,a,21,a,b,332,a)].
+
+given #375 (A,wt=18): 129 P(j(x,j(y,j(z,j(j(j(u,w),u),j(j(u,w),w)))))).  [hyper(5,a,57,a,b,29,a)].
+
+given #376 (T,wt=12): 435 P(j(x,j(j(j(n(n(y)),y),z),z))).  [hyper(5,a,6,a,b,332,a)].
+
+given #377 (T,wt=12): 441 P(j(j(x,n(n(y))),j(z,j(x,y)))).  [hyper(5,a,21,a,b,334,a)].
+
+given #378 (T,wt=12): 443 P(j(x,j(j(y,n(n(z))),j(y,z)))).  [hyper(5,a,6,a,b,334,a)].
+
+given #379 (T,wt=12): 444 P(j(j(j(n(n(x)),x),n(n(y))),y)).  [hyper(5,a,334,a,b,332,a)].
+
+given #380 (A,wt=16): 130 P(j(x,j(y,j(j(j(z,u),z),j(j(z,u),u))))).  [hyper(5,a,55,a,b,29,a)].
+
+given #381 (T,wt=12): 445 P(j(n(n(j(i(x,y),n(n(z))))),z)).  [hyper(5,a,334,a,b,311,a)].
+
+given #382 (T,wt=12): 448 P(j(j(j(x,j(y,x)),n(n(z))),z)).  [hyper(5,a,334,a,b,145,a)].
+
+given #383 (T,wt=12): 449 P(j(j(j(x,i(y,z)),n(n(u))),u)).  [hyper(5,a,334,a,b,140,a)].
+
+given #384 (T,wt=12): 450 P(j(j(j(x,j(y,y)),n(n(z))),z)).  [hyper(5,a,334,a,b,138,a)].
+
+given #385 (A,wt=14): 131 P(j(j(j(x,y),x),j(z,j(j(x,y),y)))).  [hyper(5,a,21,a,b,29,a)].
+
+given #386 (T,wt=12): 452 P(j(j(n(n(n(x))),n(i(y,z))),x)).  [hyper(5,a,334,a,b,78,a)].
+
+given #387 (T,wt=12): 454 P(j(j(n(n(n(x))),n(j(y,y))),x)).  [hyper(5,a,334,a,b,76,a)].
+
+given #388 (T,wt=12): 459 P(j(x,j(y,j(n(n(n(n(z)))),z)))).  [hyper(5,a,55,a,b,436,a)].
+
+given #389 (T,wt=12): 461 P(j(n(n(n(n(j(j(x,x),y))))),y)).  [hyper(5,a,40,a,b,436,a)].
+
+given #390 (A,wt=18): 132 P(j(j(j(j(x,y),x),j(x,y)),j(j(j(x,y),x),y))).  [hyper(5,a,16,a,b,29,a)].
+
+given #391 (T,wt=12): 462 P(j(n(n(n(n(j(i(x,y),z))))),z)).  [hyper(5,a,38,a,b,436,a)].
+
+given #392 (T,wt=12): 468 P(j(x,j(y,n(n(n(n(i(z,u)))))))).  [hyper(5,a,55,a,b,456,a)].
+
+given #393 (T,wt=12): 517 P(j(x,j(y,n(n(n(n(j(z,z)))))))).  [hyper(5,a,55,a,b,457,a)].
+
+given #394 (T,wt=12): 519 P(j(j(n(n(i(x,y))),n(n(z))),z)).  [hyper(5,a,334,a,b,337,a)].
+
+given #395 (A,wt=14): 133 P(j(x,j(j(j(y,z),y),j(j(y,z),z)))).  [hyper(5,a,6,a,b,29,a)].
+
+given #396 (T,wt=12): 526 P(j(j(n(n(i(x,y))),z),j(u,z))).  [hyper(5,a,21,a,b,337,a)].
+
+given #397 (T,wt=12): 528 P(j(x,j(j(n(n(i(y,z))),u),u))).  [hyper(5,a,6,a,b,337,a)].
+
+given #398 (T,wt=12): 529 P(j(n(n(j(j(x,x),n(n(y))))),y)).  [hyper(5,a,334,a,b,346,a)].
+
+given #399 (T,wt=12): 538 P(j(n(n(j(j(x,x),y))),j(z,y))).  [hyper(5,a,21,a,b,346,a)].
+
+given #400 (A,wt=17): 142 P(j(j(j(j(n(x),n(y)),j(j(n(x),y),x)),z),z)).  [hyper(5,a,29,a,b,20,a)].
+
+given #401 (T,wt=12): 541 P(j(x,j(n(n(j(j(y,y),z))),z))).  [hyper(5,a,6,a,b,346,a)].
+
+given #402 (T,wt=12): 542 P(j(j(n(n(j(x,x))),n(n(y))),y)).  [hyper(5,a,334,a,b,358,a)].
+
+given #403 (T,wt=12): 549 P(j(j(n(n(j(x,x))),y),j(z,y))).  [hyper(5,a,21,a,b,358,a)].
+
+given #404 (T,wt=12): 551 P(j(x,j(j(n(n(j(y,y))),z),z))).  [hyper(5,a,6,a,b,358,a)].
+
+given #405 (A,wt=18): 143 P(j(j(j(j(x,j(y,z)),j(j(x,y),j(x,z))),u),u)).  [hyper(5,a,29,a,b,17,a)].
+
+given #406 (T,wt=12): 561 P(j(x,n(j(i(y,z),n(i(u,w)))))).  [hyper(5,a,6,a,b,392,a)].
+
+given #407 (T,wt=12): 565 P(j(x,n(j(i(y,z),n(j(u,u)))))).  [hyper(5,a,6,a,b,393,a)].
+
+given #408 (T,wt=12): 566 P(j(j(j(x,x),n(n(n(n(y))))),y)).  [hyper(5,a,334,a,b,439,a)].
+
+given #409 (T,wt=12): 573 P(j(j(j(x,x),n(n(y))),j(z,y))).  [hyper(5,a,21,a,b,439,a)].
+
+given #410 (A,wt=14): 146 P(j(x,j(y,j(z,j(j(j(u,u),w),w))))).  [hyper(5,a,57,a,b,139,a)].
+
+given #411 (T,wt=12): 575 P(j(x,j(j(j(y,y),n(n(z))),z))).  [hyper(5,a,6,a,b,439,a)].
+
+given #412 (T,wt=12): 576 P(j(j(i(x,y),n(n(n(n(z))))),z)).  [hyper(5,a,334,a,b,440,a)].
+
+given #413 (T,wt=12): 583 P(j(j(i(x,y),n(n(z))),j(u,z))).  [hyper(5,a,21,a,b,440,a)].
+
+given #414 (T,wt=12): 585 P(j(x,j(j(i(y,z),n(n(u))),u))).  [hyper(5,a,6,a,b,440,a)].
+
+given #415 (A,wt=20): 149 P(j(j(j(j(x,x),j(y,z)),y),j(j(j(x,x),j(y,z)),z))).  [hyper(5,a,8,a,b,139,a)].
+
+given #416 (T,wt=12): 594 P(j(x,j(n(n(n(n(y)))),j(z,y)))).  [hyper(5,a,48,a,b,436,a)].
+
+given #417 (T,wt=12): 631 P(j(n(n(n(n(n(n(n(n(x)))))))),x)).  [hyper(5,a,334,a,b,455,a)].
+
+given #418 (T,wt=12): 641 P(j(n(n(n(n(n(n(x)))))),j(y,x))).  [hyper(5,a,21,a,b,455,a)].
+
+given #419 (T,wt=12): 644 P(j(x,j(n(n(n(n(n(n(y)))))),y))).  [hyper(5,a,6,a,b,455,a)].
+
+Low Water (keep): wt=38.000, iters=6740
+
+given #420 (A,wt=14): 151 P(j(x,j(y,j(z,j(j(i(u,w),v5),v5))))).  [hyper(5,a,57,a,b,144,a)].
+
+Low Water (keep): wt=33.000, iters=6667
+
+given #421 (T,wt=12): 649 P(j(n(n(n(n(x)))),j(y,j(z,x)))).  [hyper(5,a,21,a,b,463,a)].
+
+given #422 (T,wt=12): 655 P(j(j(j(n(n(n(n(x)))),x),y),y)).  [hyper(5,a,29,a,b,466,a)].
+
+given #423 (T,wt=12): 657 P(j(j(x,n(n(n(n(y))))),j(x,y))).  [hyper(5,a,8,a,b,466,a)].
+
+given #424 (T,wt=12): 660 P(j(j(n(n(n(n(i(x,y))))),z),z)).  [hyper(5,a,29,a,b,469,a)].
+
+Low Water (keep): wt=30.000, iters=6685
+
+given #425 (A,wt=20): 154 P(j(j(j(i(x,y),j(z,u)),z),j(j(i(x,y),j(z,u)),u))).  [hyper(5,a,8,a,b,144,a)].
+
+given #426 (T,wt=12): 691 P(j(j(n(n(n(n(j(x,x))))),y),y)).  [hyper(5,a,29,a,b,518,a)].
+
+Low Water (keep): wt=28.000, iters=6670
+
+given #427 (T,wt=12): 695 P(j(x,n(j(j(y,y),n(i(z,u)))))).  [hyper(5,a,6,a,b,530,a)].
+
+given #428 (T,wt=12): 699 P(j(x,n(j(j(y,y),n(j(z,z)))))).  [hyper(5,a,6,a,b,531,a)].
+
+given #429 (T,wt=12): 703 P(j(x,n(n(n(n(n(n(i(y,z))))))))).  [hyper(5,a,6,a,b,632,a)].
+
+given #430 (A,wt=16): 156 P(j(x,j(y,j(z,j(j(j(u,j(w,w)),v5),v5))))).  [hyper(5,a,57,a,b,138,a)].
+
+given #431 (T,wt=12): 716 P(j(x,n(n(n(n(n(n(j(y,y))))))))).  [hyper(5,a,6,a,b,633,a)].
+
+given #432 (T,wt=12): 794 P(j(j(n(j(n(x),x)),x),j(y,x))).  [hyper(5,a,21,a,b,780,a)].
+
+given #433 (T,wt=12): 796 P(j(x,j(j(n(j(n(y),y)),y),y))).  [hyper(5,a,6,a,b,780,a)].
+
+given #434 (T,wt=12): 814 P(n(n(j(j(x,y),j(x,j(z,y)))))).  [hyper(5,a,298,a,b,50,a)].
+
+given #435 (A,wt=14): 157 P(j(x,j(y,j(j(j(z,j(u,u)),w),w)))).  [hyper(5,a,55,a,b,138,a)].
+
+given #436 (T,wt=12): 828 P(j(x,j(y,n(n(j(n(n(z)),z)))))).  [hyper(5,a,55,a,b,807,a)].
+
+given #437 (T,wt=12): 843 P(j(x,j(y,n(n(j(z,j(u,u))))))).  [hyper(5,a,55,a,b,821,a)].
+
+given #438 (T,wt=12): 846 P(j(x,j(y,n(n(j(z,i(u,w))))))).  [hyper(5,a,55,a,b,822,a)].
+
+given #439 (T,wt=12): 849 P(j(x,j(y,n(n(j(z,j(u,z))))))).  [hyper(5,a,55,a,b,826,a)].
+
+Low Water (keep): wt=27.000, iters=6671
+
+given #440 (A,wt=24): 159 P(j(j(j(j(x,j(y,y)),j(z,u)),z),j(j(j(x,j(y,y)),j(z,u)),u))).  [hyper(5,a,8,a,b,138,a)].
+
+given #441 (T,wt=12): 916 P(j(x,n(n(j(n(n(n(n(y)))),y))))).  [hyper(5,a,6,a,b,803,a)].
+
+given #442 (T,wt=12): 920 P(j(x,n(n(j(n(n(y)),j(z,y)))))).  [hyper(5,a,6,a,b,804,a)].
+
+given #443 (T,wt=12): 924 P(j(x,n(n(j(y,n(n(j(z,z)))))))).  [hyper(5,a,6,a,b,805,a)].
+
+given #444 (T,wt=12): 925 P(n(n(j(x,j(y,j(z,j(u,y))))))).  [hyper(5,a,298,a,b,56,a)].
+
+given #445 (A,wt=16): 161 P(j(x,j(y,j(z,j(j(j(u,i(w,v5)),v6),v6))))).  [hyper(5,a,57,a,b,140,a)].
+
+given #446 (T,wt=12): 937 P(j(x,n(n(j(y,n(n(i(z,u)))))))).  [hyper(5,a,6,a,b,806,a)].
+
+given #447 (T,wt=12): 941 P(j(x,n(n(j(y,j(n(n(z)),z)))))).  [hyper(5,a,6,a,b,808,a)].
+
+given #448 (T,wt=12): 945 P(j(x,n(n(j(j(i(y,z),u),u))))).  [hyper(5,a,6,a,b,809,a)].
+
+given #449 (T,wt=12): 949 P(j(x,n(n(j(j(j(y,y),z),z))))).  [hyper(5,a,6,a,b,810,a)].
+
+given #450 (A,wt=14): 162 P(j(x,j(y,j(j(j(z,i(u,w)),v5),v5)))).  [hyper(5,a,55,a,b,140,a)].
+
+Low Water (keep): wt=26.000, iters=6788
+
+given #451 (T,wt=12): 960 P(j(x,n(n(j(y,j(z,j(u,y))))))).  [hyper(5,a,6,a,b,813,a)].
+
+given #452 (T,wt=12): 964 P(j(x,n(n(j(y,j(z,j(u,u))))))).  [hyper(5,a,6,a,b,817,a)].
+
+given #453 (T,wt=12): 968 P(j(x,n(n(j(y,j(z,i(u,w))))))).  [hyper(5,a,6,a,b,818,a)].
+
+given #454 (T,wt=12): 972 P(j(x,n(n(j(y,j(z,j(u,z))))))).  [hyper(5,a,6,a,b,823,a)].
+
+given #455 (A,wt=24): 164 P(j(j(j(j(x,i(y,z)),j(u,w)),u),j(j(j(x,i(y,z)),j(u,w)),w))).  [hyper(5,a,8,a,b,140,a)].
+
+Low Water (keep): wt=25.000, iters=6701
+
+given #456 (T,wt=12): 973 P(n(n(j(x,j(y,j(z,j(u,u))))))).  [hyper(5,a,298,a,b,60,a)].
+
+Low Water (keep): wt=24.000, iters=6713
+
+given #457 (T,wt=12): 985 P(j(j(n(n(j(n(n(x)),x))),y),y)).  [hyper(5,a,29,a,b,829,a)].
+
+given #458 (T,wt=12): 991 P(j(j(n(n(j(x,j(y,y)))),z),z)).  [hyper(5,a,29,a,b,844,a)].
+
+given #459 (T,wt=12): 997 P(j(j(n(n(j(x,i(y,z)))),u),u)).  [hyper(5,a,29,a,b,847,a)].
+
+given #460 (A,wt=20): 166 P(j(j(j(j(x,y),j(x,y)),j(j(x,y),x)),j(j(x,y),y))).  [hyper(5,a,138,a,b,32,a)].
+
+given #461 (T,wt=12): 1003 P(j(j(n(n(j(x,j(y,x)))),z),z)).  [hyper(5,a,29,a,b,850,a)].
+
+given #462 (T,wt=12): 1004 P(n(n(j(x,j(y,j(z,i(u,w))))))).  [hyper(5,a,298,a,b,61,a)].
+
+given #463 (T,wt=12): 1014 P(j(x,n(n(n(n(j(n(n(y)),y))))))).  [hyper(5,a,6,a,b,980,a)].
+
+given #464 (T,wt=12): 1018 P(j(x,n(n(n(n(j(y,j(z,z)))))))).  [hyper(5,a,6,a,b,986,a)].
+
+given #465 (A,wt=36): 167 P(j(x,j(y,j(z,j(j(j(j(u,j(w,v5)),j(u,w)),j(u,j(w,v5))),j(j(j(u,j(w,v5)),j(u,w)),j(u,v5))))))).  [hyper(5,a,57,a,b,32,a)].
+
+given #466 (T,wt=12): 1022 P(j(x,n(n(n(n(j(y,i(z,u)))))))).  [hyper(5,a,6,a,b,992,a)].
+
+given #467 (T,wt=12): 1026 P(j(x,n(n(n(n(j(y,j(z,y)))))))).  [hyper(5,a,6,a,b,998,a)].
+
+given #468 (T,wt=12): 1159 P(n(n(j(x,j(y,j(z,j(u,z))))))).  [hyper(5,a,298,a,b,65,a)].
+
+given #469 (T,wt=12): 1216 P(n(n(n(n(n(n(j(x,j(y,x))))))))).  [hyper(5,a,79,a,b,455,a)].
+
+Low Water (keep): wt=23.000, iters=6669
+
+given #470 (A,wt=34): 168 P(j(x,j(y,j(j(j(j(z,j(u,w)),j(z,u)),j(z,j(u,w))),j(j(j(z,j(u,w)),j(z,u)),j(z,w)))))).  [hyper(5,a,55,a,b,32,a)].
+
+given #471 (T,wt=12): 1217 P(n(j(j(x,x),n(j(y,j(z,y)))))).  [hyper(5,a,79,a,b,346,a)].
+
+given #472 (T,wt=12): 1218 P(n(j(i(x,y),n(j(z,j(u,z)))))).  [hyper(5,a,79,a,b,311,a)].
+
+given #473 (T,wt=12): 1225 P(n(n(j(j(x,j(x,y)),j(x,y))))).  [hyper(5,a,298,a,b,88,a)].
+
+given #474 (T,wt=12): 1256 P(n(n(n(n(n(n(j(x,i(y,z))))))))).  [hyper(5,a,90,a,b,455,a)].
+
+given #475 (A,wt=32): 169 P(j(j(j(j(x,j(y,z)),j(x,y)),j(x,j(y,z))),j(u,j(j(j(x,j(y,z)),j(x,y)),j(x,z))))).  [hyper(5,a,21,a,b,32,a)].
+
+given #476 (T,wt=12): 1257 P(n(j(j(x,x),n(j(y,i(z,u)))))).  [hyper(5,a,90,a,b,346,a)].
+
+given #477 (T,wt=12): 1258 P(n(j(i(x,y),n(j(z,i(u,w)))))).  [hyper(5,a,90,a,b,311,a)].
+
+given #478 (T,wt=12): 1272 P(n(n(n(n(n(n(j(x,j(y,y))))))))).  [hyper(5,a,93,a,b,455,a)].
+
+given #479 (T,wt=12): 1273 P(n(j(j(x,x),n(j(y,j(z,z)))))).  [hyper(5,a,93,a,b,346,a)].
+
+given #480 (A,wt=46): 170 P(j(j(j(j(j(x,j(y,z)),j(x,y)),j(x,j(y,z))),j(j(x,j(y,z)),j(x,y))),j(j(j(j(x,j(y,z)),j(x,y)),j(x,j(y,z))),j(x,z)))).  [hyper(5,a,8,a,b,32,a)].
+
+given #481 (T,wt=12): 1274 P(n(j(i(x,y),n(j(z,j(u,u)))))).  [hyper(5,a,93,a,b,311,a)].
+
+given #482 (T,wt=12): 1394 P(n(n(j(x,j(y,j(z,j(u,x))))))).  [hyper(5,a,298,a,b,101,a)].
+
+Low Water (keep): wt=22.000, iters=6675
+
+given #483 (T,wt=12): 1487 P(n(n(j(j(n(x),n(j(y,y))),x)))).  [hyper(5,a,298,a,b,123,a)].
+
+given #484 (T,wt=12): 1503 P(j(n(n(j(j(x,j(y,x)),z))),z)).  [hyper(5,a,332,a,b,71,a)].
+
+given #485 (A,wt=32): 171 P(j(x,j(j(j(j(y,j(z,u)),j(y,z)),j(y,j(z,u))),j(j(j(y,j(z,u)),j(y,z)),j(y,u))))).  [hyper(5,a,6,a,b,32,a)].
+
+given #486 (T,wt=12): 1553 P(j(n(j(x,n(y))),j(z,j(u,y)))).  [hyper(5,a,118,a,b,1535,a)].
+
+given #487 (T,wt=12): 1557 P(j(x,j(y,j(n(j(z,n(u))),u)))).  [hyper(5,a,55,a,b,1535,a)].
+
+given #488 (T,wt=12): 1560 P(j(x,j(n(j(y,n(z))),j(u,z)))).  [hyper(5,a,48,a,b,1535,a)].
+
+given #489 (T,wt=12): 1563 P(j(n(j(x,n(j(j(y,y),z)))),z)).  [hyper(5,a,40,a,b,1535,a)].
+
+given #490 (A,wt=35): 172 P(j(j(j(j(n(j(x,y)),j(x,y)),j(x,y)),j(j(n(j(x,y)),j(x,y)),x)),j(j(n(j(x,y)),j(x,y)),y))).  [hyper(5,a,32,a,b,37,a)].
+
+given #491 (T,wt=12): 1564 P(j(n(j(x,n(j(i(y,z),u)))),u)).  [hyper(5,a,38,a,b,1535,a)].
+
+given #492 (T,wt=12): 1582 P(j(n(j(x,n(n(n(n(n(y))))))),y)).  [hyper(5,a,334,a,b,1552,a)].
+
+given #493 (T,wt=12): 1595 P(j(n(j(x,n(n(n(y))))),j(z,y))).  [hyper(5,a,21,a,b,1552,a)].
+
+given #494 (T,wt=12): 1598 P(j(x,j(n(j(y,n(n(n(z))))),z))).  [hyper(5,a,6,a,b,1552,a)].
+
+given #495 (A,wt=18): 173 P(j(j(j(x,j(y,j(z,y))),j(x,y)),j(x,j(z,y)))).  [hyper(5,a,32,a,b,22,a)].
+
+given #496 (T,wt=12): 1624 P(j(j(j(n(j(x,n(y))),y),z),z)).  [hyper(5,a,29,a,b,1568,a)].
+
+given #497 (T,wt=12): 1626 P(j(j(x,n(j(y,n(z)))),j(x,z))).  [hyper(5,a,8,a,b,1568,a)].
+
+given #498 (T,wt=10): 13431 P(j(n(n(n(j(x,n(y))))),y)).  [hyper(5,a,332,a,b,1626,a)].
+
+Low Water (keep): wt=21.000, iters=6668
+
+given #499 (T,wt=12): 1631 P(j(x,n(n(j(n(j(y,n(z))),z))))).  [hyper(5,a,6,a,b,1616,a)].
+
+NOTE: Back_subsumption disabled, ratio of kept to back_subsumed is 208 (0.00 of 1.24 sec).
+
+given #500 (A,wt=32): 174 P(j(j(j(j(n(x),n(y)),j(j(n(x),y),x)),j(j(n(x),n(y)),j(n(x),y))),j(j(n(x),n(y)),x))).  [hyper(5,a,32,a,b,20,a)].
+
+given #501 (T,wt=12): 1837 P(n(n(j(j(n(x),n(i(y,z))),x)))).  [hyper(5,a,298,a,b,128,a)].
+
+given #502 (T,wt=12): 2166 P(j(n(n(j(j(x,i(y,z)),u))),u)).  [hyper(5,a,332,a,b,91,a)].
+
+given #503 (T,wt=12): 2269 P(n(n(j(x,j(j(j(y,y),z),z))))).  [hyper(5,a,298,a,b,147,a)].
+
+given #504 (T,wt=12): 2291 P(n(n(j(x,j(j(i(y,z),u),u))))).  [hyper(5,a,298,a,b,152,a)].
+
+given #505 (A,wt=34): 175 P(j(j(j(j(x,j(y,z)),j(j(x,y),j(x,z))),j(j(x,j(y,z)),j(x,y))),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,32,a,b,17,a)].
+
+given #506 (T,wt=12): 2312 P(n(n(j(j(j(x,j(y,y)),z),z)))).  [hyper(5,a,298,a,b,160,a)].
+
+given #507 (T,wt=12): 2331 P(j(n(n(j(j(x,j(y,y)),z))),z)).  [hyper(5,a,332,a,b,94,a)].
+
+given #508 (T,wt=12): 2388 P(n(n(j(j(j(x,i(y,z)),u),u)))).  [hyper(5,a,298,a,b,165,a)].
+
+given #509 (T,wt=12): 2405 P(n(n(j(j(j(x,j(y,x)),z),z)))).  [hyper(5,a,298,a,b,180,a)].
+
+given #510 (A,wt=16): 176 P(j(x,j(y,j(z,j(j(j(u,j(w,u)),v5),v5))))).  [hyper(5,a,57,a,b,145,a)].
+
+given #511 (T,wt=12): 2431 P(n(n(j(j(j(x,x),y),j(z,y))))).  [hyper(5,a,298,a,b,184,a)].
+
+Low Water (keep): wt=20.000, iters=6667
+
+given #512 (T,wt=12): 2466 P(n(n(j(j(i(x,y),z),j(u,z))))).  [hyper(5,a,298,a,b,192,a)].
+
+given #513 (T,wt=12): 2513 P(n(n(j(j(n(x),j(n(x),x)),x)))).  [hyper(5,a,298,a,b,223,a)].
+
+given #514 (T,wt=12): 2588 P(j(n(n(n(x))),j(j(n(y),x),y))).  [hyper(5,a,97,a,b,297,a)].
+
+given #515 (A,wt=14): 177 P(j(x,j(y,j(j(j(z,j(u,z)),w),w)))).  [hyper(5,a,55,a,b,145,a)].
+
+given #516 (T,wt=12): 2725 P(j(j(j(x,y),z),j(u,j(y,z)))).  [hyper(5,a,21,a,b,2630,a)].
+
+given #517 (T,wt=12): 2727 P(j(x,j(j(j(y,z),u),j(z,u)))).  [hyper(5,a,6,a,b,2630,a)].
+
+given #518 (T,wt=10): 13920 P(j(j(n(x),n(y)),j(y,x))).  [hyper(5,a,96,a,b,2727,a)].
+
+given #519 (T,wt=7): 13943 P(j(n(x),j(x,y))).  [hyper(5,a,2630,a,b,13920,a)].
+
+given #520 (A,wt=24): 179 P(j(j(j(j(x,j(y,x)),j(z,u)),z),j(j(j(x,j(y,x)),j(z,u)),u))).  [hyper(5,a,8,a,b,145,a)].
+
+given #521 (T,wt=9): 13942 P(j(x,j(n(y),j(y,z)))).  [hyper(5,a,2725,a,b,13920,a)].
+
+given #522 (T,wt=9): 13956 P(j(n(x),n(j(n(x),x)))).  [hyper(5,a,13920,a,b,4088,a)].
+
+given #523 (T,wt=9): 13958 P(j(n(j(x,n(n(x)))),y)).  [hyper(5,a,13920,a,b,3124,a)].
+
+given #524 (T,wt=9): 14003 P(j(n(x),n(n(j(x,y))))).  [hyper(5,a,2746,a,b,13943,a)].
+
+given #525 (A,wt=16): 181 P(j(x,j(y,j(z,j(j(j(u,u),w),j(v5,w)))))).  [hyper(5,a,57,a,b,148,a)].
+
+given #526 (T,wt=7): 14208 P(j(n(j(x,y)),x)).  [hyper(5,a,13920,a,b,14003,a)].
+
+given #527 (T,wt=7): 14307 P(j(x,j(n(x),y))).  [hyper(5,a,13920,a,b,14208,a)].
+
+given #528 (T,wt=9): 14009 P(n(n(j(n(x),j(x,y))))).  [hyper(5,a,2728,a,b,13943,a)].
+
+Low Water (keep): wt=19.000, iters=6683
+
+given #529 (T,wt=9): 14018 P(j(n(x),j(y,j(x,z)))).  [hyper(5,a,21,a,b,13943,a)].
+
+given #530 (A,wt=14): 182 P(j(x,j(y,j(j(j(z,z),u),j(w,u))))).  [hyper(5,a,55,a,b,148,a)].
+
+given #531 (T,wt=9): 14321 P(j(n(j(x,y)),n(n(x)))).  [hyper(5,a,2746,a,b,14208,a)].
+
+given #532 (T,wt=9): 14327 P(n(n(j(n(j(x,y)),x)))).  [hyper(5,a,2728,a,b,14208,a)].
+
+given #533 (T,wt=9): 14332 P(j(n(j(n(n(x)),y)),x)).  [hyper(5,a,334,a,b,14208,a)].
+
+given #534 (T,wt=9): 14348 P(j(n(j(x,y)),j(z,x))).  [hyper(5,a,21,a,b,14208,a)].
+
+given #535 (A,wt=16): 185 P(j(x,j(y,j(z,j(u,j(j(j(w,w),v5),v5)))))).  [hyper(5,a,57,a,b,150,a)].
+
+given #536 (T,wt=9): 14351 P(j(x,j(n(j(y,z)),y))).  [hyper(5,a,6,a,b,14208,a)].
+
+given #537 (T,wt=9): 14366 P(j(x,n(n(j(n(x),y))))).  [hyper(5,a,2746,a,b,14307,a)].
+
+given #538 (T,wt=9): 14371 P(n(n(j(x,j(n(x),y))))).  [hyper(5,a,2728,a,b,14307,a)].
+
+Low Water (keep): wt=18.000, iters=6827
+
+given #539 (T,wt=9): 14373 P(j(x,j(n(j(y,x)),z))).  [hyper(5,a,2630,a,b,14307,a)].
+
+given #540 (A,wt=32): 186 P(j(j(j(j(j(x,x),j(y,z)),j(y,z)),j(j(j(x,x),j(y,z)),y)),j(j(j(x,x),j(y,z)),z))).  [hyper(5,a,32,a,b,150,a)].
+
+given #541 (T,wt=9): 14384 P(j(x,j(y,j(n(x),z)))).  [hyper(5,a,21,a,b,14307,a)].
+
+given #542 (T,wt=9): 14385 P(j(j(x,n(x)),j(x,y))).  [hyper(5,a,8,a,b,14307,a)].
+
+given #543 (T,wt=9): 14386 P(j(x,j(y,j(n(y),z)))).  [hyper(5,a,6,a,b,14307,a)].
+
+given #544 (T,wt=9): 14933 P(j(x,j(n(n(n(x))),y))).  [hyper(5,a,13920,a,b,14332,a)].
+
+given #545 (A,wt=18): 188 P(j(j(j(j(x,x),y),j(y,z)),j(j(j(x,x),y),z))).  [hyper(5,a,16,a,b,150,a)].
+
+given #546 (T,wt=10): 13957 P(j(n(j(j(n(x),y),y)),x)).  [hyper(5,a,13920,a,b,4057,a)].
+
+given #547 (T,wt=10): 13961 P(j(n(j(n(i(x,y)),z)),u)).  [hyper(5,a,13920,a,b,1934,a)].
+
+given #548 (T,wt=10): 13963 P(j(n(j(n(j(x,x)),y)),z)).  [hyper(5,a,13920,a,b,1581,a)].
+
+given #549 (T,wt=10): 13981 P(j(n(j(j(n(x),x),x)),y)).  [hyper(5,a,13920,a,b,912,a)].
+
+given #550 (A,wt=16): 189 P(j(x,j(y,j(z,j(j(i(u,w),v5),j(v6,v5)))))).  [hyper(5,a,57,a,b,153,a)].
+
+given #551 (T,wt=10): 13987 P(j(x,n(j(j(y,y),n(x))))).  [hyper(5,a,13920,a,b,346,a)].
+
+given #552 (T,wt=10): 13988 P(j(x,n(j(i(y,z),n(x))))).  [hyper(5,a,13920,a,b,311,a)].
+
+given #553 (T,wt=10): 13989 P(j(x,n(j(n(n(x)),n(x))))).  [hyper(5,a,13920,a,b,296,a)].
+
+given #554 (T,wt=10): 14019 P(j(j(n(x),x),j(n(x),y))).  [hyper(5,a,8,a,b,13943,a)].
+
+given #555 (A,wt=14): 190 P(j(x,j(y,j(j(i(z,u),w),j(v5,w))))).  [hyper(5,a,55,a,b,153,a)].
+
+given #556 (T,wt=10): 14152 P(j(j(n(x),n(j(x,y))),x)).  [hyper(5,a,19,a,b,13942,a)].
+
+given #557 (T,wt=10): 14345 P(j(n(j(j(n(x),x),y)),x)).  [hyper(5,a,43,a,b,14208,a)].
+
+given #558 (T,wt=10): 14352 P(j(n(j(x,j(n(x),y))),z)).  [hyper(5,a,14307,a,b,14307,a)].
+
+given #559 (T,wt=10): 14387 P(j(n(j(n(j(x,y)),x)),z)).  [hyper(5,a,14307,a,b,14208,a)].
+
+given #560 (A,wt=28): 193 P(j(x,j(y,j(z,j(u,j(j(j(w,j(v5,v6)),j(w,v5)),j(j(w,j(v5,v6)),j(w,v6)))))))).  [hyper(5,a,57,a,b,33,a)].
+
+given #561 (T,wt=10): 14391 P(j(n(j(n(x),j(x,y))),z)).  [hyper(5,a,14307,a,b,13943,a)].
+
+given #562 (T,wt=10): 16626 P(j(x,j(j(n(n(x)),y),y))).  [hyper(5,a,13920,a,b,13957,a)].
+
+given #563 (T,wt=11): 13962 P(j(n(j(n(j(x,n(y))),y)),z)).  [hyper(5,a,13920,a,b,1631,a)].
+
+given #564 (T,wt=11): 13968 P(j(n(n(n(j(x,j(y,x))))),z)).  [hyper(5,a,13920,a,b,1026,a)].
+
+given #565 (A,wt=50): 194 P(j(j(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z))),j(j(j(x,j(y,z)),j(x,y)),j(x,j(y,z)))),j(j(j(x,j(y,z)),j(x,y)),j(x,z)))).  [hyper(5,a,32,a,b,33,a)].
+
+given #566 (T,wt=11): 13969 P(j(n(n(n(j(x,i(y,z))))),u)).  [hyper(5,a,13920,a,b,1022,a)].
+
+given #567 (T,wt=11): 13970 P(j(n(n(n(j(x,j(y,y))))),z)).  [hyper(5,a,13920,a,b,1018,a)].
+
+given #568 (T,wt=11): 13971 P(j(n(n(n(j(n(n(x)),x)))),y)).  [hyper(5,a,13920,a,b,1014,a)].
+
+given #569 (T,wt=11): 13972 P(j(n(j(x,j(y,j(z,y)))),u)).  [hyper(5,a,13920,a,b,972,a)].
+
+given #570 (A,wt=24): 195 P(j(j(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z))),u),u)).  [hyper(5,a,29,a,b,33,a)].
+
+given #571 (T,wt=11): 13973 P(j(n(j(x,j(y,i(z,u)))),w)).  [hyper(5,a,13920,a,b,968,a)].
+
+given #572 (T,wt=11): 13974 P(j(n(j(x,j(y,j(z,z)))),u)).  [hyper(5,a,13920,a,b,964,a)].
+
+given #573 (T,wt=11): 13975 P(j(n(j(x,j(y,j(z,x)))),u)).  [hyper(5,a,13920,a,b,960,a)].
+
+given #574 (T,wt=11): 13976 P(j(n(j(j(j(x,x),y),y)),z)).  [hyper(5,a,13920,a,b,949,a)].
+
+given #575 (A,wt=34): 196 P(j(j(j(j(x,j(y,z)),j(x,y)),j(j(j(x,j(y,z)),j(x,z)),u)),j(j(j(x,j(y,z)),j(x,y)),u))).  [hyper(5,a,16,a,b,33,a)].
+
+given #576 (T,wt=11): 13977 P(j(n(j(j(i(x,y),z),z)),u)).  [hyper(5,a,13920,a,b,945,a)].
+
+given #577 (T,wt=11): 13978 P(j(n(j(x,j(n(n(y)),y))),z)).  [hyper(5,a,13920,a,b,941,a)].
+
+given #578 (T,wt=11): 13979 P(j(n(j(n(n(x)),j(y,x))),z)).  [hyper(5,a,13920,a,b,920,a)].
+
+given #579 (T,wt=11): 13980 P(j(n(j(n(n(n(n(x)))),x)),y)).  [hyper(5,a,13920,a,b,916,a)].
+
+given #580 (A,wt=24): 197 P(j(j(x,j(j(y,j(z,u)),j(y,z))),j(x,j(j(y,j(z,u)),j(y,u))))).  [hyper(5,a,8,a,b,33,a)].
+
+given #581 (T,wt=11): 13992 P(n(n(n(n(j(n(x),j(x,y))))))).  [hyper(5,a,4060,a,b,13943,a)].
+
+given #582 (T,wt=11): 14001 P(j(x,n(n(j(n(y),j(y,z)))))).  [hyper(5,a,2752,a,b,13943,a)].
+
+given #583 (T,wt=11): 14004 P(n(n(j(x,j(n(y),j(y,z)))))).  [hyper(5,a,2745,a,b,13943,a)].
+
+given #584 (T,wt=11): 14005 P(j(j(j(n(x),j(x,y)),z),z)).  [hyper(5,a,2743,a,b,13943,a)].
+
+given #585 (A,wt=16): 198 P(j(x,j(y,j(z,j(u,j(j(i(w,v5),v6),v6)))))).  [hyper(5,a,57,a,b,155,a)].
+
+given #586 (T,wt=11): 14006 P(j(j(n(n(x)),n(x)),j(x,y))).  [hyper(5,a,2740,a,b,13943,a)].
+
+given #587 (T,wt=11): 14010 P(j(j(x,n(y)),j(x,j(y,z)))).  [hyper(5,a,237,a,b,13943,a)].
+
+given #588 (T,wt=9): 18307 P(j(n(n(n(x))),j(x,y))).  [hyper(5,a,332,a,b,14010,a)].
+
+Low Water (keep): wt=17.000, iters=6758
+
+given #589 (T,wt=9): 18334 P(j(n(j(x,y)),j(y,z))).  [hyper(5,a,14010,a,b,9350,a)].
+
+given #590 (A,wt=32): 199 P(j(j(j(j(i(x,y),j(z,u)),j(z,u)),j(j(i(x,y),j(z,u)),z)),j(j(i(x,y),j(z,u)),u))).  [hyper(5,a,32,a,b,155,a)].
+
+given #591 (T,wt=10): 18320 P(j(x,j(n(j(n(x),y)),z))).  [hyper(5,a,14010,a,b,14366,a)].
+
+given #592 (T,wt=10): 18323 P(j(n(j(x,y)),j(n(x),z))).  [hyper(5,a,14010,a,b,14321,a)].
+
+given #593 (T,wt=10): 18324 P(j(n(j(n(x),y)),j(x,z))).  [hyper(5,a,14010,a,b,14208,a)].
+
+given #594 (T,wt=10): 18327 P(j(n(x),j(n(j(x,y)),z))).  [hyper(5,a,14010,a,b,14003,a)].
+
+given #595 (A,wt=18): 201 P(j(j(j(i(x,y),z),j(z,u)),j(j(i(x,y),z),u))).  [hyper(5,a,16,a,b,155,a)].
+
+given #596 (T,wt=10): 18331 P(j(n(x),j(j(n(x),x),y))).  [hyper(5,a,14010,a,b,13956,a)].
+
+given #597 (T,wt=11): 14011 P(j(n(x),j(y,j(z,j(x,u))))).  [hyper(5,a,118,a,b,13943,a)].
+
+given #598 (T,wt=11): 14014 P(j(x,j(y,j(n(z),j(z,u))))).  [hyper(5,a,55,a,b,13943,a)].
+
+given #599 (T,wt=11): 14016 P(j(x,j(n(y),j(z,j(y,u))))).  [hyper(5,a,48,a,b,13943,a)].
+
+given #600 (A,wt=17): 202 P(j(x,j(y,j(z,j(j(u,j(n(w),w)),j(u,w)))))).  [hyper(5,a,57,a,b,43,a)].
+
+given #601 (T,wt=11): 14017 P(j(n(x),j(j(x,y),j(x,z)))).  [hyper(5,a,46,a,b,13943,a)].
+
+given #602 (T,wt=11): 14020 P(j(n(j(n(j(x,y)),n(y))),z)).  [hyper(5,a,13943,a,b,9378,a)].
+
+given #603 (T,wt=11): 14022 P(j(n(j(x,n(n(n(n(x)))))),y)).  [hyper(5,a,13943,a,b,4174,a)].
+
+given #604 (T,wt=11): 14028 P(j(n(j(x,j(y,n(n(x))))),z)).  [hyper(5,a,13943,a,b,3313,a)].
+
+given #605 (A,wt=15): 203 P(j(x,j(y,j(j(z,j(n(u),u)),j(z,u))))).  [hyper(5,a,55,a,b,43,a)].
+
+given #606 (T,wt=11): 14029 P(j(n(j(x,j(y,n(n(y))))),z)).  [hyper(5,a,13943,a,b,3139,a)].
+
+given #607 (T,wt=11): 14030 P(j(n(j(x,n(n(j(y,x))))),z)).  [hyper(5,a,13943,a,b,3127,a)].
+
+given #608 (T,wt=11): 14031 P(j(n(n(n(j(x,n(n(x)))))),y)).  [hyper(5,a,13943,a,b,3119,a)].
+
+given #609 (T,wt=11): 14032 P(j(n(j(x,j(j(x,y),y))),z)).  [hyper(5,a,13943,a,b,2922,a)].
+
+given #610 (A,wt=13): 205 P(j(j(x,j(n(y),y)),j(z,j(x,y)))).  [hyper(5,a,21,a,b,43,a)].
+
+given #611 (T,wt=11): 14167 P(j(n(x),n(n(n(j(n(x),x)))))).  [hyper(5,a,2746,a,b,13956,a)].
+
+given #612 (T,wt=11): 14172 P(n(n(j(n(x),n(j(n(x),x)))))).  [hyper(5,a,2728,a,b,13956,a)].
+
+given #613 (T,wt=11): 14179 P(j(n(x),j(y,n(j(n(x),x))))).  [hyper(5,a,21,a,b,13956,a)].
+
+given #614 (T,wt=11): 14180 P(j(x,j(n(y),n(j(n(y),y))))).  [hyper(5,a,6,a,b,13956,a)].
+
+given #615 (A,wt=18): 206 P(j(j(j(x,j(n(y),y)),x),j(j(x,j(n(y),y)),y))).  [hyper(5,a,8,a,b,43,a)].
+
+given #616 (T,wt=11): 14202 P(n(n(j(n(j(x,n(n(x)))),y)))).  [hyper(5,a,2728,a,b,13958,a)].
+
+given #617 (T,wt=11): 14203 P(j(x,j(n(j(y,n(n(y)))),z))).  [hyper(5,a,441,a,b,13958,a)].
+
+given #618 (T,wt=11): 14222 P(j(n(x),n(n(n(n(j(x,y))))))).  [hyper(5,a,2746,a,b,14003,a)].
+
+given #619 (T,wt=9): 19131 P(j(n(n(n(j(x,y)))),x)).  [hyper(5,a,13920,a,b,14222,a)].
+
+given #620 (A,wt=13): 207 P(j(x,j(j(y,j(n(z),z)),j(y,z)))).  [hyper(5,a,6,a,b,43,a)].
+
+given #621 (T,wt=11): 14227 P(n(n(j(n(x),n(n(j(x,y))))))).  [hyper(5,a,2728,a,b,14003,a)].
+
+given #622 (T,wt=11): 14234 P(j(n(x),j(y,n(n(j(x,z)))))).  [hyper(5,a,21,a,b,14003,a)].
+
+given #623 (T,wt=11): 14235 P(j(x,j(n(y),n(n(j(y,z)))))).  [hyper(5,a,6,a,b,14003,a)].
+
+given #624 (T,wt=11): 14310 P(n(n(n(n(j(n(j(x,y)),x)))))).  [hyper(5,a,4060,a,b,14208,a)].
+
+given #625 (A,wt=13): 208 P(j(j(j(x,j(y,x)),j(n(z),z)),z)).  [hyper(5,a,43,a,b,145,a)].
+
+given #626 (T,wt=11): 14319 P(j(x,n(n(j(n(j(y,z)),y))))).  [hyper(5,a,2752,a,b,14208,a)].
+
+given #627 (T,wt=11): 14322 P(n(n(j(x,j(n(j(y,z)),y))))).  [hyper(5,a,2745,a,b,14208,a)].
+
+given #628 (T,wt=11): 14323 P(j(j(j(n(j(x,y)),x),z),z)).  [hyper(5,a,2743,a,b,14208,a)].
+
+given #629 (T,wt=11): 14328 P(j(n(j(n(j(x,n(y))),z)),y)).  [hyper(5,a,1626,a,b,14208,a)].
+
+given #630 (A,wt=13): 210 P(j(j(j(x,i(y,z)),j(n(u),u)),u)).  [hyper(5,a,43,a,b,140,a)].
+
+given #631 (T,wt=11): 14329 P(j(n(j(n(n(n(n(x)))),y)),x)).  [hyper(5,a,657,a,b,14208,a)].
+
+given #632 (T,wt=11): 14330 P(j(x,j(n(j(n(n(y)),z)),y))).  [hyper(5,a,441,a,b,14208,a)].
+
+given #633 (T,wt=11): 14331 P(j(n(j(n(n(x)),y)),j(z,x))).  [hyper(5,a,418,a,b,14208,a)].
+
+given #634 (T,wt=11): 14333 P(j(j(x,n(j(y,z))),j(x,y))).  [hyper(5,a,237,a,b,14208,a)].
+
+given #635 (A,wt=13): 212 P(j(j(j(x,j(y,y)),j(n(z),z)),z)).  [hyper(5,a,43,a,b,138,a)].
+
+given #636 (T,wt=9): 19433 P(j(n(j(x,j(y,z))),y)).  [hyper(5,a,14333,a,b,9350,a)].
+
+given #637 (T,wt=10): 19404 P(j(n(j(n(j(x,y)),z)),x)).  [hyper(5,a,14323,a,b,14333,a)].
+
+given #638 (T,wt=11): 14334 P(j(n(j(x,y)),j(z,j(u,x)))).  [hyper(5,a,118,a,b,14208,a)].
+
+given #639 (T,wt=11): 14341 P(j(x,j(y,j(n(j(z,u)),z)))).  [hyper(5,a,55,a,b,14208,a)].
+
+given #640 (A,wt=13): 213 P(j(j(n(j(n(x),x)),n(i(y,z))),x)).  [hyper(5,a,43,a,b,78,a)].
+
+given #641 (T,wt=11): 14343 P(j(x,j(n(j(y,z)),j(u,y)))).  [hyper(5,a,48,a,b,14208,a)].
+
+given #642 (T,wt=11): 14346 P(j(n(j(j(j(x,x),y),z)),y)).  [hyper(5,a,40,a,b,14208,a)].
+
+given #643 (T,wt=11): 14347 P(j(n(j(j(i(x,y),z),u)),z)).  [hyper(5,a,38,a,b,14208,a)].
+
+given #644 (T,wt=11): 14355 P(n(n(n(n(j(x,j(n(x),y))))))).  [hyper(5,a,4060,a,b,14307,a)].
+
+given #645 (A,wt=15): 214 P(j(j(n(j(n(x),x)),n(n(j(n(x),x)))),x)).  [hyper(5,a,43,a,b,77,a)].
+
+given #646 (T,wt=11): 14364 P(j(x,n(n(j(y,j(n(y),z)))))).  [hyper(5,a,2752,a,b,14307,a)].
+
+given #647 (T,wt=11): 14367 P(n(n(j(x,j(y,j(n(y),z)))))).  [hyper(5,a,2745,a,b,14307,a)].
+
+given #648 (T,wt=11): 14368 P(j(j(j(x,j(n(x),y)),z),z)).  [hyper(5,a,2743,a,b,14307,a)].
+
+given #649 (T,wt=11): 14372 P(j(x,j(y,j(n(j(z,y)),u)))).  [hyper(5,a,2725,a,b,14307,a)].
+
+given #650 (A,wt=13): 215 P(j(j(n(j(n(x),x)),n(j(y,y))),x)).  [hyper(5,a,43,a,b,76,a)].
+
+given #651 (T,wt=11): 14374 P(j(j(x,y),j(x,j(n(y),z)))).  [hyper(5,a,237,a,b,14307,a)].
+
+given #652 (T,wt=11): 14377 P(j(x,j(y,j(z,j(n(x),u))))).  [hyper(5,a,118,a,b,14307,a)].
+
+given #653 (T,wt=11): 14380 P(j(x,j(y,j(z,j(n(z),u))))).  [hyper(5,a,55,a,b,14307,a)].
+
+given #654 (T,wt=11): 14381 P(j(x,j(j(y,n(y)),j(y,z)))).  [hyper(5,a,54,a,b,14307,a)].
+
+given #655 (A,wt=13): 216 P(j(j(n(j(n(x),x)),j(n(x),x)),x)).  [hyper(5,a,43,a,b,28,a)].
+
+given #656 (T,wt=11): 14382 P(j(x,j(y,j(z,j(n(y),u))))).  [hyper(5,a,48,a,b,14307,a)].
+
+given #657 (T,wt=11): 14797 P(j(n(x),n(n(j(y,j(x,z)))))).  [hyper(5,a,2746,a,b,14018,a)].
+
+given #658 (T,wt=11): 14802 P(n(n(j(n(x),j(y,j(x,z)))))).  [hyper(5,a,2728,a,b,14018,a)].
+
+given #659 (T,wt=11): 14809 P(j(n(x),j(j(y,x),j(y,z)))).  [hyper(5,a,46,a,b,14018,a)].
+
+given #660 (A,wt=16): 218 P(j(x,j(y,j(z,j(j(n(u),j(n(u),u)),u))))).  [hyper(5,a,57,a,b,204,a)].
+
+given #661 (T,wt=11): 14896 P(j(n(j(x,y)),n(n(n(n(x)))))).  [hyper(5,a,2746,a,b,14321,a)].
+
+given #662 (T,wt=11): 14901 P(n(n(j(n(j(x,y)),n(n(x)))))).  [hyper(5,a,2728,a,b,14321,a)].
+
+given #663 (T,wt=11): 14909 P(j(n(j(x,y)),j(z,n(n(x))))).  [hyper(5,a,21,a,b,14321,a)].
+
+given #664 (T,wt=11): 14911 P(j(x,j(n(j(y,z)),n(n(y))))).  [hyper(5,a,6,a,b,14321,a)].
+
+given #665 (A,wt=14): 219 P(j(x,j(y,j(j(n(z),j(n(z),z)),z)))).  [hyper(5,a,55,a,b,204,a)].
+
+given #666 (T,wt=11): 14951 P(n(n(j(n(j(n(n(x)),y)),x)))).  [hyper(5,a,2728,a,b,14332,a)].
+
+given #667 (T,wt=11): 14984 P(j(n(j(x,y)),n(n(j(z,x))))).  [hyper(5,a,2746,a,b,14348,a)].
+
+given #668 (T,wt=11): 14989 P(n(n(j(n(j(x,y)),j(z,x))))).  [hyper(5,a,2728,a,b,14348,a)].
+
+given #669 (T,wt=11): 15038 P(j(x,n(n(n(n(j(n(x),y))))))).  [hyper(5,a,2746,a,b,14366,a)].
+
+given #670 (A,wt=19): 220 P(j(j(n(j(n(x),x)),j(n(j(n(x),x)),j(n(x),x))),x)).  [hyper(5,a,43,a,b,204,a)].
+
+given #671 (T,wt=11): 15043 P(n(n(j(x,n(n(j(n(x),y))))))).  [hyper(5,a,2728,a,b,14366,a)].
+
+given #672 (T,wt=11): 15045 P(j(x,n(n(j(n(j(y,x)),z))))).  [hyper(5,a,2630,a,b,14366,a)].
+
+given #673 (T,wt=11): 15054 P(j(x,j(y,n(n(j(n(x),z)))))).  [hyper(5,a,21,a,b,14366,a)].
+
+given #674 (T,wt=11): 15056 P(j(x,j(y,n(n(j(n(y),z)))))).  [hyper(5,a,6,a,b,14366,a)].
+
+given #675 (A,wt=32): 222 P(j(j(j(n(j(x,y)),j(n(j(x,y)),j(x,y))),x),j(j(n(j(x,y)),j(n(j(x,y)),j(x,y))),y))).  [hyper(5,a,8,a,b,204,a)].
+
+given #676 (T,wt=11): 15455 P(n(n(j(x,j(n(j(y,x)),z))))).  [hyper(5,a,2728,a,b,14373,a)].
+
+given #677 (T,wt=11): 15457 P(j(x,j(n(j(y,j(z,x))),u))).  [hyper(5,a,2630,a,b,14373,a)].
+
+given #678 (T,wt=11): 15466 P(j(x,j(y,j(n(j(z,x)),u)))).  [hyper(5,a,21,a,b,14373,a)].
+
+given #679 (T,wt=11): 15467 P(j(j(x,n(j(y,x))),j(x,z))).  [hyper(5,a,8,a,b,14373,a)].
+
+given #680 (A,wt=17): 224 P(j(x,j(y,j(z,j(u,j(w,j(j(n(v5),v5),v5))))))).  [hyper(5,a,57,a,b,44,a)].
+
+given #681 (T,wt=11): 15774 P(j(x,n(n(j(y,j(n(x),z)))))).  [hyper(5,a,2746,a,b,14384,a)].
+
+given #682 (T,wt=11): 15779 P(n(n(j(x,j(y,j(n(x),z)))))).  [hyper(5,a,2728,a,b,14384,a)].
+
+given #683 (T,wt=11): 15786 P(j(x,j(j(y,n(x)),j(y,z)))).  [hyper(5,a,46,a,b,14384,a)].
+
+given #684 (T,wt=11): 16161 P(j(j(x,n(x)),n(n(j(x,y))))).  [hyper(5,a,2746,a,b,14385,a)].
+
+given #685 (A,wt=20): 225 P(j(j(j(x,j(j(n(y),y),y)),j(x,j(n(y),y))),j(x,y))).  [hyper(5,a,32,a,b,44,a)].
+
+given #686 (T,wt=11): 16166 P(n(n(j(j(x,n(x)),j(x,y))))).  [hyper(5,a,2728,a,b,14385,a)].
+
+given #687 (T,wt=11): 16178 P(j(j(x,n(x)),j(y,j(x,z)))).  [hyper(5,a,21,a,b,14385,a)].
+
+given #688 (T,wt=11): 16228 P(j(x,n(n(j(n(n(n(x))),y))))).  [hyper(5,a,2746,a,b,14933,a)].
+
+given #689 (T,wt=11): 16233 P(n(n(j(x,j(n(n(n(x))),y))))).  [hyper(5,a,2728,a,b,14933,a)].
+
+given #690 (A,wt=13): 226 P(j(j(j(x,j(j(n(y),y),y)),z),z)).  [hyper(5,a,29,a,b,44,a)].
+
+given #691 (T,wt=11): 16235 P(j(x,j(n(n(n(j(y,x)))),z))).  [hyper(5,a,2630,a,b,14933,a)].
+
+given #692 (T,wt=11): 16244 P(j(x,j(y,j(n(n(n(x))),z)))).  [hyper(5,a,21,a,b,14933,a)].
+
+given #693 (T,wt=11): 16245 P(j(j(x,n(n(n(x)))),j(x,y))).  [hyper(5,a,8,a,b,14933,a)].
+
+given #694 (T,wt=11): 16246 P(j(x,j(y,j(n(n(n(y))),z)))).  [hyper(5,a,6,a,b,14933,a)].
+
+given #695 (A,wt=13): 227 P(j(j(n(x),n(j(j(n(y),y),y))),x)).  [hyper(5,a,19,a,b,44,a)].
+
+given #696 (T,wt=11): 16601 P(j(j(j(x,x),y),j(n(y),z))).  [hyper(5,a,188,a,b,14386,a)].
+
+given #697 (T,wt=11): 16602 P(j(j(j(x,x),n(j(y,z))),y)).  [hyper(5,a,188,a,b,14351,a)].
+
+given #698 (T,wt=11): 16603 P(j(j(j(x,x),n(y)),j(y,z))).  [hyper(5,a,188,a,b,13942,a)].
+
+given #699 (T,wt=11): 17408 P(j(x,j(j(n(n(x)),n(x)),y))).  [hyper(5,a,13920,a,b,14345,a)].
+
+given #700 (A,wt=15): 228 P(j(j(x,j(j(j(n(y),y),y),z)),j(x,z))).  [hyper(5,a,16,a,b,44,a)].
+
+given #701 (T,wt=11): 18304 P(j(n(j(x,n(n(y)))),j(y,z))).  [hyper(5,a,1624,a,b,14010,a)].
+
+given #702 (T,wt=11): 18305 P(j(n(n(n(n(n(x))))),j(x,y))).  [hyper(5,a,655,a,b,14010,a)].
+
+given #703 (T,wt=11): 18306 P(j(x,j(n(n(n(y))),j(y,z)))).  [hyper(5,a,433,a,b,14010,a)].
+
+given #704 (T,wt=11): 18309 P(j(j(i(x,y),n(z)),j(z,u))).  [hyper(5,a,200,a,b,14010,a)].
+
+given #705 (A,wt=18): 229 P(j(x,j(y,j(z,j(j(u,j(j(w,u),v5)),j(u,v5)))))).  [hyper(5,a,57,a,b,35,a)].
+
+given #706 (T,wt=11): 18328 P(j(x,j(j(i(y,z),n(x)),u))).  [hyper(5,a,14010,a,b,13988,a)].
+
+Low Water (displace): id=3833, wt=64.000
+
+Low Water (displace): id=8025, wt=57.000
+
+Low Water (displace): id=20778, wt=15.000
+
+given #707 (T,wt=11): 18329 P(j(x,j(j(j(y,y),n(x)),z))).  [hyper(5,a,14010,a,b,13987,a)].
+
+given #708 (T,wt=11): 18333 P(j(n(j(x,y)),j(n(n(y)),z))).  [hyper(5,a,14010,a,b,9372,a)].
+
+Low Water (displace): id=20936, wt=14.000
+
+given #709 (T,wt=11): 18336 P(j(x,j(n(n(n(n(n(x))))),y))).  [hyper(5,a,14010,a,b,4169,a)].
+
+Low Water (displace): id=20961, wt=13.000
+
+given #710 (A,wt=16): 230 P(j(x,j(y,j(j(z,j(j(u,z),w)),j(z,w))))).  [hyper(5,a,55,a,b,35,a)].
+
+given #711 (T,wt=11): 18338 P(j(n(n(x)),j(n(j(y,x)),z))).  [hyper(5,a,14010,a,b,4087,a)].
+
+given #712 (T,wt=11): 18340 P(j(x,j(n(j(j(x,y),y)),z))).  [hyper(5,a,14010,a,b,4057,a)].
+
+given #713 (T,wt=11): 18341 P(j(x,j(n(j(y,n(n(x)))),z))).  [hyper(5,a,14010,a,b,4055,a)].
+
+given #714 (T,wt=11): 18342 P(j(j(i(x,y),z),j(n(z),u))).  [hyper(5,a,14010,a,b,4041,a)].
+
+given #715 (A,wt=14): 232 P(j(j(x,j(j(y,x),z)),j(u,j(x,z)))).  [hyper(5,a,21,a,b,35,a)].
+
+given #716 (T,wt=11): 18449 P(j(n(n(n(x))),n(n(j(x,y))))).  [hyper(5,a,2746,a,b,18307,a)].
+
+given #717 (T,wt=11): 18453 P(n(n(j(n(n(n(x))),j(x,y))))).  [hyper(5,a,2728,a,b,18307,a)].
+
+given #718 (T,wt=11): 18461 P(j(n(n(n(x))),j(y,j(x,z)))).  [hyper(5,a,21,a,b,18307,a)].
+
+given #719 (T,wt=11): 18484 P(j(n(j(x,y)),n(n(j(y,z))))).  [hyper(5,a,2746,a,b,18334,a)].
+
+given #720 (A,wt=20): 233 P(j(j(j(x,j(j(y,x),z)),x),j(j(x,j(j(y,x),z)),z))).  [hyper(5,a,8,a,b,35,a)].
+
+Low Water (displace): id=21164, wt=12.000
+
+given #721 (T,wt=11): 18489 P(n(n(j(n(j(x,y)),j(y,z))))).  [hyper(5,a,2728,a,b,18334,a)].
+
+given #722 (T,wt=11): 18497 P(j(n(j(x,y)),j(z,j(y,u)))).  [hyper(5,a,21,a,b,18334,a)].
+
+given #723 (T,wt=11): 18499 P(j(x,j(n(j(y,z)),j(z,u)))).  [hyper(5,a,6,a,b,18334,a)].
+
+given #724 (T,wt=11): 18820 P(j(j(i(x,y),n(j(z,u))),z)).  [hyper(5,a,201,a,b,14351,a)].
+
+given #725 (A,wt=14): 234 P(j(x,j(j(y,j(j(z,y),u)),j(y,u)))).  [hyper(5,a,6,a,b,35,a)].
+
+given #726 (T,wt=11): 19079 P(j(x,j(j(x,j(n(y),y)),y))).  [hyper(5,a,2630,a,b,206,a)].
+
+given #727 (T,wt=11): 19192 P(j(n(n(n(j(x,y)))),n(n(x)))).  [hyper(5,a,2746,a,b,19131,a)].
+
+given #728 (T,wt=11): 19196 P(n(n(j(n(n(n(j(x,y)))),x)))).  [hyper(5,a,2728,a,b,19131,a)].
+
+given #729 (T,wt=11): 19201 P(j(n(n(n(j(n(n(x)),y)))),x)).  [hyper(5,a,334,a,b,19131,a)].
+
+given #730 (A,wt=14): 235 P(j(j(x,y),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,35,a,b,33,a)].
+
+given #731 (T,wt=11): 19214 P(j(n(n(n(j(x,y)))),j(z,x))).  [hyper(5,a,21,a,b,19131,a)].
+
+given #732 (T,wt=11): 19215 P(j(x,j(n(n(n(j(y,z)))),y))).  [hyper(5,a,6,a,b,19131,a)].
+
+given #733 (T,wt=11): 19412 P(j(n(j(x,n(n(j(y,z))))),y)).  [hyper(5,a,1624,a,b,14333,a)].
+
+given #734 (T,wt=11): 19413 P(j(n(n(n(n(n(j(x,y)))))),x)).  [hyper(5,a,655,a,b,14333,a)].
+
+given #735 (A,wt=16): 238 P(j(x,j(y,j(z,j(n(u),j(j(n(w),u),w)))))).  [hyper(5,a,57,a,b,236,a)].
+
+given #736 (T,wt=11): 19532 P(j(n(j(x,j(y,z))),n(n(y)))).  [hyper(5,a,2746,a,b,19433,a)].
+
+given #737 (T,wt=11): 19536 P(n(n(j(n(j(x,j(y,z))),y)))).  [hyper(5,a,2728,a,b,19433,a)].
+
+given #738 (T,wt=11): 19541 P(j(n(j(x,j(n(n(y)),z))),y)).  [hyper(5,a,334,a,b,19433,a)].
+
+given #739 (T,wt=11): 19554 P(j(n(j(x,j(y,z))),j(u,y))).  [hyper(5,a,21,a,b,19433,a)].
+
+given #740 (A,wt=14): 239 P(j(x,j(y,j(n(z),j(j(n(u),z),u))))).  [hyper(5,a,55,a,b,236,a)].
+
+given #741 (T,wt=11): 19555 P(j(x,j(n(j(y,j(z,u))),z))).  [hyper(5,a,6,a,b,19433,a)].
+
+given #742 (T,wt=12): 2749 P(j(x,j(y,j(z,j(u,n(n(u))))))).  [hyper(5,a,57,a,b,2728,a)].
+
+given #743 (T,wt=12): 2754 P(n(n(j(j(j(x,y),z),j(y,z))))).  [hyper(5,a,2728,a,b,2630,a)].
+
+given #744 (T,wt=12): 2775 P(n(n(n(n(j(n(j(x,n(y))),y)))))).  [hyper(5,a,2728,a,b,1616,a)].
+
+given #745 (A,wt=13): 241 P(j(j(n(x),j(n(y),x)),j(n(x),y))).  [hyper(5,a,8,a,b,236,a)].
+
+given #746 (T,wt=10): 21469 P(j(j(n(x),y),j(n(y),x))).  [hyper(5,a,2630,a,b,241,a)].
+
+given #747 (T,wt=10): 21472 P(j(n(x),n(j(j(y,y),x)))).  [hyper(5,a,241,a,b,541,a)].
+
+given #748 (T,wt=10): 21473 P(j(n(j(x,j(y,z))),n(z))).  [hyper(5,a,241,a,b,411,a)].
+
+given #749 (T,wt=10): 21474 P(j(n(x),n(j(i(y,z),x)))).  [hyper(5,a,241,a,b,402,a)].
+
+given #750 (A,wt=17): 243 P(j(x,j(y,j(z,j(j(n(u),u),j(w,j(v5,u))))))).  [hyper(5,a,57,a,b,68,a)].
+
+Low Water (keep): wt=16.000, iters=6678
+
+given #751 (T,wt=10): 21475 P(j(n(j(j(n(x),y),x)),y)).  [hyper(5,a,241,a,b,242,a)].
+
+given #752 (T,wt=10): 21532 P(j(n(n(n(j(x,y)))),n(y))).  [hyper(5,a,21469,a,b,4087,a)].
+
+given #753 (T,wt=11): 21517 P(j(n(j(n(j(x,y)),z)),n(y))).  [hyper(5,a,21469,a,b,18338,a)].
+
+given #754 (T,wt=11): 21523 P(j(n(n(n(j(x,y)))),j(y,z))).  [hyper(5,a,21469,a,b,14984,a)].
+
+given #755 (A,wt=15): 244 P(j(x,j(y,j(j(n(z),z),j(u,j(w,z)))))).  [hyper(5,a,55,a,b,68,a)].
+
+given #756 (T,wt=11): 21524 P(j(n(j(j(x,y),j(x,z))),y)).  [hyper(5,a,21469,a,b,14809,a)].
+
+given #757 (T,wt=11): 21525 P(j(n(n(n(j(x,j(y,z))))),y)).  [hyper(5,a,21469,a,b,14797,a)].
+
+given #758 (T,wt=11): 21527 P(j(n(x),j(j(i(y,z),x),u))).  [hyper(5,a,21469,a,b,14347,a)].
+
+given #759 (T,wt=11): 21528 P(j(n(x),j(j(j(y,y),x),z))).  [hyper(5,a,21469,a,b,14346,a)].
+
+given #760 (A,wt=13): 245 P(j(j(n(x),x),j(y,j(z,j(u,x))))).  [hyper(5,a,21,a,b,68,a)].
+
+given #761 (T,wt=11): 21529 P(j(n(j(x,j(y,z))),j(z,u))).  [hyper(5,a,21469,a,b,14334,a)].
+
+given #762 (T,wt=11): 21530 P(j(n(j(x,j(y,j(z,u)))),z)).  [hyper(5,a,21469,a,b,14011,a)].
+
+given #763 (T,wt=11): 21531 P(j(n(n(n(x))),n(j(n(x),x)))).  [hyper(5,a,21469,a,b,4088,a)].
+
+given #764 (T,wt=11): 21553 P(j(n(j(x,y)),n(j(n(y),y)))).  [hyper(5,a,21469,a,b,366,a)].
+
+given #765 (A,wt=13): 246 P(j(x,j(j(n(y),y),j(z,j(u,y))))).  [hyper(5,a,6,a,b,68,a)].
+
+given #766 (T,wt=12): 2779 P(n(n(j(x,j(n(j(y,n(z))),z))))).  [hyper(5,a,2728,a,b,1568,a)].
+
+given #767 (T,wt=12): 2780 P(n(n(j(n(j(x,n(y))),j(z,y))))).  [hyper(5,a,2728,a,b,1565,a)].
+
+given #768 (T,wt=12): 2782 P(n(n(j(n(j(x,n(n(n(y))))),y)))).  [hyper(5,a,2728,a,b,1552,a)].
+
+given #769 (T,wt=12): 2787 P(n(n(n(n(n(n(j(n(n(x)),x)))))))).  [hyper(5,a,2728,a,b,980,a)].
+
+given #770 (A,wt=17): 247 P(j(x,j(y,j(z,j(u,j(j(n(w),w),j(v5,w))))))).  [hyper(5,a,57,a,b,69,a)].
+
+given #771 (T,wt=12): 2791 P(n(n(j(x,n(n(j(y,j(z,y)))))))).  [hyper(5,a,2728,a,b,850,a)].
+
+given #772 (T,wt=12): 2792 P(n(n(j(x,n(n(j(y,i(z,u)))))))).  [hyper(5,a,2728,a,b,847,a)].
+
+given #773 (T,wt=12): 2793 P(n(n(j(x,n(n(j(y,j(z,z)))))))).  [hyper(5,a,2728,a,b,844,a)].
+
+given #774 (T,wt=12): 2794 P(n(n(j(x,n(n(j(n(n(y)),y))))))).  [hyper(5,a,2728,a,b,829,a)].
+
+given #775 (A,wt=13): 248 P(j(j(j(j(n(x),x),j(y,x)),z),z)).  [hyper(5,a,29,a,b,69,a)].
+
+given #776 (T,wt=12): 2795 P(n(n(n(n(j(x,j(y,j(z,y)))))))).  [hyper(5,a,2728,a,b,823,a)].
+
+given #777 (T,wt=12): 2796 P(n(n(n(n(j(x,j(y,i(z,u)))))))).  [hyper(5,a,2728,a,b,818,a)].
+
+given #778 (T,wt=12): 2797 P(n(n(n(n(j(x,j(y,j(z,z)))))))).  [hyper(5,a,2728,a,b,817,a)].
+
+given #779 (T,wt=12): 2799 P(n(n(n(n(j(x,j(y,j(z,x)))))))).  [hyper(5,a,2728,a,b,813,a)].
+
+given #780 (A,wt=18): 249 P(j(j(j(n(x),x),j(j(y,x),z)),j(j(n(x),x),z))).  [hyper(5,a,16,a,b,69,a)].
+
+given #781 (T,wt=12): 2802 P(n(n(n(n(j(j(j(x,x),y),y)))))).  [hyper(5,a,2728,a,b,810,a)].
+
+given #782 (T,wt=12): 2803 P(n(n(n(n(j(j(i(x,y),z),z)))))).  [hyper(5,a,2728,a,b,809,a)].
+
+given #783 (T,wt=12): 2804 P(n(n(n(n(j(x,j(n(n(y)),y))))))).  [hyper(5,a,2728,a,b,808,a)].
+
+given #784 (T,wt=12): 2805 P(n(n(n(n(j(x,n(n(i(y,z))))))))).  [hyper(5,a,2728,a,b,806,a)].
+
+given #785 (A,wt=13): 250 P(j(j(x,j(n(y),y)),j(x,j(z,y)))).  [hyper(5,a,8,a,b,69,a)].
+
+given #786 (T,wt=12): 2806 P(n(n(n(n(j(x,n(n(j(y,y))))))))).  [hyper(5,a,2728,a,b,805,a)].
+
+given #787 (T,wt=12): 2807 P(n(n(n(n(j(n(n(x)),j(y,x))))))).  [hyper(5,a,2728,a,b,804,a)].
+
+given #788 (T,wt=12): 2808 P(n(n(n(n(j(n(n(n(n(x)))),x)))))).  [hyper(5,a,2728,a,b,803,a)].
+
+given #789 (T,wt=12): 2811 P(n(n(j(j(n(j(n(x),x)),x),x)))).  [hyper(5,a,2728,a,b,780,a)].
+
+given #790 (A,wt=17): 251 P(j(x,j(y,j(z,j(j(n(u),n(j(w,n(u)))),u))))).  [hyper(5,a,57,a,b,80,a)].
+
+given #791 (T,wt=12): 2812 P(n(n(n(n(n(n(n(n(j(x,x)))))))))).  [hyper(5,a,2728,a,b,633,a)].
+
+given #792 (T,wt=12): 2813 P(n(n(n(n(n(n(n(n(i(x,y)))))))))).  [hyper(5,a,2728,a,b,632,a)].
+
+given #793 (T,wt=12): 2814 P(n(n(n(j(j(x,x),n(j(y,y))))))).  [hyper(5,a,2728,a,b,531,a)].
+
+given #794 (T,wt=12): 2815 P(n(n(n(j(j(x,x),n(i(y,z))))))).  [hyper(5,a,2728,a,b,530,a)].
+
+given #795 (A,wt=15): 252 P(j(x,j(y,j(j(n(z),n(j(u,n(z)))),z)))).  [hyper(5,a,55,a,b,80,a)].
+
+given #796 (T,wt=12): 2816 P(n(n(j(x,n(n(n(n(j(y,y))))))))).  [hyper(5,a,2728,a,b,518,a)].
+
+given #797 (T,wt=12): 2817 P(n(n(j(x,n(n(n(n(i(y,z))))))))).  [hyper(5,a,2728,a,b,469,a)].
+
+given #798 (T,wt=12): 2818 P(n(n(j(x,j(n(n(n(n(y)))),y))))).  [hyper(5,a,2728,a,b,466,a)].
+
+given #799 (T,wt=12): 2819 P(n(n(j(n(n(n(n(x)))),j(y,x))))).  [hyper(5,a,2728,a,b,463,a)].
+
+given #800 (A,wt=17): 253 P(j(j(n(j(n(x),x)),n(j(y,n(j(n(x),x))))),x)).  [hyper(5,a,43,a,b,80,a)].
+
+given #801 (T,wt=12): 2821 P(n(n(j(n(n(n(n(n(n(x)))))),x)))).  [hyper(5,a,2728,a,b,455,a)].
+
+given #802 (T,wt=12): 2822 P(n(n(j(j(i(x,y),n(n(z))),z)))).  [hyper(5,a,2728,a,b,440,a)].
+
+given #803 (T,wt=12): 2823 P(n(n(j(j(j(x,x),n(n(y))),y)))).  [hyper(5,a,2728,a,b,439,a)].
+
+given #804 (T,wt=12): 2824 P(n(n(n(j(i(x,y),n(j(z,z))))))).  [hyper(5,a,2728,a,b,393,a)].
+
+given #805 (A,wt=13): 254 P(j(j(n(x),n(j(y,n(x)))),j(z,x))).  [hyper(5,a,21,a,b,80,a)].
+
+given #806 (T,wt=12): 2825 P(n(n(n(j(i(x,y),n(i(z,u))))))).  [hyper(5,a,2728,a,b,392,a)].
+
+given #807 (T,wt=12): 2829 P(n(n(j(j(n(n(j(x,x))),y),y)))).  [hyper(5,a,2728,a,b,358,a)].
+
+given #808 (T,wt=12): 2830 P(n(n(j(n(n(j(j(x,x),y))),y)))).  [hyper(5,a,2728,a,b,346,a)].
+
+given #809 (T,wt=12): 2832 P(n(n(j(j(n(n(i(x,y))),z),z)))).  [hyper(5,a,2728,a,b,337,a)].
+
+given #810 (A,wt=30): 255 P(j(j(j(n(j(x,y)),n(j(z,n(j(x,y))))),x),j(j(n(j(x,y)),n(j(z,n(j(x,y))))),y))).  [hyper(5,a,8,a,b,80,a)].
+
+given #811 (T,wt=12): 2833 P(n(n(j(j(x,n(n(y))),j(x,y))))).  [hyper(5,a,2728,a,b,334,a)].
+
+given #812 (T,wt=12): 2834 P(n(n(j(j(j(n(n(x)),x),y),y)))).  [hyper(5,a,2728,a,b,332,a)].
+
+given #813 (T,wt=12): 2835 P(n(n(j(x,j(n(n(y)),j(z,y)))))).  [hyper(5,a,2728,a,b,328,a)].
+
+given #814 (T,wt=12): 2836 P(n(n(j(n(n(x)),j(y,j(z,x)))))).  [hyper(5,a,2728,a,b,327,a)].
+
+given #815 (A,wt=13): 256 P(j(x,j(j(n(y),n(j(z,n(y)))),y))).  [hyper(5,a,6,a,b,80,a)].
+
+given #816 (T,wt=12): 2837 P(n(n(j(x,j(y,n(n(j(z,z)))))))).  [hyper(5,a,2728,a,b,323,a)].
+
+given #817 (T,wt=12): 2838 P(n(n(j(n(n(j(i(x,y),z))),z)))).  [hyper(5,a,2728,a,b,311,a)].
+
+given #818 (T,wt=12): 2840 P(n(n(j(x,j(y,n(n(i(z,u)))))))).  [hyper(5,a,2728,a,b,302,a)].
+
+given #819 (T,wt=12): 2842 P(n(n(j(x,j(y,j(n(n(z)),z)))))).  [hyper(5,a,2728,a,b,295,a)].
+
+given #820 (A,wt=15): 257 P(j(j(n(j(i(x,y),z)),j(i(x,y),z)),z)).  [hyper(5,a,140,a,b,36,a)].
+
+given #821 (T,wt=12): 2844 P(n(n(j(n(x),j(j(n(y),x),y))))).  [hyper(5,a,2728,a,b,236,a)].
+
+given #822 (T,wt=12): 2921 P(j(j(j(x,j(j(x,y),y)),z),z)).  [hyper(5,a,2743,a,b,2743,a)].
+
+given #823 (T,wt=12): 2924 P(j(j(x,y),j(x,j(j(y,z),z)))).  [hyper(5,a,237,a,b,2743,a)].
+
+given #824 (T,wt=10): 22016 P(j(n(n(x)),j(j(x,y),y))).  [hyper(5,a,332,a,b,2924,a)].
+
+given #825 (A,wt=15): 258 P(j(j(n(j(j(x,x),y)),j(j(x,x),y)),y)).  [hyper(5,a,138,a,b,36,a)].
+
+given #826 (T,wt=10): 22220 P(j(n(j(j(x,y),y)),n(x))).  [hyper(5,a,21469,a,b,22016,a)].
+
+============================== PROOF =================================
+
+% Proof 3 at 2.30 (+ 0.21) seconds.
+% Length of proof is 41.
+% Level of proof is 12.
+% Maximum clause weight is 20.
+% Given clauses 826.
+
+4 P(j(j(x,n(x)),n(x))) # label(non_clause) # label(goal).  [goal].
+5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+6 P(j(x,j(y,x))).  [assumption].
+7 P(i(x,y)).  [assumption].
+8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+9 P(j(j(n(x),n(y)),j(j(n(x),y),x))).  [assumption].
+13 -P(j(j(c6,n(c6)),n(c6))).  [deny(4)].
+14 P(j(x,j(y,j(z,y)))).  [hyper(5,a,6,a,b,6,a)].
+15 P(j(x,i(y,z))).  [hyper(5,a,6,a,b,7,a)].
+16 P(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,8,a,b,8,a)].
+17 P(j(x,j(j(y,j(z,u)),j(j(y,z),j(y,u))))).  [hyper(5,a,6,a,b,8,a)].
+18 P(j(j(x,y),j(x,x))).  [hyper(5,a,8,a,b,6,a)].
+19 P(j(j(j(n(x),n(y)),j(n(x),y)),j(j(n(x),n(y)),x))).  [hyper(5,a,8,a,b,9,a)].
+20 P(j(x,j(j(n(y),n(z)),j(j(n(y),z),y)))).  [hyper(5,a,6,a,b,9,a)].
+21 P(j(j(x,y),j(x,j(z,y)))).  [hyper(5,a,8,a,b,14,a)].
+22 P(j(x,j(y,j(z,j(u,z))))).  [hyper(5,a,6,a,b,14,a)].
+26 P(j(x,x)).  [hyper(5,a,18,a,b,15,a)].
+28 P(j(j(n(x),x),x)).  [hyper(5,a,9,a,b,26,a)].
+29 P(j(j(j(x,y),x),j(j(x,y),y))).  [hyper(5,a,8,a,b,26,a)].
+30 P(j(x,j(y,y))).  [hyper(5,a,6,a,b,26,a)].
+35 P(j(j(x,j(j(y,x),z)),j(x,z))).  [hyper(5,a,16,a,b,14,a)].
+37 P(j(x,j(j(n(y),y),y))).  [hyper(5,a,6,a,b,28,a)].
+43 P(j(j(x,j(n(y),y)),j(x,y))).  [hyper(5,a,8,a,b,37,a)].
+71 P(j(j(x,j(j(y,j(z,y)),u)),j(x,u))).  [hyper(5,a,16,a,b,22,a)].
+77 P(j(j(n(x),n(n(x))),x)).  [hyper(5,a,19,a,b,30,a)].
+84 P(j(x,j(j(n(y),n(n(y))),y))).  [hyper(5,a,6,a,b,77,a)].
+217 P(j(j(n(j(x,y)),y),j(x,y))).  [hyper(5,a,43,a,b,21,a)].
+236 P(j(n(x),j(j(n(y),x),y))).  [hyper(5,a,35,a,b,20,a)].
+237 P(j(j(x,y),j(j(z,x),j(z,y)))).  [hyper(5,a,35,a,b,17,a)].
+241 P(j(j(n(x),j(n(y),x)),j(n(x),y))).  [hyper(5,a,8,a,b,236,a)].
+286 P(j(n(n(x)),x)).  [hyper(5,a,35,a,b,84,a)].
+300 P(j(x,j(n(n(y)),y))).  [hyper(5,a,6,a,b,286,a)].
+332 P(j(j(j(n(n(x)),x),y),y)).  [hyper(5,a,29,a,b,300,a)].
+2630 P(j(j(j(x,y),z),j(y,z))).  [hyper(5,a,71,a,b,237,a)].
+2743 P(j(x,j(j(x,y),y))).  [hyper(5,a,2630,a,b,29,a)].
+2924 P(j(j(x,y),j(x,j(j(y,z),z)))).  [hyper(5,a,237,a,b,2743,a)].
+21469 P(j(j(n(x),y),j(n(y),x))).  [hyper(5,a,2630,a,b,241,a)].
+22016 P(j(n(n(x)),j(j(x,y),y))).  [hyper(5,a,332,a,b,2924,a)].
+22220 P(j(n(j(j(x,y),y)),n(x))).  [hyper(5,a,21469,a,b,22016,a)].
+22257 P(j(j(x,n(x)),n(x))).  [hyper(5,a,217,a,b,22220,a)].
+22258 $F.  [resolve(22257,a,13,a)].
+
+============================== end of proof ==========================
+
+% Disable descendants (x means already disabled):
+ 13
+
+given #827 (T,wt=8): 22257 P(j(j(x,n(x)),n(x))).  [hyper(5,a,217,a,b,22220,a)].
+
+given #828 (T,wt=10): 22306 P(j(j(x,n(x)),n(n(n(x))))).  [hyper(5,a,2746,a,b,22257,a)].
+
+given #829 (T,wt=10): 22311 P(n(n(j(j(x,n(x)),n(x))))).  [hyper(5,a,2728,a,b,22257,a)].
+
+given #830 (A,wt=28): 259 P(j(x,j(y,j(z,j(j(j(n(j(u,w)),j(u,w)),u),j(j(n(j(u,w)),j(u,w)),w)))))).  [hyper(5,a,57,a,b,36,a)].
+
+given #831 (T,wt=10): 22318 P(j(j(x,n(x)),j(y,n(x)))).  [hyper(5,a,21,a,b,22257,a)].
+
+given #832 (T,wt=10): 22319 P(j(x,j(j(y,n(y)),n(y)))).  [hyper(5,a,6,a,b,22257,a)].
+
+given #833 (T,wt=11): 22005 P(j(x,j(j(j(n(x),y),z),z))).  [hyper(5,a,14368,a,b,2924,a)].
+
+given #834 (T,wt=11): 22006 P(j(n(j(x,y)),j(j(x,z),z))).  [hyper(5,a,14323,a,b,2924,a)].
+
+given #835 (A,wt=26): 260 P(j(x,j(y,j(j(j(n(j(z,u)),j(z,u)),z),j(j(n(j(z,u)),j(z,u)),u))))).  [hyper(5,a,55,a,b,36,a)].
+
+given #836 (T,wt=11): 22008 P(j(n(x),j(j(j(x,y),z),z))).  [hyper(5,a,14005,a,b,2924,a)].
+
+given #837 (T,wt=11): 22246 P(j(n(j(j(j(x,y),z),z)),x)).  [hyper(5,a,14333,a,b,22220,a)].
+
+given #838 (T,wt=8): 22429 P(j(j(j(x,y),x),x)).  [hyper(5,a,217,a,b,22246,a)].
+
+given #839 (T,wt=10): 22482 P(j(j(j(x,y),x),n(n(x)))).  [hyper(5,a,2746,a,b,22429,a)].
+
+given #840 (A,wt=24): 261 P(j(j(j(n(j(x,y)),j(x,y)),x),j(z,j(j(n(j(x,y)),j(x,y)),y)))).  [hyper(5,a,21,a,b,36,a)].
+
+given #841 (T,wt=10): 22487 P(n(n(j(j(j(x,y),x),x)))).  [hyper(5,a,2728,a,b,22429,a)].
+
+given #842 (T,wt=10): 22497 P(j(j(j(x,y),x),j(z,x))).  [hyper(5,a,21,a,b,22429,a)].
+
+given #843 (T,wt=10): 22498 P(j(x,j(j(j(y,z),y),y))).  [hyper(5,a,6,a,b,22429,a)].
+
+given #844 (T,wt=11): 22248 P(j(n(j(j(x,y),y)),j(x,z))).  [hyper(5,a,14010,a,b,22220,a)].
+
+given #845 (A,wt=24): 264 P(j(x,j(j(j(n(j(y,z)),j(y,z)),y),j(j(n(j(y,z)),j(y,z)),z)))).  [hyper(5,a,6,a,b,36,a)].
+
+given #846 (T,wt=11): 22285 P(j(j(x,n(x)),j(n(n(x)),y))).  [hyper(5,a,14374,a,b,22257,a)].
+
+given #847 (T,wt=11): 22288 P(j(j(j(x,y),n(j(x,y))),x)).  [hyper(5,a,14333,a,b,22257,a)].
+
+given #848 (T,wt=11): 22289 P(j(n(j(j(x,n(x)),n(x))),y)).  [hyper(5,a,14307,a,b,22257,a)].
+
+given #849 (T,wt=11): 22460 P(j(j(j(x,y),x),j(n(x),z))).  [hyper(5,a,14374,a,b,22429,a)].
+
+given #850 (A,wt=23): 265 P(j(j(n(j(j(j(i(x,y),z),z),u)),j(j(j(i(x,y),z),z),u)),u)).  [hyper(5,a,36,a,b,155,a)].
+
+given #851 (T,wt=11): 22464 P(j(n(j(j(j(x,y),x),x)),z)).  [hyper(5,a,14307,a,b,22429,a)].
+
+given #852 (T,wt=12): 2925 P(j(x,j(y,j(z,j(j(x,u),u))))).  [hyper(5,a,118,a,b,2743,a)].
+
+given #853 (T,wt=12): 2928 P(j(x,j(y,j(z,j(j(z,u),u))))).  [hyper(5,a,55,a,b,2743,a)].
+
+given #854 (T,wt=12): 2929 P(j(x,j(y,j(z,j(j(y,u),u))))).  [hyper(5,a,48,a,b,2743,a)].
+
+given #855 (A,wt=23): 266 P(j(j(n(j(j(j(j(x,x),y),y),z)),j(j(j(j(x,x),y),y),z)),z)).  [hyper(5,a,36,a,b,150,a)].
+
+given #856 (T,wt=12): 3118 P(j(j(n(n(j(x,n(n(x))))),y),y)).  [hyper(5,a,2743,a,b,2744,a)].
+
+given #857 (T,wt=12): 3120 P(j(j(n(x),n(j(y,n(n(y))))),x)).  [hyper(5,a,236,a,b,2744,a)].
+
+given #858 (T,wt=12): 3123 P(j(x,j(y,n(n(j(z,n(n(z)))))))).  [hyper(5,a,55,a,b,2744,a)].
+
+given #859 (T,wt=12): 3125 P(n(n(j(x,j(y,n(n(j(z,y)))))))).  [hyper(5,a,2745,a,b,2745,a)].
+
+given #860 (A,wt=25): 267 P(j(j(n(j(j(j(n(x),x),j(y,x)),z)),j(j(j(n(x),x),j(y,x)),z)),z)).  [hyper(5,a,36,a,b,69,a)].
+
+given #861 (T,wt=12): 3126 P(j(j(j(x,n(n(j(y,x)))),z),z)).  [hyper(5,a,2743,a,b,2745,a)].
+
+given #862 (T,wt=12): 3129 P(j(j(x,y),j(x,n(n(j(z,y)))))).  [hyper(5,a,237,a,b,2745,a)].
+
+given #863 (T,wt=12): 3130 P(j(x,j(y,j(z,n(n(j(u,x))))))).  [hyper(5,a,118,a,b,2745,a)].
+
+given #864 (T,wt=12): 3133 P(j(x,j(y,j(z,n(n(j(u,z))))))).  [hyper(5,a,55,a,b,2745,a)].
+
+given #865 (A,wt=23): 268 P(j(j(n(j(j(x,j(y,j(z,x))),u)),j(j(x,j(y,j(z,x))),u)),u)).  [hyper(5,a,36,a,b,58,a)].
+
+given #866 (T,wt=12): 3134 P(j(x,j(y,j(z,n(n(j(u,y))))))).  [hyper(5,a,48,a,b,2745,a)].
+
+given #867 (T,wt=12): 3137 P(n(n(j(x,n(n(j(y,n(n(y))))))))).  [hyper(5,a,2745,a,b,2744,a)].
+
+given #868 (T,wt=12): 3138 P(n(n(j(x,j(y,j(j(y,z),z)))))).  [hyper(5,a,2745,a,b,2743,a)].
+
+given #869 (T,wt=12): 3310 P(j(x,n(n(j(y,j(z,n(n(y)))))))).  [hyper(5,a,2752,a,b,2752,a)].
+
+given #870 (A,wt=25): 269 P(j(j(n(j(j(x,j(j(n(y),y),y)),z)),j(j(x,j(j(n(y),y),y)),z)),z)).  [hyper(5,a,36,a,b,44,a)].
+
+given #871 (T,wt=12): 3311 P(n(n(j(x,j(y,j(z,n(n(y)))))))).  [hyper(5,a,2745,a,b,2752,a)].
+
+given #872 (T,wt=12): 3312 P(j(j(j(x,j(y,n(n(x)))),z),z)).  [hyper(5,a,2743,a,b,2752,a)].
+
+given #873 (T,wt=12): 3314 P(j(j(x,y),j(x,j(z,n(n(y)))))).  [hyper(5,a,237,a,b,2752,a)].
+
+given #874 (T,wt=12): 3315 P(j(x,j(y,j(z,j(u,n(n(x))))))).  [hyper(5,a,118,a,b,2752,a)].
+
+given #875 (A,wt=23): 270 P(j(j(n(j(j(x,j(y,j(z,z))),u)),j(j(x,j(y,j(z,z))),u)),u)).  [hyper(5,a,36,a,b,41,a)].
+
+given #876 (T,wt=12): 3319 P(j(x,j(y,j(z,j(u,n(n(z))))))).  [hyper(5,a,55,a,b,2752,a)].
+
+given #877 (T,wt=12): 3320 P(j(x,j(y,j(z,j(u,n(n(y))))))).  [hyper(5,a,48,a,b,2752,a)].
+
+given #878 (T,wt=12): 3321 P(j(x,n(n(j(y,n(n(j(z,y)))))))).  [hyper(5,a,2752,a,b,2745,a)].
+
+given #879 (T,wt=12): 3322 P(j(x,n(n(n(n(j(y,n(n(y))))))))).  [hyper(5,a,2752,a,b,2744,a)].
+
+given #880 (A,wt=23): 271 P(j(j(n(j(j(x,j(y,i(z,u))),w)),j(j(x,j(y,i(z,u))),w)),w)).  [hyper(5,a,36,a,b,39,a)].
+
+given #881 (T,wt=12): 3323 P(j(x,n(n(j(y,j(j(y,z),z)))))).  [hyper(5,a,2752,a,b,2743,a)].
+
+given #882 (T,wt=12): 3530 P(j(x,n(n(j(y,j(z,n(n(z)))))))).  [hyper(5,a,2752,a,b,2753,a)].
+
+given #883 (T,wt=12): 3531 P(n(n(j(x,j(y,j(z,n(n(z)))))))).  [hyper(5,a,2745,a,b,2753,a)].
+
+given #884 (T,wt=12): 3532 P(j(j(j(x,j(y,n(n(y)))),z),z)).  [hyper(5,a,2743,a,b,2753,a)].
+
+given #885 (A,wt=21): 272 P(j(j(n(j(j(j(n(x),x),x),y)),j(j(j(n(x),x),x),y)),y)).  [hyper(5,a,36,a,b,37,a)].
+
+given #886 (T,wt=12): 3539 P(j(x,j(j(y,z),j(y,n(n(z)))))).  [hyper(5,a,54,a,b,2753,a)].
+
+given #887 (T,wt=12): 3541 P(j(j(j(x,n(n(x))),y),j(z,y))).  [hyper(5,a,49,a,b,2753,a)].
+
+given #888 (T,wt=12): 3546 P(j(j(x,j(n(n(x)),y)),j(x,y))).  [hyper(5,a,16,a,b,2753,a)].
+
+given #889 (T,wt=10): 23068 P(j(j(n(n(x)),y),j(x,y))).  [hyper(5,a,2630,a,b,3546,a)].
+
+given #890 (A,wt=19): 274 P(j(j(n(j(j(x,j(y,y)),z)),j(j(x,j(y,y)),z)),z)).  [hyper(5,a,36,a,b,31,a)].
+
+given #891 (T,wt=12): 3637 P(n(n(j(x,j(j(x,j(x,y)),y))))).  [hyper(5,a,2728,a,b,2732,a)].
+
+given #892 (T,wt=12): 3652 P(j(x,j(y,j(j(x,j(x,z)),z)))).  [hyper(5,a,21,a,b,2732,a)].
+
+given #893 (T,wt=12): 3653 P(j(j(x,j(x,j(x,y))),j(x,y))).  [hyper(5,a,8,a,b,2732,a)].
+
+given #894 (T,wt=12): 3654 P(j(x,j(y,j(j(y,j(y,z)),z)))).  [hyper(5,a,6,a,b,2732,a)].
+
+given #895 (A,wt=19): 275 P(j(j(n(j(j(x,i(y,z)),u)),j(j(x,i(y,z)),u)),u)).  [hyper(5,a,36,a,b,23,a)].
+
+given #896 (T,wt=12): 3840 P(n(n(j(x,j(j(x,y),j(z,y)))))).  [hyper(5,a,2728,a,b,2738,a)].
+
+given #897 (T,wt=12): 3841 P(j(x,j(j(j(y,x),z),j(u,z)))).  [hyper(5,a,2630,a,b,2738,a)].
+
+given #898 (T,wt=12): 3849 P(j(x,j(y,j(j(x,z),j(u,z))))).  [hyper(5,a,21,a,b,2738,a)].
+
+given #899 (T,wt=12): 3850 P(j(j(x,j(x,y)),j(x,j(z,y)))).  [hyper(5,a,8,a,b,2738,a)].
+
+given #900 (A,wt=23): 276 P(j(j(n(j(j(x,j(y,j(z,y))),u)),j(j(x,j(y,j(z,y))),u)),u)).  [hyper(5,a,36,a,b,22,a)].
+
+given #901 (T,wt=12): 3851 P(j(x,j(y,j(j(y,z),j(u,z))))).  [hyper(5,a,6,a,b,2738,a)].
+
+given #902 (T,wt=12): 4034 P(j(j(x,y),n(n(j(x,n(n(y))))))).  [hyper(5,a,2746,a,b,2746,a)].
+
+given #903 (T,wt=12): 4039 P(n(n(j(j(x,y),j(x,n(n(y))))))).  [hyper(5,a,2728,a,b,2746,a)].
+
+given #904 (T,wt=12): 4045 P(j(j(j(x,j(y,y)),z),n(n(z)))).  [hyper(5,a,94,a,b,2746,a)].
+
+given #905 (A,wt=19): 279 P(j(j(n(j(j(x,j(y,x)),z)),j(j(x,j(y,x)),z)),z)).  [hyper(5,a,36,a,b,14,a)].
+
+given #906 (T,wt=12): 4046 P(j(j(j(x,i(y,z)),u),n(n(u)))).  [hyper(5,a,91,a,b,2746,a)].
+
+given #907 (T,wt=12): 4047 P(j(j(j(x,j(y,x)),z),n(n(z)))).  [hyper(5,a,71,a,b,2746,a)].
+
+given #908 (T,wt=12): 4052 P(j(j(x,y),j(z,j(x,n(n(y)))))).  [hyper(5,a,21,a,b,2746,a)].
+
+given #909 (T,wt=12): 4058 P(j(x,n(n(j(j(x,y),j(z,y)))))).  [hyper(5,a,2746,a,b,2738,a)].
+
+given #910 (A,wt=17): 280 P(j(x,j(y,j(z,j(j(n(u),n(n(u))),j(w,u)))))).  [hyper(5,a,57,a,b,82,a)].
+
+given #911 (T,wt=12): 4059 P(j(x,n(n(j(j(x,j(x,y)),y))))).  [hyper(5,a,2746,a,b,2732,a)].
+
+given #912 (T,wt=12): 4062 P(j(j(j(x,y),z),n(n(j(y,z))))).  [hyper(5,a,2746,a,b,2630,a)].
+
+given #913 (T,wt=12): 4067 P(j(n(j(x,n(y))),n(n(j(z,y))))).  [hyper(5,a,2746,a,b,1565,a)].
+
+given #914 (T,wt=12): 4073 P(j(j(n(j(n(x),x)),x),n(n(x)))).  [hyper(5,a,2746,a,b,780,a)].
+
+given #915 (A,wt=15): 281 P(j(x,j(y,j(j(n(z),n(n(z))),j(u,z))))).  [hyper(5,a,55,a,b,82,a)].
+
+given #916 (T,wt=12): 4074 P(j(n(n(n(n(x)))),n(n(j(y,x))))).  [hyper(5,a,2746,a,b,463,a)].
+
+given #917 (T,wt=12): 4077 P(j(j(n(n(j(x,x))),y),n(n(y)))).  [hyper(5,a,2746,a,b,358,a)].
+
+given #918 (T,wt=12): 4078 P(j(n(n(j(j(x,x),y))),n(n(y)))).  [hyper(5,a,2746,a,b,346,a)].
+
+given #919 (T,wt=12): 4080 P(j(j(n(n(i(x,y))),z),n(n(z)))).  [hyper(5,a,2746,a,b,337,a)].
+
+given #920 (A,wt=13): 282 P(j(j(n(x),n(n(x))),j(y,j(z,x)))).  [hyper(5,a,21,a,b,82,a)].
+
+given #921 (T,wt=12): 4081 P(j(j(x,n(n(y))),n(n(j(x,y))))).  [hyper(5,a,2746,a,b,334,a)].
+
+given #922 (T,wt=12): 4082 P(j(j(j(n(n(x)),x),y),n(n(y)))).  [hyper(5,a,2746,a,b,332,a)].
+
+given #923 (T,wt=12): 4083 P(j(n(n(x)),n(n(j(y,j(z,x)))))).  [hyper(5,a,2746,a,b,327,a)].
+
+given #924 (T,wt=12): 4084 P(j(n(n(j(i(x,y),z))),n(n(z)))).  [hyper(5,a,2746,a,b,311,a)].
+
+given #925 (A,wt=13): 283 P(j(x,j(j(n(y),n(n(y))),j(z,y)))).  [hyper(5,a,6,a,b,82,a)].
+
+given #926 (T,wt=12): 4090 P(j(n(x),n(n(j(j(n(y),x),y))))).  [hyper(5,a,2746,a,b,236,a)].
+
+given #927 (T,wt=12): 4096 P(j(j(n(x),j(n(x),x)),n(n(x)))).  [hyper(5,a,2746,a,b,204,a)].
+
+given #928 (T,wt=12): 4104 P(j(j(i(x,y),z),n(n(j(u,z))))).  [hyper(5,a,2746,a,b,153,a)].
+
+given #929 (T,wt=12): 4105 P(j(j(j(x,x),y),n(n(j(z,y))))).  [hyper(5,a,2746,a,b,148,a)].
+
+given #930 (A,wt=17): 284 P(j(x,j(y,j(z,j(u,j(j(n(w),n(n(w))),w)))))).  [hyper(5,a,57,a,b,84,a)].
+
+given #931 (T,wt=12): 4127 P(j(j(n(x),n(i(y,z))),n(n(x)))).  [hyper(5,a,2746,a,b,78,a)].
+
+given #932 (T,wt=12): 4129 P(j(j(n(x),n(j(y,y))),n(n(x)))).  [hyper(5,a,2746,a,b,76,a)].
+
+given #933 (T,wt=12): 4134 P(j(x,n(n(j(y,j(z,j(u,x))))))).  [hyper(5,a,2746,a,b,57,a)].
+
+given #934 (T,wt=12): 4149 P(j(j(x,j(x,y)),n(n(j(x,y))))).  [hyper(5,a,2746,a,b,34,a)].
+
+given #935 (A,wt=25): 285 P(j(j(n(j(j(j(n(x),n(n(x))),x),y)),j(j(j(n(x),n(n(x))),x),y)),y)).  [hyper(5,a,36,a,b,84,a)].
+
+given #936 (T,wt=12): 4152 P(j(j(x,y),n(n(j(x,j(z,y)))))).  [hyper(5,a,2746,a,b,21,a)].
+
+given #937 (T,wt=12): 4167 P(n(n(n(n(j(x,n(n(n(n(x)))))))))).  [hyper(5,a,4060,a,b,4060,a)].
+
+given #938 (T,wt=12): 4168 P(j(x,n(n(j(y,n(n(n(n(y))))))))).  [hyper(5,a,2752,a,b,4060,a)].
+
+given #939 (T,wt=12): 4170 P(n(n(j(x,j(y,n(n(n(n(y))))))))).  [hyper(5,a,2745,a,b,4060,a)].
+
+given #940 (A,wt=13): 289 P(j(j(j(j(n(x),n(n(x))),x),y),y)).  [hyper(5,a,29,a,b,84,a)].
+
+given #941 (T,wt=12): 4171 P(j(j(j(x,n(n(n(n(x))))),y),y)).  [hyper(5,a,2743,a,b,4060,a)].
+
+given #942 (T,wt=12): 4175 P(j(j(x,y),j(x,n(n(n(n(y))))))).  [hyper(5,a,237,a,b,4060,a)].
+
+given #943 (T,wt=12): 4176 P(j(x,j(y,j(z,n(n(n(n(x)))))))).  [hyper(5,a,118,a,b,4060,a)].
+
+given #944 (T,wt=12): 4179 P(j(x,j(y,j(z,n(n(n(n(z)))))))).  [hyper(5,a,55,a,b,4060,a)].
+
+given #945 (A,wt=20): 290 P(j(j(j(n(x),n(n(x))),j(x,y)),j(j(n(x),n(n(x))),y))).  [hyper(5,a,16,a,b,84,a)].
+
+given #946 (T,wt=12): 4180 P(j(x,j(y,j(z,n(n(n(n(y)))))))).  [hyper(5,a,48,a,b,4060,a)].
+
+given #947 (T,wt=12): 4184 P(n(n(n(n(j(x,j(y,n(n(y))))))))).  [hyper(5,a,4060,a,b,2753,a)].
+
+given #948 (T,wt=12): 4185 P(n(n(n(n(j(x,j(y,n(n(x))))))))).  [hyper(5,a,4060,a,b,2752,a)].
+
+given #949 (T,wt=12): 4187 P(n(n(n(n(j(x,n(n(j(y,x))))))))).  [hyper(5,a,4060,a,b,2745,a)].
+
+given #950 (A,wt=13): 291 P(j(j(x,j(n(y),n(n(y)))),j(x,y))).  [hyper(5,a,8,a,b,84,a)].
+
+given #951 (T,wt=11): 24193 P(j(n(n(j(n(x),n(n(x))))),x)).  [hyper(5,a,332,a,b,291,a)].
+
+given #952 (T,wt=11): 24211 P(j(j(j(x,n(y)),n(n(y))),y)).  [hyper(5,a,291,a,b,2630,a)].
+
+given #953 (T,wt=11): 24228 P(j(n(x),n(j(n(x),n(n(x)))))).  [hyper(5,a,21469,a,b,24193,a)].
+
+given #954 (T,wt=12): 4188 P(n(n(n(n(n(n(j(x,n(n(x)))))))))).  [hyper(5,a,4060,a,b,2744,a)].
+
+given #955 (A,wt=16): 299 P(j(j(n(n(j(x,y))),x),j(n(n(j(x,y))),y))).  [hyper(5,a,8,a,b,286,a)].
+
+given #956 (T,wt=10): 24303 P(j(x,j(n(n(j(x,y))),y))).  [hyper(5,a,2630,a,b,299,a)].
+
+given #957 (T,wt=12): 4189 P(n(n(n(n(j(x,j(j(x,y),y))))))).  [hyper(5,a,4060,a,b,2743,a)].
+
+given #958 (T,wt=12): 4408 P(j(x,n(n(j(y,j(z,n(n(x)))))))).  [hyper(5,a,2746,a,b,2747,a)].
+
+given #959 (T,wt=12): 4413 P(n(n(j(x,j(y,j(z,n(n(x)))))))).  [hyper(5,a,2728,a,b,2747,a)].
+
+given #960 (A,wt=18): 304 P(j(x,j(y,j(z,j(j(u,j(i(w,v5),v6)),j(u,v6)))))).  [hyper(5,a,57,a,b,38,a)].
+
+given #961 (T,wt=12): 4702 P(j(x,n(n(j(j(j(y,x),z),z))))).  [hyper(5,a,2746,a,b,2923,a)].
+
+given #962 (T,wt=12): 4707 P(n(n(j(x,j(j(j(y,x),z),z))))).  [hyper(5,a,2728,a,b,2923,a)].
+
+given #963 (T,wt=12): 4708 P(j(x,j(j(j(y,j(z,x)),u),u))).  [hyper(5,a,2630,a,b,2923,a)].
+
+given #964 (T,wt=12): 4716 P(j(x,j(y,j(j(j(z,x),u),u)))).  [hyper(5,a,21,a,b,2923,a)].
+
+given #965 (A,wt=16): 305 P(j(x,j(y,j(j(z,j(i(u,w),v5)),j(z,v5))))).  [hyper(5,a,55,a,b,38,a)].
+
+given #966 (T,wt=12): 4717 P(j(x,j(y,j(j(j(z,y),u),u)))).  [hyper(5,a,6,a,b,2923,a)].
+
+given #967 (T,wt=12): 4909 P(j(x,n(n(j(y,j(j(x,z),z)))))).  [hyper(5,a,2746,a,b,2931,a)].
+
+given #968 (T,wt=12): 4914 P(n(n(j(x,j(y,j(j(x,z),z)))))).  [hyper(5,a,2728,a,b,2931,a)].
+
+given #969 (T,wt=12): 4921 P(j(x,j(j(y,j(x,z)),j(y,z)))).  [hyper(5,a,46,a,b,2931,a)].
+
+given #970 (A,wt=14): 308 P(j(j(x,j(i(y,z),u)),j(w,j(x,u)))).  [hyper(5,a,21,a,b,38,a)].
+
+given #971 (T,wt=12): 4940 P(j(x,j(j(j(y,n(n(y))),z),z))).  [hyper(5,a,2931,a,b,2728,a)].
+
+given #972 (T,wt=12): 5216 P(j(j(j(x,n(n(x))),y),n(n(y)))).  [hyper(5,a,2746,a,b,2933,a)].
+
+given #973 (T,wt=12): 5221 P(n(n(j(j(j(x,n(n(x))),y),y)))).  [hyper(5,a,2728,a,b,2933,a)].
+
+given #974 (T,wt=12): 5224 P(j(j(j(x,n(n(x))),n(n(y))),y)).  [hyper(5,a,334,a,b,2933,a)].
+
+given #975 (A,wt=20): 309 P(j(j(j(x,j(i(y,z),u)),x),j(j(x,j(i(y,z),u)),u))).  [hyper(5,a,8,a,b,38,a)].
+
+given #976 (T,wt=12): 5296 P(j(x,n(n(n(n(j(y,j(z,x)))))))).  [hyper(5,a,2746,a,b,3128,a)].
+
+given #977 (T,wt=12): 5301 P(n(n(j(x,n(n(j(y,j(z,x)))))))).  [hyper(5,a,2728,a,b,3128,a)].
+
+given #978 (T,wt=12): 5308 P(j(x,j(y,n(n(j(z,j(u,x))))))).  [hyper(5,a,21,a,b,3128,a)].
+
+given #979 (T,wt=12): 5309 P(j(x,j(y,n(n(j(z,j(u,y))))))).  [hyper(5,a,6,a,b,3128,a)].
+
+given #980 (A,wt=14): 310 P(j(x,j(j(y,j(i(z,u),w)),j(y,w)))).  [hyper(5,a,6,a,b,38,a)].
+
+given #981 (T,wt=12): 5508 P(j(x,n(n(j(y,n(n(j(z,x)))))))).  [hyper(5,a,2746,a,b,3135,a)].
+
+given #982 (T,wt=12): 5513 P(n(n(j(x,j(y,n(n(j(z,x)))))))).  [hyper(5,a,2728,a,b,3135,a)].
+
+given #983 (T,wt=12): 5517 P(j(x,j(j(n(y),n(j(z,x))),y))).  [hyper(5,a,97,a,b,3135,a)].
+
+given #984 (T,wt=12): 5781 P(j(x,n(n(j(j(n(y),n(x)),y))))).  [hyper(5,a,2746,a,b,3317,a)].
+
+given #985 (A,wt=22): 312 P(j(j(n(j(i(x,y),z)),j(n(j(i(x,y),z)),j(i(x,y),z))),z)).  [hyper(5,a,38,a,b,204,a)].
+
+given #986 (T,wt=12): 5786 P(n(n(j(x,j(j(n(y),n(x)),y))))).  [hyper(5,a,2728,a,b,3317,a)].
+
+given #987 (T,wt=12): 5795 P(j(x,j(y,j(j(n(z),n(x)),z)))).  [hyper(5,a,21,a,b,3317,a)].
+
+given #988 (T,wt=12): 5796 P(j(j(x,j(n(y),n(x))),j(x,y))).  [hyper(5,a,8,a,b,3317,a)].
+
+given #989 (T,wt=8): 24574 P(j(x,n(j(x,n(x))))).  [hyper(5,a,5796,a,b,24303,a)].
+
+given #990 (A,wt=14): 313 P(j(j(j(x,j(y,x)),j(i(z,u),w)),w)).  [hyper(5,a,38,a,b,145,a)].
+
+given #991 (T,wt=9): 24602 P(j(x,j(j(x,n(x)),y))).  [hyper(5,a,14010,a,b,24574,a)].
+
+given #992 (T,wt=10): 24627 P(j(x,n(n(n(j(x,n(x))))))).  [hyper(5,a,2746,a,b,24574,a)].
+
+given #993 (T,wt=10): 24632 P(n(n(j(x,n(j(x,n(x))))))).  [hyper(5,a,2728,a,b,24574,a)].
+
+given #994 (T,wt=10): 24642 P(j(x,j(y,n(j(x,n(x)))))).  [hyper(5,a,21,a,b,24574,a)].
+
+given #995 (A,wt=14): 314 P(j(j(j(x,i(y,z)),j(i(u,w),v5)),v5)).  [hyper(5,a,38,a,b,140,a)].
+
+given #996 (T,wt=10): 24643 P(j(x,j(y,n(j(y,n(y)))))).  [hyper(5,a,6,a,b,24574,a)].
+
+given #997 (T,wt=11): 24598 P(j(x,j(n(n(j(x,n(x)))),y))).  [hyper(5,a,14374,a,b,24574,a)].
+
+given #998 (T,wt=11): 24601 P(j(n(j(x,n(j(x,n(x))))),y)).  [hyper(5,a,14307,a,b,24574,a)].
+
+given #999 (T,wt=11): 24630 P(j(j(n(x),x),n(j(x,n(x))))).  [hyper(5,a,2740,a,b,24574,a)].
+
+given #1000 (A,wt=14): 316 P(j(j(j(x,j(y,y)),j(i(z,u),w)),w)).  [hyper(5,a,38,a,b,138,a)].
+
+given #1001 (T,wt=11): 24678 P(j(x,n(n(j(j(x,n(x)),y))))).  [hyper(5,a,2746,a,b,24602,a)].
+
+given #1002 (T,wt=11): 24683 P(n(n(j(x,j(j(x,n(x)),y))))).  [hyper(5,a,2728,a,b,24602,a)].
+
+given #1003 (T,wt=11): 24694 P(j(x,j(y,j(j(x,n(x)),z)))).  [hyper(5,a,21,a,b,24602,a)].
+
+given #1004 (T,wt=11): 24695 P(j(j(x,j(x,n(x))),j(x,y))).  [hyper(5,a,8,a,b,24602,a)].
+
+given #1005 (A,wt=19): 317 P(j(j(n(j(i(x,y),z)),n(j(u,n(j(i(x,y),z))))),z)).  [hyper(5,a,38,a,b,80,a)].
+
+given #1006 (T,wt=11): 24696 P(j(x,j(y,j(j(y,n(y)),z)))).  [hyper(5,a,6,a,b,24602,a)].
+
+given #1007 (T,wt=12): 5797 P(j(x,j(y,j(j(n(z),n(y)),z)))).  [hyper(5,a,6,a,b,3317,a)].
+
+given #1008 (T,wt=12): 6025 P(j(j(i(x,y),z),n(n(n(n(z)))))).  [hyper(5,a,2746,a,b,4041,a)].
+
+given #1009 (T,wt=12): 6030 P(n(n(j(j(i(x,y),z),n(n(z)))))).  [hyper(5,a,2728,a,b,4041,a)].
+
+given #1010 (A,wt=14): 318 P(j(j(n(j(i(x,y),z)),n(i(u,w))),z)).  [hyper(5,a,38,a,b,78,a)].
+
+given #1011 (T,wt=12): 6037 P(j(j(i(x,y),z),j(u,n(n(z))))).  [hyper(5,a,21,a,b,4041,a)].
+
+given #1012 (T,wt=12): 6038 P(j(x,j(j(i(y,z),u),n(n(u))))).  [hyper(5,a,6,a,b,4041,a)].
+
+given #1013 (T,wt=12): 6048 P(j(j(j(x,x),y),n(n(n(n(y)))))).  [hyper(5,a,2746,a,b,4042,a)].
+
+given #1014 (T,wt=12): 6053 P(n(n(j(j(j(x,x),y),n(n(y)))))).  [hyper(5,a,2728,a,b,4042,a)].
+
+given #1015 (A,wt=17): 319 P(j(j(n(j(i(x,y),z)),n(n(j(i(x,y),z)))),z)).  [hyper(5,a,38,a,b,77,a)].
+
+given #1016 (T,wt=12): 6060 P(j(j(j(x,x),y),j(z,n(n(y))))).  [hyper(5,a,21,a,b,4042,a)].
+
+given #1017 (T,wt=12): 6061 P(j(x,j(j(j(y,y),z),n(n(z))))).  [hyper(5,a,6,a,b,4042,a)].
+
+given #1018 (T,wt=12): 6087 P(j(x,n(n(n(n(j(y,n(n(x))))))))).  [hyper(5,a,2746,a,b,4055,a)].
+
+given #1019 (T,wt=12): 6092 P(n(n(j(x,n(n(j(y,n(n(x))))))))).  [hyper(5,a,2728,a,b,4055,a)].
+
+given #1020 (A,wt=14): 320 P(j(j(n(j(i(x,y),z)),n(j(u,u))),z)).  [hyper(5,a,38,a,b,76,a)].
+
+given #1021 (T,wt=12): 6099 P(j(x,j(y,n(n(j(z,n(n(x)))))))).  [hyper(5,a,21,a,b,4055,a)].
+
+given #1022 (T,wt=12): 6100 P(j(x,j(y,n(n(j(z,n(n(y)))))))).  [hyper(5,a,6,a,b,4055,a)].
+
+given #1023 (T,wt=12): 6353 P(j(x,n(n(n(n(n(n(j(y,x))))))))).  [hyper(5,a,2746,a,b,4056,a)].
+
+given #1024 (T,wt=12): 6358 P(n(n(j(x,n(n(n(n(j(y,x))))))))).  [hyper(5,a,2728,a,b,4056,a)].
+
+given #1025 (A,wt=14): 325 P(j(x,j(y,j(z,j(n(n(u)),j(w,u)))))).  [hyper(5,a,57,a,b,297,a)].
+
+given #1026 (T,wt=12): 6365 P(j(x,j(y,n(n(n(n(j(z,x)))))))).  [hyper(5,a,21,a,b,4056,a)].
+
+given #1027 (T,wt=12): 6366 P(j(x,j(y,n(n(n(n(j(z,y)))))))).  [hyper(5,a,6,a,b,4056,a)].
+
+given #1028 (T,wt=12): 6577 P(j(x,n(n(n(n(j(j(x,y),y))))))).  [hyper(5,a,2746,a,b,4057,a)].
+
+given #1029 (T,wt=12): 6582 P(n(n(j(x,n(n(j(j(x,y),y))))))).  [hyper(5,a,2728,a,b,4057,a)].
+
+given #1030 (A,wt=14): 329 P(j(x,j(y,j(z,j(u,j(n(n(w)),w)))))).  [hyper(5,a,57,a,b,300,a)].
+
+given #1031 (T,wt=12): 6589 P(j(x,j(y,n(n(j(j(x,z),z)))))).  [hyper(5,a,21,a,b,4057,a)].
+
+given #1032 (T,wt=12): 6590 P(j(x,j(y,n(n(j(j(y,z),z)))))).  [hyper(5,a,6,a,b,4057,a)].
+
+given #1033 (T,wt=12): 6917 P(j(n(n(x)),n(n(n(n(j(y,x))))))).  [hyper(5,a,2746,a,b,4087,a)].
+
+given #1034 (T,wt=12): 6922 P(n(n(j(n(n(x)),n(n(j(y,x))))))).  [hyper(5,a,2728,a,b,4087,a)].
+
+given #1035 (A,wt=19): 330 P(j(j(n(j(j(n(n(x)),x),y)),j(j(n(n(x)),x),y)),y)).  [hyper(5,a,36,a,b,300,a)].
+
+given #1036 (T,wt=12): 6929 P(j(n(n(x)),j(y,n(n(j(z,x)))))).  [hyper(5,a,21,a,b,4087,a)].
+
+given #1037 (T,wt=12): 6930 P(j(x,j(n(n(y)),n(n(j(z,y)))))).  [hyper(5,a,6,a,b,4087,a)].
+
+given #1038 (T,wt=12): 6943 P(j(x,n(n(n(n(n(n(n(n(x)))))))))).  [hyper(5,a,2746,a,b,4169,a)].
+
+given #1039 (T,wt=12): 6948 P(n(n(j(x,n(n(n(n(n(n(x)))))))))).  [hyper(5,a,2728,a,b,4169,a)].
+
+given #1040 (A,wt=26): 331 P(j(j(j(n(n(j(x,y))),j(x,y)),j(n(n(j(x,y))),x)),j(n(n(j(x,y))),y))).  [hyper(5,a,32,a,b,300,a)].
+
+given #1041 (T,wt=12): 6956 P(j(x,j(y,n(n(n(n(n(n(x))))))))).  [hyper(5,a,21,a,b,4169,a)].
+
+given #1042 (T,wt=12): 6958 P(j(x,j(y,n(n(n(n(n(n(y))))))))).  [hyper(5,a,6,a,b,4169,a)].
+
+given #1043 (T,wt=12): 7236 P(j(x,n(n(j(y,n(n(n(n(x))))))))).  [hyper(5,a,2746,a,b,4181,a)].
+
+given #1044 (T,wt=12): 7241 P(n(n(j(x,j(y,n(n(n(n(x))))))))).  [hyper(5,a,2728,a,b,4181,a)].
+
+given #1045 (A,wt=14): 333 P(j(j(n(n(x)),j(x,y)),j(n(n(x)),y))).  [hyper(5,a,16,a,b,300,a)].
+
+given #1046 (T,wt=10): 25018 P(j(j(x,y),j(n(n(x)),y))).  [hyper(5,a,2630,a,b,333,a)].
+
+given #1047 (T,wt=10): 25024 P(j(n(n(x)),n(j(x,n(x))))).  [hyper(5,a,333,a,b,24643,a)].
+
+given #1048 (T,wt=10): 25025 P(j(n(n(j(j(x,y),x))),x)).  [hyper(5,a,333,a,b,22498,a)].
+
+given #1049 (T,wt=10): 25026 P(j(n(n(j(x,n(x)))),n(x))).  [hyper(5,a,333,a,b,22319,a)].
+
+given #1050 (A,wt=14): 335 P(j(x,j(y,j(z,j(u,n(n(i(w,v5)))))))).  [hyper(5,a,57,a,b,303,a)].
+
+given #1051 (T,wt=10): 25069 P(j(j(x,n(n(n(x)))),n(x))).  [hyper(5,a,291,a,b,25018,a)].
+
+given #1052 (T,wt=10): 25262 P(j(n(x),n(j(j(x,y),x)))).  [hyper(5,a,21469,a,b,25025,a)].
+
+given #1053 (T,wt=11): 25023 P(j(n(n(x)),j(j(x,n(x)),y))).  [hyper(5,a,333,a,b,24696,a)].
+
+given #1054 (T,wt=11): 25027 P(j(n(n(j(x,n(x)))),j(x,y))).  [hyper(5,a,333,a,b,14381,a)].
+
+given #1055 (A,wt=19): 336 P(j(j(n(j(n(n(i(x,y))),z)),j(n(n(i(x,y))),z)),z)).  [hyper(5,a,36,a,b,303,a)].
+
+given #1056 (T,wt=11): 25032 P(j(n(n(j(j(x,n(y)),y))),y)).  [hyper(5,a,333,a,b,3581,a)].
+
+given #1057 (T,wt=11): 25036 P(j(n(n(j(n(n(n(x))),x))),x)).  [hyper(5,a,333,a,b,861,a)].
+
+given #1058 (T,wt=11): 25269 P(j(x,n(j(j(n(x),y),n(x))))).  [hyper(5,a,13920,a,b,25025,a)].
+
+given #1059 (T,wt=11): 25354 P(j(n(x),j(j(j(x,y),x),z))).  [hyper(5,a,14010,a,b,25262,a)].
+
+given #1060 (A,wt=18): 338 P(j(x,j(y,j(z,j(j(u,j(j(w,w),v5)),j(u,v5)))))).  [hyper(5,a,57,a,b,40,a)].
+
+given #1061 (T,wt=11): 25381 P(j(j(n(x),j(j(x,y),x)),x)).  [hyper(5,a,9,a,b,25262,a)].
+
+given #1062 (T,wt=11): 25384 P(j(n(j(j(x,n(x)),y)),n(x))).  [hyper(5,a,21469,a,b,25023,a)].
+
+given #1063 (T,wt=11): 25406 P(j(n(j(x,y)),n(j(x,n(x))))).  [hyper(5,a,21469,a,b,25027,a)].
+
+given #1064 (T,wt=11): 25427 P(j(n(x),n(j(j(y,n(x)),x)))).  [hyper(5,a,21469,a,b,25032,a)].
+
+given #1065 (A,wt=16): 339 P(j(x,j(y,j(j(z,j(j(u,u),w)),j(z,w))))).  [hyper(5,a,55,a,b,40,a)].
+
+given #1066 (T,wt=11): 25453 P(j(n(x),n(j(n(n(n(x))),x)))).  [hyper(5,a,21469,a,b,25036,a)].
+
+given #1067 (T,wt=11): 25513 P(j(n(j(j(j(x,y),x),z)),x)).  [hyper(5,a,21469,a,b,25354,a)].
+
+given #1068 (T,wt=12): 7245 P(j(x,j(j(n(y),n(n(n(x)))),y))).  [hyper(5,a,97,a,b,4181,a)].
+
+given #1069 (T,wt=12): 8343 P(j(n(j(x,j(y,n(z)))),n(n(z)))).  [hyper(5,a,2746,a,b,8309,a)].
+
+given #1070 (A,wt=14): 343 P(j(j(x,j(j(y,y),z)),j(u,j(x,z)))).  [hyper(5,a,21,a,b,40,a)].
+
+given #1071 (T,wt=12): 8349 P(n(n(j(n(j(x,j(y,n(z)))),z)))).  [hyper(5,a,2728,a,b,8309,a)].
+
+given #1072 (T,wt=12): 8352 P(j(n(j(x,j(y,n(n(n(z)))))),z)).  [hyper(5,a,334,a,b,8309,a)].
+
+given #1073 (T,wt=12): 8369 P(j(n(j(x,j(y,n(z)))),j(u,z))).  [hyper(5,a,21,a,b,8309,a)].
+
+given #1074 (T,wt=12): 8372 P(j(x,j(n(j(y,j(z,n(u)))),u))).  [hyper(5,a,6,a,b,8309,a)].
+
+given #1075 (A,wt=20): 344 P(j(j(j(x,j(j(y,y),z)),x),j(j(x,j(j(y,y),z)),z))).  [hyper(5,a,8,a,b,40,a)].
+
+given #1076 (T,wt=12): 8493 P(j(j(j(x,j(y,z)),u),j(z,u))).  [hyper(5,a,2630,a,b,117,a)].
+
+given #1077 (T,wt=11): 25727 P(j(j(j(x,j(y,n(z))),z),z)).  [hyper(5,a,43,a,b,8493,a)].
+
+given #1078 (T,wt=12): 8775 P(n(j(j(x,x),n(j(n(n(y)),y))))).  [hyper(5,a,374,a,b,346,a)].
+
+given #1079 (T,wt=12): 8776 P(n(j(i(x,y),n(j(n(n(z)),z))))).  [hyper(5,a,374,a,b,311,a)].
+
+given #1080 (A,wt=14): 345 P(j(x,j(j(y,j(j(z,z),u)),j(y,u)))).  [hyper(5,a,6,a,b,40,a)].
+
+given #1081 (T,wt=12): 9069 P(n(j(j(x,x),n(n(n(i(y,z))))))).  [hyper(5,a,379,a,b,346,a)].
+
+given #1082 (T,wt=12): 9070 P(n(j(i(x,y),n(n(n(i(z,u))))))).  [hyper(5,a,379,a,b,311,a)].
+
+given #1083 (T,wt=12): 9229 P(n(j(j(x,x),n(n(n(j(y,y))))))).  [hyper(5,a,406,a,b,346,a)].
+
+given #1084 (T,wt=12): 9230 P(n(j(i(x,y),n(n(n(j(z,z))))))).  [hyper(5,a,406,a,b,311,a)].
+
+given #1085 (A,wt=22): 347 P(j(j(n(j(j(x,x),y)),j(n(j(j(x,x),y)),j(j(x,x),y))),y)).  [hyper(5,a,40,a,b,204,a)].
+
+given #1086 (T,wt=12): 9361 P(n(n(n(n(j(n(j(x,y)),n(y))))))).  [hyper(5,a,4060,a,b,9350,a)].
+
+given #1087 (T,wt=12): 9370 P(j(x,n(n(j(n(j(y,z)),n(z)))))).  [hyper(5,a,2752,a,b,9350,a)].
+
+given #1088 (T,wt=12): 9373 P(n(n(j(x,j(n(j(y,z)),n(z)))))).  [hyper(5,a,2745,a,b,9350,a)].
+
+given #1089 (T,wt=12): 9374 P(j(j(j(n(j(x,y)),n(y)),z),z)).  [hyper(5,a,2743,a,b,9350,a)].
+
+given #1090 (A,wt=14): 348 P(j(j(j(x,j(y,x)),j(j(z,z),u)),u)).  [hyper(5,a,40,a,b,145,a)].
+
+given #1091 (T,wt=12): 9379 P(j(j(x,n(j(y,z))),j(x,n(z)))).  [hyper(5,a,237,a,b,9350,a)].
+
+given #1092 (T,wt=12): 9380 P(j(n(j(x,y)),j(z,j(u,n(y))))).  [hyper(5,a,118,a,b,9350,a)].
+
+given #1093 (T,wt=12): 9383 P(j(x,j(y,j(n(j(z,u)),n(u))))).  [hyper(5,a,55,a,b,9350,a)].
+
+given #1094 (T,wt=12): 9384 P(j(x,j(n(j(y,z)),j(u,n(z))))).  [hyper(5,a,48,a,b,9350,a)].
+
+given #1095 (A,wt=14): 349 P(j(j(j(x,i(y,z)),j(j(u,u),w)),w)).  [hyper(5,a,40,a,b,140,a)].
+
+given #1096 (T,wt=12): 9400 P(j(n(j(x,y)),n(n(n(n(n(y))))))).  [hyper(5,a,2746,a,b,9372,a)].
+
+given #1097 (T,wt=12): 9406 P(n(n(j(n(j(x,y)),n(n(n(y))))))).  [hyper(5,a,2728,a,b,9372,a)].
+
+given #1098 (T,wt=12): 9414 P(j(n(j(x,y)),j(z,n(n(n(y)))))).  [hyper(5,a,21,a,b,9372,a)].
+
+given #1099 (T,wt=12): 9416 P(j(x,j(n(j(y,z)),n(n(n(z)))))).  [hyper(5,a,6,a,b,9372,a)].
+
+given #1100 (A,wt=14): 350 P(j(j(j(x,j(y,y)),j(j(z,z),u)),u)).  [hyper(5,a,40,a,b,138,a)].
+
+given #1101 (T,wt=12): 9593 P(j(n(j(x,y)),n(n(j(z,n(y)))))).  [hyper(5,a,2746,a,b,9385,a)].
+
+given #1102 (T,wt=12): 9599 P(n(n(j(n(j(x,y)),j(z,n(y)))))).  [hyper(5,a,2728,a,b,9385,a)].
+
+given #1103 (T,wt=12): 9603 P(j(n(j(x,y)),j(j(n(z),y),z))).  [hyper(5,a,97,a,b,9385,a)].
+
+given #1104 (T,wt=12): 10343 P(j(j(x,y),j(j(j(x,y),x),y))).  [hyper(5,a,2630,a,b,132,a)].
+
+given #1105 (A,wt=19): 351 P(j(j(n(j(j(x,x),y)),n(j(z,n(j(j(x,x),y))))),y)).  [hyper(5,a,40,a,b,80,a)].
+
+given #1106 (T,wt=12): 11116 P(j(x,j(j(j(y,y),j(x,z)),z))).  [hyper(5,a,2630,a,b,149,a)].
+
+given #1107 (T,wt=12): 11609 P(j(x,j(j(i(y,z),j(x,u)),u))).  [hyper(5,a,2630,a,b,154,a)].
+
+given #1108 (T,wt=12): 13118 P(n(j(j(x,j(y,x)),n(i(z,u))))).  [hyper(5,a,78,a,b,1503,a)].
+
+given #1109 (T,wt=12): 13119 P(n(j(j(x,j(y,x)),n(j(z,z))))).  [hyper(5,a,76,a,b,1503,a)].
+
+given #1110 (A,wt=14): 352 P(j(j(n(j(j(x,x),y)),n(i(z,u))),y)).  [hyper(5,a,40,a,b,78,a)].
+
+given #1111 (T,wt=12): 13428 P(j(n(j(x,n(n(j(y,n(z)))))),z)).  [hyper(5,a,1624,a,b,1626,a)].
+
+given #1112 (T,wt=12): 13429 P(j(n(n(n(n(n(j(x,n(y))))))),y)).  [hyper(5,a,655,a,b,1626,a)].
+
+given #1113 (T,wt=12): 13430 P(j(x,j(n(n(n(j(y,n(z))))),z))).  [hyper(5,a,433,a,b,1626,a)].
+
+given #1114 (T,wt=12): 13433 P(j(j(i(x,y),n(j(z,n(u)))),u)).  [hyper(5,a,200,a,b,1626,a)].
+
+given #1115 (A,wt=17): 353 P(j(j(n(j(j(x,x),y)),n(n(j(j(x,x),y)))),y)).  [hyper(5,a,40,a,b,77,a)].
+
+given #1116 (T,wt=12): 13434 P(j(j(j(x,x),n(j(y,n(z)))),z)).  [hyper(5,a,187,a,b,1626,a)].
+
+given #1117 (T,wt=12): 13541 P(j(n(n(n(j(x,n(y))))),n(n(y)))).  [hyper(5,a,2746,a,b,13431,a)].
+
+given #1118 (T,wt=12): 13545 P(n(n(j(n(n(n(j(x,n(y))))),y)))).  [hyper(5,a,2728,a,b,13431,a)].
+
+given #1119 (T,wt=12): 13552 P(j(n(n(n(j(x,n(n(n(y))))))),y)).  [hyper(5,a,334,a,b,13431,a)].
+
+given #1120 (A,wt=14): 354 P(j(j(n(j(j(x,x),y)),n(j(z,z))),y)).  [hyper(5,a,40,a,b,76,a)].
+
+given #1121 (T,wt=12): 13567 P(j(n(n(n(j(x,n(y))))),j(z,y))).  [hyper(5,a,21,a,b,13431,a)].
+
+given #1122 (T,wt=12): 13641 P(n(j(j(x,i(y,z)),n(i(u,w))))).  [hyper(5,a,78,a,b,2166,a)].
+
+given #1123 (T,wt=12): 13642 P(n(j(j(x,i(y,z)),n(j(u,u))))).  [hyper(5,a,76,a,b,2166,a)].
+
+given #1124 (T,wt=12): 13734 P(n(j(j(x,j(y,y)),n(i(z,u))))).  [hyper(5,a,78,a,b,2331,a)].
+
+given #1125 (A,wt=14): 356 P(j(x,j(y,j(z,j(u,n(n(j(w,w)))))))).  [hyper(5,a,57,a,b,324,a)].
+
+given #1126 (T,wt=12): 13735 P(n(j(j(x,j(y,y)),n(j(z,z))))).  [hyper(5,a,76,a,b,2331,a)].
+
+given #1127 (T,wt=12): 13922 P(j(j(x,j(y,z)),j(y,j(x,z)))).  [hyper(5,a,45,a,b,2727,a)].
+
+============================== PROOF =================================
+
+% Proof 4 at 3.82 (+ 0.37) seconds.
+% Length of proof is 18.
+% Level of proof is 8.
+% Maximum clause weight is 24.
+% Given clauses 1127.
+
+2 P(j(j(x,y),j(j(y,z),j(x,z)))) # label(non_clause) # label(goal).  [goal].
+5 -P(j(x,y)) | -P(x) | P(y).  [assumption].
+6 P(j(x,j(y,x))).  [assumption].
+8 P(j(j(x,j(y,z)),j(j(x,y),j(x,z)))).  [assumption].
+11 -P(j(j(c2,c3),j(j(c3,c4),j(c2,c4)))).  [deny(2)].
+14 P(j(x,j(y,j(z,y)))).  [hyper(5,a,6,a,b,6,a)].
+16 P(j(j(j(x,j(y,z)),j(x,y)),j(j(x,j(y,z)),j(x,z)))).  [hyper(5,a,8,a,b,8,a)].
+17 P(j(x,j(j(y,j(z,u)),j(j(y,z),j(y,u))))).  [hyper(5,a,6,a,b,8,a)].
+22 P(j(x,j(y,j(z,j(u,z))))).  [hyper(5,a,6,a,b,14,a)].
+35 P(j(j(x,j(j(y,x),z)),j(x,z))).  [hyper(5,a,16,a,b,14,a)].
+45 P(j(j(j(x,j(y,z)),j(j(j(x,y),j(x,z)),u)),j(j(x,j(y,z)),u))).  [hyper(5,a,16,a,b,17,a)].
+71 P(j(j(x,j(j(y,j(z,y)),u)),j(x,u))).  [hyper(5,a,16,a,b,22,a)].
+237 P(j(j(x,y),j(j(z,x),j(z,y)))).  [hyper(5,a,35,a,b,17,a)].
+2630 P(j(j(j(x,y),z),j(y,z))).  [hyper(5,a,71,a,b,237,a)].
+2727 P(j(x,j(j(j(y,z),u),j(z,u)))).  [hyper(5,a,6,a,b,2630,a)].
+13922 P(j(j(x,j(y,z)),j(y,j(x,z)))).  [hyper(5,a,45,a,b,2727,a)].
+26072 P(j(j(x,y),j(j(y,z),j(x,z)))).  [hyper(5,a,13922,a,b,237,a)].
+26073 $F.  [resolve(26072,a,11,a)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=1127. Generated=540042. Kept=26065. proofs=4.
+Usable=1122. Sos=19999. Demods=0. Limbo=90, Disabled=4862. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=381879. Back_subsumed=65.
+Sos_limit_deleted=132098. Sos_displaced=4785. Sos_removed=0.
+New_demodulators=0 (0 lex), Back_demodulated=0. Back_unit_deleted=0.
+Demod_attempts=0. Demod_rewrites=0.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=1.
+Megabytes=37.67.
+User_CPU=3.82, System_CPU=0.37, Wall_clock=4.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+Exiting with 4 proofs.
+
+Process 14819 exit (max_proofs) Fri Jan 10 23:22:37 2014
