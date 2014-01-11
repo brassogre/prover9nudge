@@ -28,9 +28,11 @@ SOS = 'sos'
 USABLE = 'usable'
 GOALS = 'goals'
 SEARCH_STRING = '==== SEARCH ===='
-
+BUILT_IN_FUNCTIONS = ['+', '*', '-', '/', '^', '@', '~', '=']
+JUNK_SYMBOL = ':'
 PROOF_START = '===== PROOF ====='
 PROOF_END = '==== end of proof ===='
+PARENTHESES = ['(', ')']
 
 LYNX_COMMAND = '/usr/bin/lynx'
 LYNX_DUMP_OPTION = '-dump'
@@ -47,3 +49,4 @@ def getConnection():
 
 # we're not ready for this quite yet...
 # CURSOR = getConnection()
+
