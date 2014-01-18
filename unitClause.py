@@ -1,4 +1,11 @@
-"""Class for defining and processing unit clauses..."""
+"""Class for defining and processing unit clauses. The goal is to be able to
+   go from a string representation of a unit clause without any arbitrary standards
+   (except what Prover9 requires) to a canonicalized version of the clause. When the
+   canonicalized version is produced, we have a list of all the functions, variables,
+   and so on. The end-game is to be able to take two arbitrary string representations
+   of a unit clause and tell whether they are identical after taking into account
+   arbitrary differences in (e.g.) function and variable names, infix vs. prefix, and
+   so on."""
 
 import os
 import sys
@@ -9,7 +16,26 @@ import globalConfig as gc
 
 class UnitClause:
     """Class for defining unit clauses and related methods.
-       Non-unit clauses will be built from this class.
+       Non-unit clauses are built from this class in the obvious way.
+
+       When a UnitClause object is created, a string representation
+       of the unit clause is passed to the constructor. Then the __init__
+       method parses the string and populates the following values.
+
+       :ivar original: The original string representation of the unit clause
+       :type original: str
+       :ivar originalPrefix: True if the original string passed to the constructor
+                             was in prefix form
+       :ivar originalInfix: True if the original string passed to the constructor
+                            was in infix form
+       :ivar functions: List of all functions appearing in the original representation
+                        of the unit clause
+       :ivar variables: List of all variables appearing in the original representation
+                        of the unit clause
+       :ivar arities: Dictionary mapping functions and predicates to their arities
+       :ivar canonicalizedDictionary:
+       :ivar negated: True if the original unit clause was negated
+       :ivar hashkey: Hashed representation of the clause object
     """
     original = ''                # Unprocessed string
     originalPrefix = False       # Is the original in prefix notation?
@@ -41,10 +67,10 @@ class UnitClause:
         self.canonicalize()
 
     def canonicalize(self):
-        """Generate a list of symbols, using canonical forms for the functions, 
+        """Generate a list of symbols, using canonical forms for the functions,
            predicates, and variables. May have to rethink this in order to handle
            non-unit clauses. We can use the replacement dictionary to compose one
-           replacement function with the inverse of the other, in order to do a 
+           replacement function with the inverse of the other, in order to do a
            cheap unification of two unit clauses."""
         tokenList = self.toList()
         replacementDict = {}
@@ -82,7 +108,7 @@ class UnitClause:
         pass
 
     def toList(self):
-        """Translate a formula into a list of tokens."""
+        """Tokenize a formula into a list of variables, functions, predicates, etc."""
         delimiters = ['-', ',', '(', ')', '.']
         delimited = self.prefix
         for delimiter in delimiters:
@@ -120,7 +146,7 @@ class UnitClause:
                 delimited = delimited[:i] + [gc.JUNK_SYMBOL] + delimited[j + 1:]
                 i += 1
         self.arities = arityDict
-                
+
     def prettyPrint(self):
         """Print the UnitClause:"""
         print 'original string: ', self.original
