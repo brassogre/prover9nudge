@@ -241,6 +241,8 @@ class UnitClause:
     def findPredicate(self):
         """Unless there's an equality, a predicate will always be the first symbol
            before an open parenthesis."""
+        #print 'findPredicate:', self.original
+        if not '(' in self.original: return
         parenIndex = self.original.index('(')
         predicate = self.original[:parenIndex]
         if '-' in predicate: predicate = predicate.replace('-', '')
@@ -254,7 +256,8 @@ class UnitClause:
         """Test whether the unit clause is negated."""
         tmp = self.prefix
         tmp = tmp.strip()
-        if tmp[0] == '-': self.negated = True
+        #print 'TMP:', tmp, len(tmp), self.prefix
+        if len(tmp) > 0 and tmp[0] == '-': self.negated = True
         else: self.negated = False
 
 def hasSequentialNames(l):
@@ -292,7 +295,3 @@ for token in infixList: # scanning from right to left, effectively
         except IndexError:
             pass
 
-print infixList
-prefixList.reverse()
-print infixExpression
-print prefixList

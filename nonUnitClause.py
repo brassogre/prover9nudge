@@ -7,6 +7,12 @@ import cPickle as pickle
 import hashlib
 import globalConfig as gc 
 
+def allWhiteSpace(s):
+    sentinal = True
+    for c in s:
+        if not c in string.whitespace: sentinal = False
+    return sentinal
+
 class NonUnitClause:
     """Class for defining non-unit clauses and related methods.
        Relies heavily on UnitClause class."""
@@ -38,7 +44,7 @@ class NonUnitClause:
 
     def splitIntoUnits(self):
         unitStrings = self.original.replace(' ', '').split(gc.DISJUNCTION)
-        self.units = [unitClause.UnitClause(unitString) for unitString in unitStrings]
+        self.units = [unitClause.UnitClause(unitString) for unitString in unitStrings if not allWhiteSpace(unitString)]
 
     def canonicalize(self):
         functionsDict = {}

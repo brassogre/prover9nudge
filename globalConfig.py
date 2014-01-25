@@ -4,7 +4,7 @@
 import os
 import sys
 import string
-#import MySQLdb
+import MySQLdb
 
 """
 """
@@ -22,12 +22,14 @@ EMAIL_PASSWORD ='*********'
 """:ivar EMAIL_PASSWORD: Password for hintomatic email account"""
 IMAP_SERVER = 'imap.gmail.com'
 """:ivar IMAP_SERVER: The address for hintomatic's email account's IMAP"""
-MYSQL_DATABASE = 'autoprove'
+MYSQL_DATABASE = 'prover9nudge'
 """:ivar MYSQL_DATABASE: Name of database for storing proofs, clauses, etc."""
-MYSQL_USER = '**********'
+MYSQL_USER = 'zac'
 """:ivar MYSQL_USER: User authorized for access to MYSQL"""
-MYSQL_PASSWORD = '*********'
+MYSQL_PASSWORD = 'WVOQuine618!'
 """:ivar MYSQL_PASSWORD: That user's password"""
+MYSQL_PROOFS_TABLE = 'proofs'
+""":ivar MYSQL_PROOFS_TABLE: Name of table holding proofs"""
 TEST_DIRECTORY = BASE_DIRECTORY + 'test_files/'
 """:ivar TEST_DIRECTORY: Where sample input and output files are kept"""
 TEST_INPUT_FILE = TEST_DIRECTORY + './prop.in'
@@ -78,5 +80,5 @@ def getConnection():
   return cursor
 
 # we're not ready for this quite yet...
-# CURSOR = getConnection()
+CURSOR = getConnection()
 

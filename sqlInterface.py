@@ -1,3 +1,12 @@
+"""This is a set of utilities for making it easier to interface with MySQL,
+which is where all the proofs and input files will live.
+
+Table structure in prover9nudge database:
+    proofs:
+        rawproof mediumtext (text output of proof)
+        clauselist mediumtext (list of clauses -- python object)
+"""
+
 import os
 import sys
 import math
@@ -6,6 +15,11 @@ import MySQLdb
 import hashlib
 import globalConfig as gc
 import binascii
+import cPickle as pickle
+
+def hashString(s):
+    out = hashlib.sha224("Nobody inspects the spammish repetition").hexdigest()
+    return out
 
 def makeQuery(tableName, columnList, whereColumn = None, whereOperator = ' = ', whereCondition = None, limit = None):
     """Takes a TABLENAME, list of COLUMNS, and some options, and returns a string.
@@ -60,7 +74,7 @@ def makeInsert(tableName, columnList, values, encodeList = []):
     value = values[ind]
     column = columnList[ind]
     if column in encodeList:
-      value = toHex(str(value))
+      value = toHex(pickle.dumps(value))
     if type(value) == str:
       value = '"' + value + '"'
     value = str(value)
@@ -81,10 +95,10 @@ def convertFrom64(s):
 def convertDictFrom64(d):
     out = {}
     for key in d.keys():
-        out[key] = convertFrom64(d[key])
+        out[key] = pickle.loads(convertFrom64(d[key]))
     return out
     
-def insertValues(tableName, columnList, values, encodeList = None):
+def insertValues(tableName, columnList, values, encodeList = []):
     query = makeInsert(tableName, columnList, values, encodeList = encodeList)
     gc.CURSOR.execute(query)
     gc.CURSOR.execute('commit;')
@@ -98,21 +112,23 @@ def insertDict(tableName, d, encodeList):
     insertValues(tableName, columnList, values, encodeList)        
 
 def toHex(s):
-  b = binascii.b2a_base64(str(s))
+  b = s.encode('base64')
   b = b.strip()
   return b
 
+#I don't think this right...
 def fromHex(s):
     """Takes a string and returns a string.
        Converts the string to base64 for the purpose of getting rid of
        and nasty special characters."""
-    b = binascii.a2b_base64(s)
+    b = s.decode('base64')
     return b
 
-#insertValues('outputfiles', ['id', 'hash', 'rawfile'], [618, 'hash618', 'rawfile618'], encodeList = ['rawfile'])
+#insertValues('proofs', ['rawproof', 'clauselist'], ['imaproof', ['foo1', 'foo2']], encodeList = ['rawproof', 'clauselist'])
+
 #print makeInsert('thisisthetable', ['a', 'b', 'c'], [1, 'foo', 'goo'], encodeList = ['a', 'c'])
 #s = 'The quick brown fox...'
 #print toHex(s)
 #print fromHex(toHex(s))
 #exit()
-#print queryDict('outputfiles', ['rawfile', 'hash', 'id'])
+#print queryDict('proofs', ['rawproof', 'clauselist'])
