@@ -61,7 +61,7 @@ def queryDict(tableName, columnList, whereColumn = None, whereOperator = ' = ', 
 
 def makeInsert(tableName, columnList, values, encodeList = []):
   """insert into outputfiles (id, hash) values (1123123, 'foo');"""
-  query = "INSERT INTO %s " % tableName
+  query = "INSERT IGNORE INTO %s " % tableName
   columns = '('
   for column in columnList:
     columns += column

@@ -39,6 +39,7 @@ class NonUnitClause:
         self.findFunctions()
         self.findPredicates()
         self.findVariables()
+        self.canonicalize()
         pickleString = pickle.dumps(self)
         self.hashKey = hashlib.sha224(pickleString).hexdigest()
 
@@ -47,6 +48,12 @@ class NonUnitClause:
         self.units = [unitClause.UnitClause(unitString) for unitString in unitStrings if not allWhiteSpace(unitString)]
 
     def canonicalize(self):
+        for unit in self.units:
+            self.canonicalized.append(unit.canonicalized)
+        #print self.canonicalized
+
+    # throw this away?
+    def canonicalize1(self):
         functionsDict = {}
         variablesDict = {}
         predicatesDict = {}

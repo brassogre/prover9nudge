@@ -30,10 +30,18 @@ MYSQL_PASSWORD = 'WVOQuine618!'
 """:ivar MYSQL_PASSWORD: That user's password"""
 MYSQL_PROOFS_TABLE = 'proofs'
 """:ivar MYSQL_PROOFS_TABLE: Name of table holding proofs"""
+
+MYSQL_RAW_PROOF_COLUMN = 'rawproof'
+MYSQL_PARSED_PROOF_COLUMN = 'clauselist'
+MYSQL_PROOF_HASH = 'rawproofhash'
+
 TEST_DIRECTORY = BASE_DIRECTORY + 'test_files/'
 """:ivar TEST_DIRECTORY: Where sample input and output files are kept"""
 TEST_INPUT_FILE = TEST_DIRECTORY + './prop.in'
 """:ivar TEST_INPUT_FILE: Relative pathname to a sample input file for testing"""
+ASSUMPTIONS_START = 'formulas(assumptions)'
+""":ivar ASSUMPTIONS_START: String that marks the beginning of an assumptions
+                            list in a Prover9 input file"""
 SOS_START = 'formulas(sos)'
 """:ivar SOS_START: String that marks the beginning of the SOS list in a
                  Prover9 file"""
@@ -54,6 +62,8 @@ SOS = 'sos'
 """:ivar SOS: Name of SOS list"""
 USABLE = 'usable'
 """:ivar USABLE: Name of Usable list"""
+ASSUMPTIONS = 'assumptions'
+""":ivar ASSUMPTIONS:: Name of assumptions list"""
 GOALS = 'goals'
 """:ivar GOALS: Name of goals list"""
 SEARCH_STRING = '==== SEARCH ===='

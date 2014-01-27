@@ -9,6 +9,7 @@ import math
 import information
 import random
 import numpy
+import collections
 
 def overlapDictionary(d, ordered = False):
     """takes dictionary and yields dictionary where each token is a key, and value
@@ -45,7 +46,7 @@ def pageRank(d, restartProb = .08, restarts = 10000):
         tally[node] = tally[node] / float(counter)
     return tally
 
-def destinationsFromStart(d, node, pathLength = 20, iterations = 100):
+def destinationsFromStart(d, node, pathLength = 20, iterations = 500):
     """Starting at node, and in paths no longer than pathLength, track
        the number of steps to each node that we eventually wind up on...
        take the average at the end, and return a dictionary. The
@@ -80,22 +81,32 @@ def meanCommuteTime(d, pathLength = 20, iterations = 100):
     """Simply adds the one-way path lengths between all pairs of nodes
        to derive the mean commute time between all node pairs."""
     oneWayCommuteTimes = oneWayCommutes(d, pathLength = pathLength, iterations = iterations)
-    commuteTimes = {}
+    commuteTimes = collections.defaultdict(dict) ### 
     for node1 in oneWayCommuteTimes:
         for node2 in oneWayCommuteTimes[node1]:
             if node1 in oneWayCommuteTimes[node2]:
                 commute = oneWayCommuteTimes[node1][node2] + oneWayCommuteTimes[node2][node1]
-                if not node1 in commuteTimes: commuteTimes[node1] = {}
-                if not node2 in commuteTimes: commuteTimes[node2] = {}
+                #if not node1 in commuteTimes: commuteTimes[node1] = {}
+                #if not node2 in commuteTimes: commuteTimes[node2] = {}
                 commuteTimes[node1][node2] = commute
                 commuteTimes[node2][node1] = commute
-    return commuteTimes
+    return dict(commuteTimes)
 
-def toGephi(d, fileName):
+def toGephi(d, fileName, minimumEdgeWeight = 0):
     f = open(fileName, 'w')
     f.write('source,target,weight\n')
+    maximum = -10000000
+    minimum = 100000000
+    for k1 in d:
+        for k2 in d[k1]:
+            if d[k1][k2] < minimum: minimum = d[k1][k2]
+            if d[k1][k2] > maximum: maximum = d[k1][k2]
+    print maximum, minimum
+    for k1 in d:
+        for k2 in d[k1]:
+            d[k1][k2] = 1. - ((d[k1][k2] - minimum) / (maximum - minimum))
     for k1 in d:
         for k2 in d[k1]:
             s = '"' + k1 + '","' + k2 + '",' + str(d[k1][k2]) + '\n'
-            f.write(s)
+            if d[k1][k2] >= minimumEdgeWeight: f.write(s)
     
