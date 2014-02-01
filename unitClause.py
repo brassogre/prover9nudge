@@ -53,7 +53,12 @@ class UnitClause:
     hashKey = ''
 
     def __init__(self, s):
-        self.original = s
+        self.raw = s # literally what's been passed
+        # now, we'll test for equality, and make a substitution when necessary
+        # that substituted thingy will be passed to self.original,
+        # and then we're back to where we belong...
+        self.setOriginalToPrefixEquality()
+        #self.original = s
         self.original = self.original.strip()
         self.original = self.original.replace('.', '')
         if not self.isInfix(): self.prefix = self.original
@@ -65,6 +70,19 @@ class UnitClause:
         self.hashKey = hashlib.sha224(pickleString).hexdigest()
         self.functionArities()
         self.canonicalize()
+
+    def setOriginalToPrefixEquality(self):
+        s = self.raw
+        if '=' in s and not '!=' in s:
+            i = s.index('=')
+            out = 'EQ(' + s[:i] + ',' + s[i+1:] + ')'
+        elif '!=' in s:
+            i = s.index('!=')
+            out = '-EQ(' + s[:i] + ',' + s[i+2:] + ')'
+        else:
+            out = s
+        self.original = out
+            
 
     def canonicalize(self):
         """Generate a list of symbols, using canonical forms for the functions,
@@ -241,6 +259,8 @@ class UnitClause:
     def findPredicate(self):
         """Unless there's an equality, a predicate will always be the first symbol
            before an open parenthesis."""
+        #print 'findPredicate:', self.original
+        if not '(' in self.original: return
         parenIndex = self.original.index('(')
         predicate = self.original[:parenIndex]
         if '-' in predicate: predicate = predicate.replace('-', '')
@@ -254,7 +274,8 @@ class UnitClause:
         """Test whether the unit clause is negated."""
         tmp = self.prefix
         tmp = tmp.strip()
-        if tmp[0] == '-': self.negated = True
+        #print 'TMP:', tmp, len(tmp), self.prefix
+        if len(tmp) > 0 and tmp[0] == '-': self.negated = True
         else: self.negated = False
 
 def hasSequentialNames(l):
@@ -269,6 +290,7 @@ def hasSequentialNames(l):
             returnIndex = index
     return returnIndex
 
+"""
 infixExpression = '(((2+(3*4))-51)=6)'
 infixList = [c for c in infixExpression]
 print 'original infix:', infixList
@@ -292,7 +314,4 @@ for token in infixList: # scanning from right to left, effectively
         except IndexError:
             pass
 
-print infixList
-prefixList.reverse()
-print infixExpression
-print prefixList
+"""
