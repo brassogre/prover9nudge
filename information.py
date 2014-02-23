@@ -38,7 +38,7 @@ def totalTokens(d):
     total = 0
     for k in d:
         total += len(d[k])
-    return total    
+    return total
 
 def probTokenDict(d):
     """Takes a dictionary and returns a dictionary.
@@ -69,7 +69,7 @@ def tokenPairTally(d):
                 if token2 <= token1: continue
                 if not token1 in jointTally: jointTally[token1] = {}
                 if not token2 in jointTally[token1]: jointTally[token1][token2] = 0
-                jointTally[token1][token2] += 1    
+                jointTally[token1][token2] += 1
     return jointTally
 
 def jointProbDict(d):
@@ -134,7 +134,7 @@ def nestedDictThreshold(d, thresholdValue = .1):
     return out
 
 def pruneNestedDictByThreshold(d, thresholdValue = .1):
-    """Takes a nested dictionary where d[k1][k2] is 
+    """Takes a nested dictionary where d[k1][k2] is
        assumed to be a number. Prunes the dictionary
        so that every value is in the top "thresholdValue"
        of values from the original dictionary."""
@@ -144,3 +144,4 @@ def pruneNestedDictByThreshold(d, thresholdValue = .1):
         for k2 in d[k1]:
             if d1[k1][k2] < threshold: del(d1[k1][k2])
     return d1
+

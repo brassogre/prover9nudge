@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Hint-o-Matic documentation build configuration file, created by
-# sphinx-quickstart on Sat Jan 18 10:12:25 2014.
+# Prover9Nudge documentation build configuration file, created by
+# sphinx-quickstart on Sat Jan 25 13:27:27 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -47,7 +47,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Hint-o-Matic'
+project = u'Prover9Nudge'
 copyright = u'2014, Zachary Ernst'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -180,7 +180,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Hint-o-Maticdoc'
+htmlhelp_basename = 'Prover9Nudgedoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -200,7 +200,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'Hint-o-Matic.tex', u'Hint-o-Matic Documentation',
+  ('index', 'Prover9Nudge.tex', u'Prover9Nudge Documentation',
    u'Zachary Ernst', 'manual'),
 ]
 
@@ -230,7 +230,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'hint-o-matic', u'Hint-o-Matic Documentation',
+    ('index', 'prover9nudge', u'Prover9Nudge Documentation',
      [u'Zachary Ernst'], 1)
 ]
 
@@ -244,8 +244,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Hint-o-Matic', u'Hint-o-Matic Documentation',
-   u'Zachary Ernst', 'Hint-o-Matic', 'One line description of project.',
+  ('index', 'Prover9Nudge', u'Prover9Nudge Documentation',
+   u'Zachary Ernst', 'Prover9Nudge', 'One line description of project.',
    'Miscellaneous'),
 ]
 

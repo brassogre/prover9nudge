@@ -12,9 +12,7 @@ import sys
 import string
 import cPickle as pickle
 import hashlib
-
-BUILT_IN_FUNCTIONS = ['+', '*', '-', '/', '^', '@', '~']
-JUNK_SYMBOL = ':'
+import globalConfig as gc
 
 class UnitClause:
     """Class for defining unit clauses and related methods.
@@ -55,7 +53,12 @@ class UnitClause:
     hashKey = ''
 
     def __init__(self, s):
-        self.original = s
+        self.raw = s # literally what's been passed
+        # now, we'll test for equality, and make a substitution when necessary
+        # that substituted thingy will be passed to self.original,
+        # and then we're back to where we belong...
+        self.setOriginalToPrefixEquality()
+        #self.original = s
         self.original = self.original.strip()
         self.original = self.original.replace('.', '')
         if not self.isInfix(): self.prefix = self.original
@@ -67,6 +70,19 @@ class UnitClause:
         self.hashKey = hashlib.sha224(pickleString).hexdigest()
         self.functionArities()
         self.canonicalize()
+
+    def setOriginalToPrefixEquality(self):
+        s = self.raw
+        if '=' in s and not '!=' in s:
+            i = s.index('=')
+            out = 'EQ(' + s[:i] + ',' + s[i+1:] + ')'
+        elif '!=' in s:
+            i = s.index('!=')
+            out = '-EQ(' + s[:i] + ',' + s[i+2:] + ')'
+        else:
+            out = s
+        self.original = out
+            
 
     def canonicalize(self):
         """Generate a list of symbols, using canonical forms for the functions,
@@ -126,7 +142,7 @@ class UnitClause:
         delimited = []
         for i in tmp:
             if i == '-': continue
-            if i in self.variables: delimited.append(JUNK_SYMBOL)
+            if i in self.variables: delimited.append(gc.JUNK_SYMBOL)
             else: delimited.append(i)
         allFunctions = list(set(self.functions) | set([self.predicate]))
         arityDict = {}
@@ -141,11 +157,11 @@ class UnitClause:
                 while delimited[j] != ')': j += 1
                 symbols = set(delimited[i + 1:j + 1]) - set(self.variables)
                 symbols = symbols - set(['(', ')'])
-                if symbols != set([JUNK_SYMBOL]) and symbols != set([JUNK_SYMBOL, ',']):
+                if symbols != set([gc.JUNK_SYMBOL]) and symbols != set([gc.JUNK_SYMBOL, ',']):
                     i += 1
                     continue
-                arityDict[delimited[i]] = delimited[i:j + 1].count(JUNK_SYMBOL)
-                delimited = delimited[:i] + [JUNK_SYMBOL] + delimited[j + 1:]
+                arityDict[delimited[i]] = delimited[i:j + 1].count(gc.JUNK_SYMBOL)
+                delimited = delimited[:i] + [gc.JUNK_SYMBOL] + delimited[j + 1:]
                 i += 1
         self.arities = arityDict
 
@@ -179,7 +195,7 @@ class UnitClause:
     def isInfix(self):
         """Test whether the original string representation is infix."""
         sentinal = False
-        for function in BUILT_IN_FUNCTIONS:
+        for function in gc.BUILT_IN_FUNCTIONS:
             if ')' + function in self.original: sentinal = True
             if function + '(' in self.original: sentinal = True
         self.originalInfix = True
@@ -243,6 +259,8 @@ class UnitClause:
     def findPredicate(self):
         """Unless there's an equality, a predicate will always be the first symbol
            before an open parenthesis."""
+        #print 'findPredicate:', self.original
+        if not '(' in self.original: return
         parenIndex = self.original.index('(')
         predicate = self.original[:parenIndex]
         if '-' in predicate: predicate = predicate.replace('-', '')
@@ -256,5 +274,44 @@ class UnitClause:
         """Test whether the unit clause is negated."""
         tmp = self.prefix
         tmp = tmp.strip()
-        if tmp[0] == '-': self.negated = True
+        #print 'TMP:', tmp, len(tmp), self.prefix
+        if len(tmp) > 0 and tmp[0] == '-': self.negated = True
         else: self.negated = False
+
+def hasSequentialNames(l):
+    returnIndex = None
+    for index in range(len(l) - 1):
+        firstSymbol = l[index]
+        secondSymbol = l[index + 1]
+        if not firstSymbol in gc.BUILT_IN_FUNCTIONS and (
+            not firstSymbol in gc.PARENTHESES and 
+            not secondSymbol in gc.BUILT_IN_FUNCTIONS and
+            not secondSymbol in gc.PARENTHESES):
+            returnIndex = index
+    return returnIndex
+
+"""
+infixExpression = '(((2+(3*4))-51)=6)'
+infixList = [c for c in infixExpression]
+print 'original infix:', infixList
+print 'sequential:', hasSequentialNames(infixList)
+infixList.reverse()
+stack = []
+prefixList = []
+for token in infixList: # scanning from right to left, effectively
+    print 'token:', token
+    if token == ')':
+        stack.append(token)
+    elif token in string.digits:
+        print 'adding to prefixList:', token
+        prefixList.append(token)
+    elif token in gc.BUILT_IN_FUNCTIONS:
+        stack.append(token)
+    elif token == '(':
+        try:
+            prefixList.append(stack.pop())
+            stack.pop()
+        except IndexError:
+            pass
+
+"""
