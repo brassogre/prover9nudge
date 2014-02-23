@@ -109,6 +109,36 @@ yacc.yacc()
 
 # equality not set up for atoms yet.
 
+def canonicalize_tree(tree, vocabulary_dict):
+    print 'in canonicalize_tree'
+
+    def make_replacement_dict(d):
+        function_counter = 0
+        predicate_counter = 0
+        variable_counter = 0
+        out = {}
+        for k, v in d.iteritems():
+            if v == 'function':
+                replacement = '<<function:'+str(function_counter)+'>>'
+                function_counter += 1
+            elif v == 'predicate':
+                replacement = '<<predicate:'+str(predicate_counter)+'>>'
+                predicate_counter += 1
+            elif v == 'variable':
+                replacement = '<<variable:'+str(variable_counter)+'>>'
+                variable_counter += 1
+            else:
+                replacement = v
+            out[k] = replacement
+        return out
+    
+    replacement_dict = make_replacement_dict(vocabulary_dict)
+    if not isinstance(tree, tuple) and tree in ['OR', 'NEGATION', 'CLAUSE']:
+        return tree
+    if not isinstance(tree, tuple):
+        return replacement_dict[tree]
+    return tuple((canonicalize_tree(i, replacement_dict) for i in tree))
+
 def ladr_parser(s):
     global vocabulary
     global arity
@@ -123,4 +153,5 @@ def ladr_parser(s):
     inner_flatten(result)
     d['flattened'] = flatten_global
     d['tree'] = result
+    d['flattened_canonicalized'] = canonicalize_tree(d['tree'], d['vocabulary'])
     return d
