@@ -4,9 +4,9 @@ import string
 
 tokens = ('NAME', 'NOT_EQUAL')
 literals = ['=', '-', '(', ')', '+', '|', ',', r'.', r'|']
-t_NAME = r'[a-zA-Z]+'
+t_NAME = r'[a-zA-Z0-9]+'
 
-#t_ignore = r'[ \t\r\n]'
+t_ignore = r'[ ]'
 
 t_NOT_EQUAL = r'\!='
 
@@ -110,7 +110,6 @@ yacc.yacc()
 # equality not set up for atoms yet.
 
 def canonicalize_tree(tree, vocabulary_dict):
-    print 'in canonicalize_tree'
 
     def make_replacement_dict(d):
         function_counter = 0
@@ -153,5 +152,5 @@ def ladr_parser(s):
     inner_flatten(result)
     d['flattened'] = flatten_global
     d['tree'] = result
-    d['flattened_canonicalized'] = canonicalize_tree(d['tree'], d['vocabulary'])
+    d['tree_canonicalized'] = canonicalize_tree(d['tree'], d['vocabulary'])
     return d

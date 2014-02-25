@@ -2,7 +2,6 @@ import os
 import sys
 import string
 import pickle
-import unitClause
 import cPickle as pickle
 import hashlib
 import ladrParser

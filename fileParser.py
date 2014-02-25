@@ -9,8 +9,8 @@ import random
 import collections
 import globalConfig as gc
 import sqlInterface
-import unitClause
-import nonUnitClause
+import textUtilities
+import clause as ladrClause
 import graphUtilities
 
 def allWhiteSpace(s):
@@ -49,7 +49,7 @@ def isInputFile(fileName):
     f.close()
     return (sentinal and not search_string_sentinal)
 
-def readFile(fileName):
+def determineFile(fileName):
     """Tests whether it's got proofs. If it does, call readOutputFile;
        if it doesn't, call readInputFile."""
     out = None
@@ -75,28 +75,48 @@ def readOutputFile(fileName):
         if allWhiteSpace(line): continue
         if '(all' in line: continue
         if '(exists' in line: continue
-        # This is a temporary measure until we can parse inline equality
-        #if '=' in line and not gc.PROOF_START in line and not gc.PROOF_END in line:
-        #    print 'equality:', line
-        #    continue
         if gc.PROOF_START in line:
             inProof = True
-            #print 'Im in a proof!'
             oneProof = []
-            continue # so that we skip the first line
+            continue
         if gc.PROOF_END in line:
             inProof = False
-            proofs.append([nonUnitClause.NonUnitClause(clause) for clause in oneProof if len(clause) > 1])
-        if inProof and '.' in line and line[0] != '%':
-            terminatorIndex = line.index('.')
-            #print line
-            if '#' in line and line.index('#') < terminatorIndex:
-                terminatorIndex = line.index('#')
-            line = line[:terminatorIndex]
-            tokens = line.split()[1:]
-            clause = ' '.join(tokens)
-            if clause != '$F': oneProof.append(clause)
+            proofs.append(oneProof)
+        if inProof and '.' in line:
+            raw_clause = extractClauseFromLine(line) # here
+            if len(raw_clause) <= 5: continue
+            one_clause = ladrClause.Clause(raw_clause)
+            oneProof.append(one_clause)
     return proofs
+
+def extractClauseFromLine(line):
+    line = line.split('#')
+    if len(line) > 1:
+        line = line[0]
+    else:
+        line = ''.join(line)
+    line = line.split(gc.COMMENT_MARKER)
+    if len(line) > 1:
+        line = line[0]
+    else:
+        line = ''.join(line)
+    if '[' in line and ']' in line:
+        line = line[:line.index('[')] + line[line.index(']')+1:]
+    line = line.split(' ')
+    line = [i for i in line if not textUtilities.allDigits(i)]
+    line = ' '.join(line)
+    line = ''.join([c for c in line if not c == gc.END_OF_STATEMENT])
+    line = line.strip()
+    line = line + gc.END_OF_STATEMENT
+    if len(line) > 3 and not r'$' in line:
+        return line
+    else:
+        return ''
+
+s1 = '2 P(j(j(x,y),j(j(y,z),j(x,z)))) # label(non_clause) # label(goal).  [goal].'
+s1 = '5 -P(j(x,y)) | -P(x) | P(y).  [assumption].'
+print extractClauseFromLine(s1)
+
 
 def readFile(fileName):
     if 'gz' == fileName[-2:]:
@@ -119,22 +139,20 @@ def readInputFile(fileName):
     inAssumptions = False
     for s in f:
         #print s
-        line = ''
-        # strip out the whitespace
-        for c in s:
-            if not c in string.whitespace: line += c
-        line = line.strip()
+        line = textUtilities.stripWhitespace(s)
         # find comments and strip them out
         if gc.COMMENT_MARKER in line:
             commentStart = line.index(gc.COMMENT_MARKER)
             line = line[:commentStart]
         # split the line with each delimiter
         line = line.split(gc.END_OF_STATEMENT)
-        if len(line) < 2: # line doesn't contain a period!
-            continue
         for statement in line:
-            if len(statement) < 2: continue
-            #print 'statement:', statement
+            if 'end_of_list' in statement: continue
+            if textUtilities.allWhitespace(statement): continue
+            print 'sending:', statement
+            statement = extractClauseFromLine(statement)
+            print 'returning:', statement
+            if len(statement) < 5: continue
             if gc.ASSUMPTIONS in statement: 
                 inAssumptions = True
                 continue
@@ -153,19 +171,17 @@ def readInputFile(fileName):
                 inUsable = False
                 inGoals = False
                 continue
-            #print '--->', '+'+statement+'+', inSos, inUsable, inGoals, inAssumptions
             if not(inSos or inUsable or inGoals):
                 continue
-            #print statement
-            unit = nonUnitClause.NonUnitClause(statement)
-            if inSos: unit.listCategory = gc.SOS
-            if inUsable: unit.listCategory = gc.USABLE
-            if inGoals: unit.listCategory = gc.GOALS
-            if inAssumptions: unit.listCategory = gc.ASSUMPTIONS 
-            unit.prettyPrint()
-            allClauses.append(unit)
+            clause = ladrClause.Clause(statement)
+            allClauses.append(clause)
     f.close()
     return allClauses
+
+
+print readOutputFile('./test_files/prop.out')
+print readInputFile('./test_files/prop.in')
+exit()
 
 def parseProofFilesInDirectory(directory):
     fileList = [directory + '/' + i for i in os.listdir(directory)]
@@ -229,12 +245,4 @@ def directoryToSQL(directory):
                            [gc.MYSQL_RAW_PROOF_COLUMN, gc.MYSQL_PARSED_PROOF_COLUMN])
 
 
-#hashlib.sha224("Nobody inspects the spammish repetition").hexdigest()             
 directoryToSQL('./ladr_with_proofs')
-#exit()
-#d = makeGraphFromDirectory('./ladr_with_proofs')
-#print d
-#mct = graphUtilities.meanCommuteTime(d)
-#print mct
-#graphUtilities.toGephi(mct, './gephi.csv', minimumEdgeWeight = .5)
-#parseProofFilesInDirectory('./ladr_with_proofs')
