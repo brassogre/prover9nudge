@@ -35,19 +35,26 @@ def makeQuery(tableName, columnList, whereColumn = None, whereOperator = ' = ', 
     query += ';'
     return query
 
+def convertFromPickle(s):
+    out = pickle.loads(s)
+    return out
+
 def executeQuery(query):
     """Takes a query (string), executes it in MySQL.
        Returns a list of results."""
+    print 'executing...'
     gc.CURSOR.execute(query)
-    results = []
+    print 'finished executing...'
     result = gc.CURSOR.fetchone()
     while result != None:
-        #print result
-        results.append(result)
+        result = result[0]
+        result = convertFrom64(result)
+        result = convertFromPickle(result)
+        yield result
         result = gc.CURSOR.fetchone()
-    return results
 
-def queryDict(tableName, columnList, whereColumn = None, whereOperator = ' = ', whereCondition = None, limit = None):
+def queryDict(tableName, columnList, whereColumn = None,
+        whereOperator = ' = ', whereCondition = None, limit = None):
   query = makeQuery(tableName, columnList, whereColumn = whereColumn, whereOperator = whereOperator, whereCondition = whereCondition, limit = limit)
   queryResults = executeQuery(query)
   results = []
@@ -87,9 +94,9 @@ def makeInsert(tableName, columnList, values, encodeList = []):
 
 def convertFrom64(s):
     try:
-	out = fromHex(s)
+	    out = fromHex(s)
     except:
-	out = s
+	    out = s
     return out
 
 def convertDictFrom64(d):

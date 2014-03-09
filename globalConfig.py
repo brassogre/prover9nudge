@@ -30,6 +30,8 @@ MYSQL_PASSWORD = 'WVOQuine618!'
 """:ivar MYSQL_PASSWORD: That user's password"""
 MYSQL_PROOFS_TABLE = 'proofs'
 """:ivar MYSQL_PROOFS_TABLE: Name of table holding proofs"""
+MYSQL_INPUT_TABLE = 'inputfiles'
+MYSQL_INPUT_BLOB = 'inputblob'
 
 MYSQL_RAW_PROOF_COLUMN = 'rawproof'
 MYSQL_PARSED_PROOF_COLUMN = 'clauselist'
