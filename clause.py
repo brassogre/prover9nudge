@@ -28,6 +28,10 @@ class Clause:
             self.parse_dictionary = None
         pickleString = pickle.dumps(self)
         self.hashKey = hashlib.sha224(pickleString).hexdigest()
+        try:
+            self.parse_dictionary['canonical_hash'] = hashlib.sha224(pickle.dumps(self.parse_dictionary['tree_canonicalized'])).hexdigest()
+        except:
+            self.parse_dictionary['canonical_hash'] = ''
 
     def prettyPrint(self):
         pass

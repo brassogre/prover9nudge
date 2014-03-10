@@ -11,6 +11,8 @@ import numpy
 import collections
 import hashlib
 import cPickle as pickle
+import clause
+import searchDatabase
 
 def hit_list_to_dicts(hit_list):
     """Take a "hit list" from searchDatabase.search_database
@@ -20,14 +22,18 @@ def hit_list_to_dicts(hit_list):
     lookup_dict = {}
     for hit in hit_list:
         for one_clause in hit['enclosing_set']:
-            lookup_dict[one_clause.hashKey] = one_clause
+            print one_clause.parse_dictionary
+            if len(one_clause.parse_dictionary['canonical_hash']) < 5: continue
+            lookup_dict[one_clause.parse_dictionary['canonical_hash']] = one_clause
     co_occurence = collections.defaultdict(list)
     for hit in hit_list:
         print hit
         for clause1 in hit['enclosing_set']:
             for clause2 in hit['enclosing_set']:
+                if len(clause1.parse_dictionary['canonical_hash']) < 5: continue
+                if len(clause2.parse_dictionary['canonical_hash']) < 5: continue
                 if clause1 == clause2: continue
-                co_occurence[clause1.hashKey].append(clause2.hashKey)
+                co_occurence[clause1.parse_dictionary['canonical_hash']].append(clause2.parse_dictionary['canonical_hash'])
     return (lookup_dict, co_occurence)
 
 def overlapDictionary(d, ordered = False):
@@ -133,13 +139,26 @@ def toGephi(d, fileName, minimumEdgeWeight = 0):
             if d[k1][k2] >= minimumEdgeWeight: f.write(s)
 
 if __name__ == '__main__':
-    print 'testing...'
-    print 'loading test data...'
-    f = open('./sample_hit_output.pickle', 'r')
-    test_data = pickle.load(f)
-    f.close()
-    print 'done loading test data...'
-    lookup_dict, co_occurence_dict = hit_list_to_dicts(test_data)
+    print 'searching database for matches...'
+    c = [clause.Clause('p(i(i(x,y),i(i(y,z),i(x,z)))).'),
+         clause.Clause('p(i(i(x,y),i(y,x))).')]
+    for i in c:
+        print i.parse_dictionary
+    output = list(searchDatabase.search_database(c, limit=2000000))
+    """
+    output is a list of "hit" dictionaries, with keys:
+        enclosing_set
+        matching_clause
+        provided_clause
+    """
+    #print 'testing...'
+    #print 'loading test data...'
+    #f = open('./sample_hit_output.pickle', 'r')
+    #test_data = pickle.load(f)
+    #f.close()
+    #print 'done loading test data...'
+    #provided_clauses = [v['matching_clause'] for v in output]
+    lookup_dict, co_occurence_dict = hit_list_to_dicts(output)
     print 'dumping clause_graph_dict...'
     clause_graph_dict = overlapDictionary(co_occurence_dict)
     f = open('./clause_graph_dict.pickle', 'w')
@@ -148,6 +167,9 @@ if __name__ == '__main__':
     print 'done dumping...'
     #print clause_graph_dict
     print 'length of clause_graph_dict:', len(clause_graph_dict)
+    if len(clause_graph_dict) == 0:
+        print 'empty graph dictionary! bailing out!'
+        exit()
     print 'calculating pagerank...'
     print pageRank(clause_graph_dict)
     commute_dict = meanCommuteTime(clause_graph_dict)
