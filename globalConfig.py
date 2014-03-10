@@ -26,7 +26,7 @@ MYSQL_DATABASE = 'prover9nudge'
 """:ivar MYSQL_DATABASE: Name of database for storing proofs, clauses, etc."""
 MYSQL_USER = 'zac'
 """:ivar MYSQL_USER: User authorized for access to MYSQL"""
-MYSQL_PASSWORD = 'WVOQuine618!'
+MYSQL_PASSWORD = '*********'
 """:ivar MYSQL_PASSWORD: That user's password"""
 MYSQL_PROOFS_TABLE = 'proofs'
 """:ivar MYSQL_PROOFS_TABLE: Name of table holding proofs"""
