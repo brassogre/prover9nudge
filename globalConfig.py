@@ -1,13 +1,7 @@
 """This class does nothing except keep all global configuration options. It is
    imported by (I think) every module."""
 
-import os
-import sys
-import string
-import MySQLdb
-
-"""
-"""
+import mysql.connector
 
 BASE_DIRECTORY = '/home/zac/projects/hintomatic/'
 """:ivar BASE_DIRECTORY: Where the hintomatic project lives"""
@@ -18,7 +12,7 @@ EMAIL_ACCOUNT = 'hintomatic@gmail.com'
                      submit input and output files"""
 SMTP_SERVER = 'smtp.gmail.com'
 """:ivar SMTP_SERVER: Server for hintomatic email account (gmail)"""
-EMAIL_PASSWORD ='*********'
+EMAIL_PASSWORD = '*********'
 """:ivar EMAIL_PASSWORD: Password for hintomatic email account"""
 IMAP_SERVER = 'imap.gmail.com'
 """:ivar IMAP_SERVER: The address for hintomatic's email account's IMAP"""
@@ -26,12 +20,10 @@ MYSQL_DATABASE = 'prover9nudge'
 """:ivar MYSQL_DATABASE: Name of database for storing proofs, clauses, etc."""
 MYSQL_USER = 'zac'
 """:ivar MYSQL_USER: User authorized for access to MYSQL"""
-MYSQL_PASSWORD = '*********'
+MYSQL_PASSWORD = '***************'
 """:ivar MYSQL_PASSWORD: That user's password"""
 MYSQL_PROOFS_TABLE = 'proofs'
 """:ivar MYSQL_PROOFS_TABLE: Name of table holding proofs"""
-MYSQL_INPUT_TABLE = 'inputfiles'
-MYSQL_INPUT_BLOB = 'inputblob'
 
 MYSQL_RAW_PROOF_COLUMN = 'rawproof'
 MYSQL_PARSED_PROOF_COLUMN = 'clauselist'
@@ -84,13 +76,13 @@ LYNX_STDIN_OPTION = '-stdin'
 LYNX_INPUT_FILE = TMP_DIRECTORY + 'lynx_input.html'
 
 def getConnection():
-  global MYSQL_USER
-  global MYSQL_PASSWORD
-  global MYSQL_DATABASE
-  db = MySQLdb.connect(user = MYSQL_USER, passwd = MYSQL_PASSWORD, db = MYSQL_DATABASE)
-  cursor = db.cursor()
-  return cursor
+    global MYSQL_USER
+    global MYSQL_PASSWORD
+    global MYSQL_DATABASE
+    db = mysql.connector.connect(user=MYSQL_USER, passwd=MYSQL_PASSWORD, db=MYSQL_DATABASE)
+    cursor = db.cursor()
+    return cursor
 
-# we're not ready for this quite yet...
-CURSOR = getConnection()
+#  we're not ready for this quite yet...
+#  CURSOR = getConnection()
 

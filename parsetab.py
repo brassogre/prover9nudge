@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '\xfbS(Z\x14T\xbb\xaf\x9ca\xa1/\x99\xe3\x0c0'
+_lr_signature = b'\xb6\xa0\xcbh\xf7x\xbcL7o+3+h\xe3\xdb'
     
-_lr_action_items = {'NOT_EQUAL':([1,8,14,27,],[10,21,-19,-24,]),'NAME':([0,4,10,11,13,17,19,21,22,28,],[1,16,24,26,30,1,1,35,37,40,]),')':([12,25,26,27,38,39,40,],[27,-21,-20,-24,-19,-23,-22,]),'(':([1,16,24,26,30,35,37,40,],[11,11,11,11,11,11,11,11,]),'-':([0,17,19,],[4,4,4,]),',':([12,25,26,27,38,39,40,],[28,-21,-20,-24,-19,-23,-22,]),'.':([2,5,6,7,9,14,15,23,24,27,29,30,31,32,33,34,35,36,37,38,],[-8,-6,18,20,-7,-10,-5,-17,-18,-24,-13,-14,-10,-4,-3,-15,-16,-11,-12,-19,]),'=':([1,8,14,27,],[13,22,-19,-24,]),'|':([2,5,6,7,9,14,15,23,24,27,29,30,31,32,33,34,35,36,37,38,],[-8,-6,17,19,-7,-10,-5,-17,-18,-24,-13,-14,-10,-4,-3,-15,-16,-11,-12,-19,]),'$end':([3,18,20,],[0,-2,-1,]),}
+_lr_action_items = {'(':([7,10,25,29,33,],[16,16,16,16,16,]),'-':([0,12,14,],[1,1,1,]),',':([18,24,25,26,31,32,33,],[27,-15,-14,-18,-13,-17,-16,]),'NOT_EQUAL':([8,17,26,],[20,-13,-18,]),'.':([2,3,5,6,9,11,17,21,22,23,26,28,30,31,],[-8,13,-7,15,-6,-5,-10,-10,-3,-4,-18,-11,-12,-13,]),'=':([8,17,26,],[19,-13,-18,]),'|':([2,3,5,6,9,11,17,21,22,23,26,28,30,31,],[-8,12,-7,14,-6,-5,-10,-10,-3,-4,-18,-11,-12,-13,]),')':([18,24,25,26,31,32,33,],[26,-15,-14,-18,-13,-17,-16,]),'NAME':([0,1,12,14,16,19,20,27,],[7,10,7,7,25,29,29,33,]),'$end':([4,13,15,],[0,-1,-2,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'finished_argument_list':([1,16,24,26,30,35,37,40,],[14,31,38,38,38,38,38,38,]),'non_unit_clause':([0,],[6,]),'clause':([0,],[3,]),'predicate_expression':([0,4,17,19,],[5,15,5,5,]),'negated_equality_expression':([0,17,19,],[2,2,2,]),'argument_list':([1,16,24,26,30,35,37,40,],[12,12,12,12,12,12,12,12,]),'unit_clause':([0,17,19,],[7,32,33,]),'function_expression':([0,10,11,13,17,19,21,22,28,],[8,23,25,29,8,8,34,36,39,]),'equality_expression':([0,17,19,],[9,9,9,]),}
+_lr_goto_items = {'equality_expression':([0,12,14,],[5,5,5,]),'clause':([0,],[4,]),'argument_list':([7,10,25,29,33,],[18,18,18,18,18,]),'finished_argument_list':([7,10,25,29,33,],[17,21,31,31,31,]),'function_expression':([0,12,14,16,19,20,27,],[8,8,8,24,28,30,32,]),'non_unit_clause':([0,],[6,]),'unit_clause':([0,12,14,],[3,22,23,]),'negated_equality_expression':([0,12,14,],[2,2,2,]),'predicate_expression':([0,1,12,14,],[9,11,9,9,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,28 +26,22 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> clause","S'",1,None,None,None),
-  ('clause -> unit_clause .','clause',2,'p_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',20),
-  ('clause -> non_unit_clause .','clause',2,'p_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',21),
-  ('non_unit_clause -> unit_clause | unit_clause','non_unit_clause',3,'p_non_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',25),
-  ('non_unit_clause -> non_unit_clause | unit_clause','non_unit_clause',3,'p_non_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',26),
-  ('unit_clause -> - predicate_expression','unit_clause',2,'p_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',30),
-  ('unit_clause -> predicate_expression','unit_clause',1,'p_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',31),
-  ('unit_clause -> equality_expression','unit_clause',1,'p_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',32),
-  ('unit_clause -> negated_equality_expression','unit_clause',1,'p_unit_clause','/Users/zernst/projects/prover9nudge/ladrParser.py',33),
-  ('negated_predicate -> - predicate_expression','negated_predicate',2,'p_negated_predicate','/Users/zernst/projects/prover9nudge/ladrParser.py',40),
-  ('predicate_expression -> NAME finished_argument_list','predicate_expression',2,'p_predicate_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',44),
-  ('equality_expression -> function_expression = function_expression','equality_expression',3,'p_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',50),
-  ('equality_expression -> function_expression = NAME','equality_expression',3,'p_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',51),
-  ('equality_expression -> NAME = function_expression','equality_expression',3,'p_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',52),
-  ('equality_expression -> NAME = NAME','equality_expression',3,'p_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',53),
-  ('negated_equality_expression -> function_expression NOT_EQUAL function_expression','negated_equality_expression',3,'p_negated_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',59),
-  ('negated_equality_expression -> function_expression NOT_EQUAL NAME','negated_equality_expression',3,'p_negated_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',60),
-  ('negated_equality_expression -> NAME NOT_EQUAL function_expression','negated_equality_expression',3,'p_negated_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',61),
-  ('negated_equality_expression -> NAME NOT_EQUAL NAME','negated_equality_expression',3,'p_negated_equality_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',62),
-  ('function_expression -> NAME finished_argument_list','function_expression',2,'p_function_expression','/Users/zernst/projects/prover9nudge/ladrParser.py',69),
-  ('argument_list -> ( NAME','argument_list',2,'p_argument_list_atomic_1','/Users/zernst/projects/prover9nudge/ladrParser.py',75),
-  ('argument_list -> ( function_expression','argument_list',2,'p_argument_list_atomic_2','/Users/zernst/projects/prover9nudge/ladrParser.py',81),
-  ('argument_list -> argument_list , NAME','argument_list',3,'p_argument_list_molecular_1','/Users/zernst/projects/prover9nudge/ladrParser.py',85),
-  ('argument_list -> argument_list , function_expression','argument_list',3,'p_argument_list_molecular_2','/Users/zernst/projects/prover9nudge/ladrParser.py',90),
-  ('finished_argument_list -> argument_list )','finished_argument_list',2,'p_finished_argument_list','/Users/zernst/projects/prover9nudge/ladrParser.py',94),
+  ('clause -> unit_clause .','clause',2,'p_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',20),
+  ('clause -> non_unit_clause .','clause',2,'p_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',21),
+  ('non_unit_clause -> unit_clause | unit_clause','non_unit_clause',3,'p_non_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',25),
+  ('non_unit_clause -> non_unit_clause | unit_clause','non_unit_clause',3,'p_non_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',26),
+  ('unit_clause -> - predicate_expression','unit_clause',2,'p_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',30),
+  ('unit_clause -> predicate_expression','unit_clause',1,'p_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',31),
+  ('unit_clause -> equality_expression','unit_clause',1,'p_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',32),
+  ('unit_clause -> negated_equality_expression','unit_clause',1,'p_unit_clause','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',33),
+  ('negated_predicate -> - predicate_expression','negated_predicate',2,'p_negated_predicate','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',40),
+  ('predicate_expression -> NAME finished_argument_list','predicate_expression',2,'p_predicate_expression','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',44),
+  ('equality_expression -> function_expression = function_expression','equality_expression',3,'p_equality_expression','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',50),
+  ('negated_equality_expression -> function_expression NOT_EQUAL function_expression','negated_equality_expression',3,'p_negated_equality_expression','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',56),
+  ('function_expression -> NAME finished_argument_list','function_expression',2,'p_function_expression','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',62),
+  ('argument_list -> ( NAME','argument_list',2,'p_argument_list_atomic_1','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',68),
+  ('argument_list -> ( function_expression','argument_list',2,'p_argument_list_atomic_2','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',74),
+  ('argument_list -> argument_list , NAME','argument_list',3,'p_argument_list_molecular_1','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',78),
+  ('argument_list -> argument_list , function_expression','argument_list',3,'p_argument_list_molecular_2','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',83),
+  ('finished_argument_list -> argument_list )','finished_argument_list',2,'p_finished_argument_list','C:\\Users\\10034888\\Workspace\\prover9nudge\\ladrParser.py',87),
 ]
